@@ -13,7 +13,7 @@ Zero dependencies — pure CSS + vanilla JavaScript.
 [![Material 3](https://img.shields.io/badge/Material%20You-M3-d93025.svg?style=flat-square)](#-design-tokens)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-00838f.svg?style=flat-square)](#-contributing)
 
-<img src="https://img.shields.io/badge/%F0%9F%94%B5-blue%20%C2%B7%20%F0%9F%94%B4-red%20%C2%B7%20%F0%9F%9F%A1-yellow%20%C2%B7%20%F0%9F%9F%A2-green-blue.svg?style=flat-square" alt="Google 4-color accents" />
+<img src="https://img.shields.io/badge/accent-Google%204--color-0b57d0.svg?style=flat-square" alt="Google-inspired 4-color accents" />
 
 </div>
 
@@ -130,7 +130,7 @@ Toggle Ui Library/
 
 ---
 
-## 🎚️ The Toggle Collection
+## 🎚 The Toggle Collection
 
 25 handcrafted switches — each pure CSS (a visually hidden native input plus sibling track/thumb elements), each with matching HTML, CSS and React source in the code inspector. Filter them live on the **Toggles & Switches** page.
 
@@ -243,7 +243,7 @@ Dark mode is a token swap, not a fork of the styles: `[data-theme="dark"]` re-de
 
 ---
 
-## 🛠 Custom Switch Studio
+## 🧰 Custom Switch Studio
 
 The **Custom Studio** page (`index.html#studio`) generates a brand-new switch from scratch:
 
@@ -330,7 +330,7 @@ Don't forget to add the matching `.toggle-mine` rules to `css/toggles.css`.
 
 ---
 
-## ⌨️ Keyboard Shortcuts
+## ⌨ Keyboard Shortcuts
 
 | Shortcut | Action |
 |---|---|
@@ -363,7 +363,7 @@ Don't forget to add the matching `.toggle-mine` rules to `css/toggles.css`.
 
 ---
 
-## 🗺️ Roadmap
+## 🧭 Roadmap
 
 - [ ] `prefers-reduced-motion` support and an animation-intensity setting
 - [x] `:focus-visible` ring polished across the component set ← *help wanted*
