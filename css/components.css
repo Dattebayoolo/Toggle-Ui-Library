@@ -1,0 +1,1013 @@
+/* ==========================================================================
+   TOGGLE DESIGN SYSTEM - COMPLETE COMPONENT SUITE
+   Google Material You (M3) Official Component Specs
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. BUTTONS & FLOATING ACTION BUTTONS (FAB)
+   -------------------------------------------------------------------------- */
+.toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 24px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-family);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.toggle-btn .material-symbols-rounded {
+  font-size: 18px;
+}
+
+/* Filled Button (High emphasis) */
+.toggle-btn-filled {
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  box-shadow: var(--elevation-1);
+}
+.toggle-btn-filled:hover {
+  background-color: var(--md-sys-color-primary-hover);
+  box-shadow: var(--elevation-2);
+  transform: translateY(-1px);
+}
+.toggle-btn-filled:active {
+  transform: translateY(0);
+}
+
+/* Tonal Button (Medium emphasis) */
+.toggle-btn-tonal {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+.toggle-btn-tonal:hover {
+  filter: brightness(0.96);
+  box-shadow: var(--elevation-1);
+}
+
+/* Outlined Button */
+.toggle-btn-outlined {
+  background-color: transparent;
+  border-color: var(--md-sys-color-outline);
+  color: var(--md-sys-color-primary);
+}
+.toggle-btn-outlined:hover {
+  background-color: var(--md-sys-color-primary-container);
+  border-color: var(--md-sys-color-primary);
+}
+
+/* Text Button (Low emphasis) */
+.toggle-btn-text {
+  background-color: transparent;
+  color: var(--md-sys-color-primary);
+  padding: 0 16px;
+}
+.toggle-btn-text:hover {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+
+/* Elevated Button */
+.toggle-btn-elevated {
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-primary);
+  box-shadow: var(--elevation-1);
+  border: 1px solid var(--md-sys-color-card-border);
+}
+.toggle-btn-elevated:hover {
+  box-shadow: var(--elevation-2);
+  background-color: var(--md-sys-color-surface-container-low);
+}
+
+/* Floating Action Button (FAB) */
+.toggle-fab {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  box-shadow: var(--elevation-3);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-spring);
+}
+.toggle-fab:hover {
+  box-shadow: var(--elevation-4);
+  transform: scale(1.05);
+}
+.toggle-fab .material-symbols-rounded {
+  font-size: 24px;
+}
+
+/* Extended FAB */
+.toggle-fab-extended {
+  height: 56px;
+  padding: 0 20px;
+  border-radius: var(--radius-lg);
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  box-shadow: var(--elevation-3);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-spring);
+}
+.toggle-fab-extended:hover {
+  box-shadow: var(--elevation-4);
+  transform: translateY(-2px);
+}
+
+/* Segmented Button Group */
+.toggle-segmented-btn-group {
+  display: inline-flex;
+  border: 1px solid var(--md-sys-color-outline);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background: var(--md-sys-color-surface);
+}
+.toggle-seg-btn {
+  padding: 8px 18px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--md-sys-color-on-surface-variant);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+  border-right: 1px solid var(--md-sys-color-outline-variant);
+}
+.toggle-seg-btn:last-child {
+  border-right: none;
+}
+.toggle-seg-btn:hover {
+  background-color: var(--md-sys-color-surface-container);
+}
+.toggle-seg-btn.active {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+/* --------------------------------------------------------------------------
+   2. CHECKBOXES & RADIO BUTTONS
+   -------------------------------------------------------------------------- */
+.toggle-checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  user-select: none;
+}
+.toggle-checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.toggle-checkbox-box {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 2px solid var(--md-sys-color-outline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  background-color: var(--md-sys-color-surface);
+}
+.toggle-checkbox-label input:checked + .toggle-checkbox-box {
+  background-color: var(--md-sys-color-primary);
+  border-color: var(--md-sys-color-primary);
+}
+.toggle-checkbox-box .material-symbols-rounded {
+  font-size: 16px;
+  color: #fff;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all var(--transition-spring);
+}
+.toggle-checkbox-label input:checked + .toggle-checkbox-box .material-symbols-rounded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Radio Button */
+.toggle-radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.92rem;
+  user-select: none;
+}
+.toggle-radio-label input {
+  position: absolute;
+  opacity: 0;
+}
+.toggle-radio-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--md-sys-color-outline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+.toggle-radio-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--md-sys-color-primary);
+  transform: scale(0);
+  transition: transform var(--transition-spring);
+}
+.toggle-radio-label input:checked + .toggle-radio-circle {
+  border-color: var(--md-sys-color-primary);
+}
+.toggle-radio-label input:checked + .toggle-radio-circle .toggle-radio-inner {
+  transform: scale(1);
+}
+
+/* --------------------------------------------------------------------------
+   3. TEXT FIELDS & INPUTS (Material You Floating Outlined)
+   -------------------------------------------------------------------------- */
+.toggle-textfield {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 380px;
+}
+.toggle-textfield input {
+  width: 100%;
+  height: 54px;
+  padding: 16px 16px 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--md-sys-color-outline);
+  background: transparent;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--md-sys-color-on-surface);
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+.toggle-textfield input:focus {
+  border-color: var(--md-sys-color-primary);
+  border-width: 2px;
+  box-shadow: 0 0 0 1px var(--md-sys-color-primary);
+}
+.toggle-textfield label {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  font-size: 0.95rem;
+  color: var(--md-sys-color-outline);
+  pointer-events: none;
+  transition: all var(--transition-fast);
+}
+.toggle-textfield input:focus ~ label,
+.toggle-textfield input:not(:placeholder-shown) ~ label {
+  top: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--md-sys-color-primary);
+}
+.toggle-textfield-hint {
+  font-size: 0.75rem;
+  color: var(--md-sys-color-outline);
+  margin-top: 4px;
+  padding-left: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   4. CHIPS & BADGES
+   -------------------------------------------------------------------------- */
+.toggle-chip-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.toggle-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface-variant);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-fast);
+}
+.toggle-chip .material-symbols-rounded {
+  font-size: 16px;
+}
+.toggle-chip:hover {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+.toggle-chip.active {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  border-color: transparent;
+}
+
+/* Status Notification Badge */
+.toggle-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.toggle-badge-primary {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+.toggle-badge-success {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+.toggle-badge-warning {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+.toggle-badge-error {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* --------------------------------------------------------------------------
+   5. PROGRESS INDICATORS (Linear & Google 4-Color Circular)
+   -------------------------------------------------------------------------- */
+.toggle-linear-progress {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--md-sys-color-surface-container-highest);
+  overflow: hidden;
+  position: relative;
+}
+.toggle-linear-progress-bar {
+  height: 100%;
+  background-color: var(--md-sys-color-primary);
+  width: 60%;
+  border-radius: 2px;
+  transition: width var(--transition-base);
+}
+.toggle-linear-progress.indeterminate .toggle-linear-progress-bar {
+  width: 40%;
+  position: absolute;
+  animation: m3ProgressIndeterminate 1.6s infinite ease-in-out;
+}
+@keyframes m3ProgressIndeterminate {
+  0% { left: -40%; width: 40%; }
+  50% { left: 40%; width: 50%; }
+  100% { left: 100%; width: 30%; }
+}
+
+/* Google Multi-Color Circular Spinner */
+.toggle-google-spinner {
+  width: 40px;
+  height: 40px;
+  animation: spinnerRotate 2s linear infinite;
+}
+.toggle-google-spinner circle {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  animation: spinnerDash 1.5s ease-in-out infinite, spinnerColor 6s ease-in-out infinite;
+}
+@keyframes spinnerRotate {
+  100% { transform: rotate(360deg); }
+}
+@keyframes spinnerDash {
+  0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
+  50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
+  100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
+}
+@keyframes spinnerColor {
+  0%, 100% { stroke: var(--google-blue); }
+  25% { stroke: var(--google-red); }
+  50% { stroke: var(--google-yellow); }
+  75% { stroke: var(--google-green); }
+}
+
+/* --------------------------------------------------------------------------
+   6. SLIDERS & RANGE CONTROLS
+   -------------------------------------------------------------------------- */
+.toggle-slider-wrap {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.toggle-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 16px;
+  border-radius: var(--radius-full);
+  background: var(--md-sys-color-surface-container-highest);
+  outline: none;
+  position: relative;
+}
+.toggle-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background-color: var(--md-sys-color-primary);
+  border: 4px solid var(--md-sys-color-surface);
+  box-shadow: var(--elevation-1);
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+.toggle-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 8px rgba(11, 87, 208, 0.12);
+}
+
+/* --------------------------------------------------------------------------
+   7. CARDS & BENTO SURFACES
+   -------------------------------------------------------------------------- */
+.m3-card {
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+.m3-card-elevated {
+  background-color: var(--md-sys-color-surface-container-low);
+  box-shadow: var(--elevation-1);
+  border: 1px solid var(--md-sys-color-card-border);
+}
+.m3-card-elevated:hover {
+  box-shadow: var(--elevation-3);
+  transform: translateY(-2px);
+}
+.m3-card-filled {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+.m3-card-outlined {
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+/* --------------------------------------------------------------------------
+   8. NAVIGATION PILLS & TABS
+   -------------------------------------------------------------------------- */
+.toggle-tabs {
+  display: inline-flex;
+  border-bottom: 1px solid var(--md-sys-color-card-border);
+  gap: 16px;
+  width: 100%;
+}
+.toggle-tab-item {
+  padding: 12px 18px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--md-sys-color-outline);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color var(--transition-fast);
+}
+.toggle-tab-item .material-symbols-rounded {
+  font-size: 18px;
+}
+.toggle-tab-item:hover {
+  color: var(--md-sys-color-on-surface);
+}
+.toggle-tab-item.active {
+  color: var(--md-sys-color-primary);
+}
+.toggle-tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background-color: var(--md-sys-color-primary);
+}
+
+/* Navigation Rail Item */
+.toggle-rail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+}
+.toggle-rail-indicator {
+  width: 56px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast);
+}
+.toggle-rail-item:hover .toggle-rail-indicator {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+.toggle-rail-item.active .toggle-rail-indicator {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+/* --------------------------------------------------------------------------
+   9. MATERIAL INK RIPPLE EFFECT
+   -------------------------------------------------------------------------- */
+.md-ripple-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.md-ripple-wave {
+  position: absolute;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.16;
+  pointer-events: none;
+  transform: scale(0);
+  animation: mdRippleEffect 550ms cubic-bezier(0.1, 0, 0, 1) forwards;
+}
+
+@keyframes mdRippleEffect {
+  to {
+    transform: scale(3.5);
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. AVATARS & USER PRESENCE
+   -------------------------------------------------------------------------- */
+.toggle-avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  font-weight: 700;
+  font-size: 0.95rem;
+  user-select: none;
+  border: 2px solid var(--md-sys-color-surface);
+  box-shadow: var(--elevation-1);
+}
+
+.toggle-avatar-sm { width: 32px; height: 32px; font-size: 0.8rem; }
+.toggle-avatar-lg { width: 56px; height: 56px; font-size: 1.3rem; }
+
+.toggle-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-full);
+}
+
+.toggle-avatar-status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--md-sys-color-surface);
+}
+
+.toggle-avatar-status.online { background-color: var(--google-green); }
+.toggle-avatar-status.busy { background-color: var(--google-red); }
+.toggle-avatar-status.away { background-color: var(--google-yellow); }
+.toggle-avatar-status.offline { background-color: var(--md-sys-color-outline); }
+
+/* Stacked Avatar Group */
+.toggle-avatar-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.toggle-avatar-group .toggle-avatar {
+  margin-left: -12px;
+  transition: transform var(--transition-fast), z-index var(--transition-fast);
+}
+
+.toggle-avatar-group .toggle-avatar:first-child {
+  margin-left: 0;
+}
+
+.toggle-avatar-group .toggle-avatar:hover {
+  transform: translateY(-4px) scale(1.1);
+  z-index: 10;
+}
+
+/* --------------------------------------------------------------------------
+   11. TOOLTIPS & FLOATING CUES
+   -------------------------------------------------------------------------- */
+.toggle-tooltip-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.toggle-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  background-color: var(--md-sys-color-on-surface);
+  color: var(--md-sys-color-surface);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--radius-xs);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: var(--elevation-2);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  z-index: 300;
+}
+
+.toggle-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 4px;
+  border-style: solid;
+  border-color: var(--md-sys-color-on-surface) transparent transparent transparent;
+}
+
+.toggle-tooltip-wrap:hover .toggle-tooltip,
+.toggle-tooltip-wrap:focus-within .toggle-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* --------------------------------------------------------------------------
+   12. DATA TABLES & DATA MATRICES
+   -------------------------------------------------------------------------- */
+.toggle-table-container {
+  width: 100%;
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--elevation-1);
+}
+
+.toggle-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.toggle-data-table th {
+  padding: 14px 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--md-sys-color-outline);
+  background-color: var(--md-sys-color-surface-container);
+  border-bottom: 1px solid var(--md-sys-color-card-border);
+}
+
+.toggle-data-table td {
+  padding: 16px 20px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--md-sys-color-card-border);
+  color: var(--md-sys-color-on-surface);
+  transition: background-color var(--transition-fast);
+}
+
+.toggle-data-table tr:hover td {
+  background-color: var(--md-sys-color-surface-container-low);
+}
+
+.toggle-data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.toggle-table-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background-color: var(--md-sys-color-surface-container-low);
+  border-top: 1px solid var(--md-sys-color-card-border);
+  font-size: 0.82rem;
+  color: var(--md-sys-color-outline);
+}
+
+/* --------------------------------------------------------------------------
+   13. DIALOGS & OVERLAY SHEETS
+   -------------------------------------------------------------------------- */
+.m3-dialog-card {
+  background-color: var(--md-sys-color-surface);
+  border-radius: var(--radius-2xl);
+  padding: 28px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: var(--elevation-4);
+  border: 1px solid var(--md-sys-color-card-border);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.m3-dialog-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.m3-dialog-body {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.m3-dialog-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* --------------------------------------------------------------------------
+   14. EXPANSION PANELS & ACCORDIONS
+   -------------------------------------------------------------------------- */
+.m3-accordion {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.m3-accordion-item {
+  background-color: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.m3-accordion-item.open {
+  background-color: var(--md-sys-color-surface);
+  box-shadow: var(--elevation-1);
+}
+
+.m3-accordion-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--md-sys-color-on-surface);
+}
+
+.m3-accordion-chevron {
+  transition: transform var(--transition-base);
+  color: var(--md-sys-color-outline);
+}
+
+.m3-accordion-item.open .m3-accordion-chevron {
+  transform: rotate(180deg);
+  color: var(--md-sys-color-primary);
+}
+
+.m3-accordion-body {
+  padding: 0 20px 20px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--md-sys-color-on-surface-variant);
+  display: none;
+}
+
+.m3-accordion-item.open .m3-accordion-body {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   15. MODAL BOTTOM SHEET
+   -------------------------------------------------------------------------- */
+.m3-bottom-sheet-scrim {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  z-index: 550;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.m3-bottom-sheet-scrim.show {
+  display: flex;
+  opacity: 1;
+}
+
+.m3-bottom-sheet {
+  background-color: var(--md-sys-color-surface);
+  border-radius: 28px 28px 0 0;
+  width: 100%;
+  max-width: 640px;
+  padding: 16px 24px 32px;
+  box-shadow: var(--elevation-5);
+  transform: translateY(100%);
+  transition: transform var(--transition-spring);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.m3-bottom-sheet-scrim.show .m3-bottom-sheet {
+  transform: translateY(0);
+}
+
+.m3-bottom-sheet-handle {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--md-sys-color-outline-variant);
+  margin: 0 auto 8px;
+}
+
+/* --------------------------------------------------------------------------
+   16. SKELETON SHIMMER LOADERS
+   -------------------------------------------------------------------------- */
+.m3-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--md-sys-color-surface-container-high) 0%,
+    var(--md-sys-color-surface-container-highest) 50%,
+    var(--md-sys-color-surface-container-high) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.8s infinite ease-in-out;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.m3-skeleton-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.m3-skeleton-bar {
+  height: 14px;
+  width: 100%;
+  border-radius: var(--radius-full);
+}
+
+/* --------------------------------------------------------------------------
+   17. PIN & OTP VERIFICATION BOXES
+   -------------------------------------------------------------------------- */
+.toggle-pin-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-pin-box {
+  width: 48px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--md-sys-color-outline-variant);
+  background-color: var(--md-sys-color-surface);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--md-sys-color-primary);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.toggle-pin-box:focus {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 3px var(--md-sys-color-primary-container);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   18. GOOGLE GEMINI AI SPARKLE SWITCH
+   -------------------------------------------------------------------------- */
+.toggle-gemini {
+  width: 68px;
+  height: 34px;
+}
+
+.toggle-gemini .track {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  background: #1e1f20;
+  border: 1px solid #3c4043;
+  transition: all 400ms ease;
+  overflow: hidden;
+}
+
+.toggle-gemini .thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background: #3c4043;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c4c7c5;
+  transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1), background 300ms ease;
+}
+
+.toggle-gemini .thumb .material-symbols-rounded {
+  font-size: 18px;
+  transition: transform 400ms ease, color 300ms ease;
+}
+
+.toggle-gemini input:checked + .track {
+  background: linear-gradient(135deg, #1b0933, #041e49);
+  border-color: #a855f7;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.35);
+}
+
+.toggle-gemini input:checked + .track .thumb {
+  transform: translateX(34px);
+  background: linear-gradient(135deg, #a855f7, #3b82f6);
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
+}
+
+.toggle-gemini input:checked + .track .thumb .material-symbols-rounded {
+  transform: rotate(180deg) scale(1.1);
+}

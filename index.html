@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toggle Design System — Google-Style Documentation & UI Component Library</title>
+  <meta name="description" content="Toggle is a global Google-inspired design system with documentation sidebar, rounded iconography, adaptive Material You theming, and multi-component UI architecture." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230b57d0'><path d='M17 7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h10c2.76 0 5-2.24 5-5s-2.24-5-5-5zm0 8c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z'/></svg>" />
+
+  <!-- Google Typography: Outfit & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Google Material Symbols Rounded -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/toggles.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/docs.css" />
+</head>
+<body>
+
+  <!-- ========================================================================
+       App Bar / Header (Google Clean Sticky Navigation)
+       ======================================================================== -->
+  <header class="app-header">
+    <div class="header-container" style="max-width:100%;">
+      <!-- Mobile Drawer Button -->
+      <button id="mobileMenuBtn" class="mobile-menu-btn" title="Toggle Sidebar" aria-label="Open sidebar">
+        <span class="material-symbols-rounded">menu</span>
+      </button>
+
+      <!-- Brand Logo with Google 4-Color Accents -->
+      <a href="#overview" class="brand" aria-label="Toggle Design System Home">
+        <div class="brand-icon">
+          <span class="material-symbols-rounded">toggle_on</span>
+        </div>
+        <div class="brand-title">
+          Toggle
+          <span class="brand-dots">
+            <span class="brand-dot blue"></span>
+            <span class="brand-dot red"></span>
+            <span class="brand-dot yellow"></span>
+            <span class="brand-dot green"></span>
+          </span>
+          <span class="brand-tag">Design System</span>
+        </div>
+      </a>
+
+      <!-- Google Search Command Pill -->
+      <div class="search-wrapper" style="max-width:480px;">
+        <div class="search-bar" id="searchInput" style="cursor:pointer;" title="Click or press Ctrl+K to search">
+          <span class="material-symbols-rounded search-icon">search</span>
+          <span style="flex:1; font-size:0.9rem; color:var(--md-sys-color-outline);">Search docs, components, tokens...</span>
+          <kbd class="search-shortcut">Ctrl+K</kbd>
+        </div>
+      </div>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <!-- Tactile Sound Toggle -->
+        <button id="soundToggleBtn" class="icon-btn" title="Toggle Tactile Click Sound" aria-label="Sound feedback">
+          <span id="soundIcon" class="material-symbols-rounded">volume_off</span>
+        </button>
+
+        <!-- Material You Dynamic Accent Color Picker -->
+        <div class="palette-dropdown">
+          <button id="paletteBtn" class="icon-btn" title="Change Theme Accent" aria-label="Theme palette">
+            <span class="material-symbols-rounded">palette</span>
+          </button>
+          <div id="paletteMenu" class="palette-menu">
+            <button class="color-swatch active" style="background:#0b57d0;" data-h="217" data-s="89%" data-l="45%" data-name="Google Blue" title="Google Blue"></button>
+            <button class="color-swatch" style="background:#0d8043;" data-h="142" data-s="70%" data-l="40%" data-name="Google Green" title="Google Green"></button>
+            <button class="color-swatch" style="background:#d93025;" data-h="4" data-s="85%" data-l="52%" data-name="Google Red" title="Google Red"></button>
+            <button class="color-swatch" style="background:#f9ab00;" data-h="43" data-s="96%" data-l="48%" data-name="Google Yellow" title="Google Yellow"></button>
+            <button class="color-swatch" style="background:#7c3aed;" data-h="270" data-s="75%" data-l="55%" data-name="Google Purple" title="Google Purple"></button>
+            <button class="color-swatch" style="background:#00838f;" data-h="187" data-s="90%" data-l="38%" data-name="Cyan Teal" title="Cyan Teal"></button>
+          </div>
+        </div>
+
+        <!-- Download CSS Bundle Button -->
+        <button id="downloadBundleBtn" class="icon-btn" title="Download Full CSS Bundle" aria-label="Download CSS">
+          <span class="material-symbols-rounded">download</span>
+        </button>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button id="themeToggleBtn" class="icon-btn" title="Toggle Dark/Light Mode" aria-label="Toggle theme">
+          <span id="themeIcon" class="material-symbols-rounded">dark_mode</span>
+        </button>
+
+        <a href="#toggles" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.85rem;">
+          <span class="material-symbols-rounded" style="font-size: 18px;">auto_awesome</span>
+          <span>Explore</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       Google Documentation Layout (Left Sidebar, Main Content, Right TOC)
+       ======================================================================== -->
+  <div class="docs-layout">
+    <!-- LEFT DOCUMENTATION SIDEBAR -->
+    <aside id="docsSidebar" class="docs-sidebar">
+      <!-- Search filter -->
+      <div class="sidebar-search-box">
+        <div class="sidebar-search-input-wrap">
+          <span class="material-symbols-rounded" style="font-size:16px; color:var(--md-sys-color-outline);">search</span>
+          <input type="text" id="sidebarSearch" class="sidebar-search-input" placeholder="Filter components..." />
+        </div>
+      </div>
+
+      <!-- Group 1: Getting Started -->
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">
+          <span>Getting Started</span>
+        </div>
+        <ul class="sidebar-nav-list">
+          <li>
+            <a href="#overview" class="sidebar-nav-link" data-id="overview">
+              <span class="material-symbols-rounded">dashboard_customize</span>
+              <span>Overview</span>
+            </a>
+          </li>
+          <li>
+            <a href="#tokens" class="sidebar-nav-link" data-id="tokens">
+              <span class="material-symbols-rounded">palette</span>
+              <span>Design Tokens</span>
+              <span class="sidebar-badge new">M3</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Group 2: Actions & Controls -->
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">
+          <span>Actions & Controls</span>
+        </div>
+        <ul class="sidebar-nav-list">
+          <li>
+            <a href="#toggles" class="sidebar-nav-link active" data-id="toggles">
+              <span class="material-symbols-rounded">toggle_on</span>
+              <span>Toggles & Switches</span>
+              <span class="sidebar-badge count">24+</span>
+            </a>
+          </li>
+          <li>
+            <a href="#buttons" class="sidebar-nav-link" data-id="buttons">
+              <span class="material-symbols-rounded">smart_button</span>
+              <span>Buttons & FABs</span>
+            </a>
+          </li>
+          <li>
+            <a href="#checkboxes" class="sidebar-nav-link" data-id="checkboxes">
+              <span class="material-symbols-rounded">check_box</span>
+              <span>Checkboxes & Radios</span>
+            </a>
+          </li>
+          <li>
+            <a href="#sliders" class="sidebar-nav-link" data-id="sliders">
+              <span class="material-symbols-rounded">linear_scale</span>
+              <span>Sliders & Range</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Group 3: Inputs & Forms -->
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">
+          <span>Inputs & Forms</span>
+        </div>
+        <ul class="sidebar-nav-list">
+          <li>
+            <a href="#inputs" class="sidebar-nav-link" data-id="inputs">
+              <span class="material-symbols-rounded">edit_note</span>
+              <span>Text Fields & Inputs</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Group 4: Data Display -->
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">
+          <span>Data Display</span>
+        </div>
+        <ul class="sidebar-nav-list">
+          <li>
+            <a href="#chips" class="sidebar-nav-link" data-id="chips">
+              <span class="material-symbols-rounded">label</span>
+              <span>Chips & Badges</span>
+            </a>
+          </li>
+          <li>
+            <a href="#cards" class="sidebar-nav-link" data-id="cards">
+              <span class="material-symbols-rounded">dashboard</span>
+              <span>Cards & Surfaces</span>
+            </a>
+          </li>
+          <li>
+            <a href="#avatars" class="sidebar-nav-link" data-id="avatars">
+              <span class="material-symbols-rounded">account_circle</span>
+              <span>Avatars & Presence</span>
+            </a>
+          </li>
+          <li>
+            <a href="#tables" class="sidebar-nav-link" data-id="tables">
+              <span class="material-symbols-rounded">table_chart</span>
+              <span>Data Tables</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Group 5: Navigation -->
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">
+          <span>Navigation</span>
+        </div>
+        <ul class="sidebar-nav-list">
+          <li>
+            <a href="#navigation" class="sidebar-nav-link" data-id="navigation">
+              <span class="material-symbols-rounded">navigation</span>
+              <span>Navigation & Rails</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Group 6: Feedback -->
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">
+          <span>Feedback & Overlays</span>
+        </div>
+        <ul class="sidebar-nav-list">
+          <li>
+            <a href="#progress" class="sidebar-nav-link" data-id="progress">
+              <span class="material-symbols-rounded">progress_activity</span>
+              <span>Progress Indicators</span>
+            </a>
+          </li>
+          <li>
+            <a href="#dialogs" class="sidebar-nav-link" data-id="dialogs">
+              <span class="material-symbols-rounded">web_asset</span>
+              <span>Dialogs & Modals</span>
+            </a>
+          </li>
+          <li>
+            <a href="#tooltips" class="sidebar-nav-link" data-id="tooltips">
+              <span class="material-symbols-rounded">info</span>
+              <span>Tooltips & Cues</span>
+            </a>
+          </li>
+          <li>
+            <a href="#feedback" class="sidebar-nav-link" data-id="feedback">
+              <span class="material-symbols-rounded">notifications</span>
+              <span>Snackbars & Toasts</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Group 7: Tools & Studio -->
+      <div class="sidebar-group">
+        <div class="sidebar-group-title">
+          <span>Tools & Studio</span>
+        </div>
+        <ul class="sidebar-nav-list">
+          <li>
+            <a href="#studio" class="sidebar-nav-link" data-id="studio">
+              <span class="material-symbols-rounded">tune</span>
+              <span>Custom Studio</span>
+              <span class="sidebar-badge new">LIVE</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- CENTER DOCUMENTATION CANVAS (Loaded dynamically by docs.js) -->
+    <main id="docCanvas" class="docs-content">
+      <!-- Dynamic documentation rendered here -->
+    </main>
+
+    <!-- RIGHT "ON THIS PAGE" TABLE OF CONTENTS -->
+    <aside class="docs-toc">
+      <div class="toc-title">On this page</div>
+      <ul id="tocList" class="toc-list">
+        <li><a href="#demo" class="toc-link active">Interactive Preview</a></li>
+        <li><a href="#variations" class="toc-link">Variations</a></li>
+        <li><a href="#tokens" class="toc-link">Design Tokens</a></li>
+        <li><a href="#accessibility" class="toc-link">Accessibility</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- ========================================================================
+       Command Palette Modal (Ctrl+K)
+       ======================================================================== -->
+  <div id="commandPaletteBackdrop" class="command-palette-backdrop">
+    <div class="command-palette-dialog" role="dialog" aria-modal="true">
+      <div class="command-search-header">
+        <span class="material-symbols-rounded" style="color:var(--md-sys-color-primary)">search</span>
+        <input 
+          type="text" 
+          id="commandSearchInput" 
+          class="command-search-input" 
+          placeholder="Search components, documentation, tokens..." 
+        />
+        <kbd class="search-shortcut">ESC to close</kbd>
+      </div>
+      <ul id="commandResultsList" class="command-results-list"></ul>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Code Inspector Dialog / Modal
+       ======================================================================== -->
+  <div id="codeModalBackdrop" class="modal-backdrop">
+    <div class="modal-dialog" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h3 id="modalTitle" class="modal-title">Component Inspector</h3>
+          <span id="modalBadge" class="modal-badge">Material</span>
+        </div>
+        <button id="modalCloseBtn" class="icon-btn" aria-label="Close modal">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div id="modalPreviewStage" class="modal-preview-stage"></div>
+        <div class="modal-code-wrapper">
+          <div class="code-box-header">
+            <div class="code-tabs">
+              <button class="code-tab modal-code-tab active" data-tab="html">HTML</button>
+              <button class="code-tab modal-code-tab" data-tab="css">CSS</button>
+              <button class="code-tab modal-code-tab" data-tab="react">React</button>
+            </div>
+            <button id="modalCopyBtn" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;">
+              <span class="material-symbols-rounded" style="font-size: 16px;">content_copy</span>
+              <span>Copy</span>
+            </button>
+          </div>
+          <pre id="modalCodeDisplay" class="code-pre"></pre>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button onclick="document.getElementById('codeModalBackdrop').classList.remove('show')" class="btn btn-secondary">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/toggle-data.js"></script>
+  <script src="js/components-data.js"></script>
+  <script src="js/playground.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/docs.js"></script>
+</body>
+</html>

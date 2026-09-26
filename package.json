@@ -1,0 +1,20 @@
+{
+  "name": "toggle-ui-library",
+  "version": "1.0.0",
+  "description": "Google Material 3 inspired modern Toggle UI Library with rounded icons, interactive playground, and rich switch collection",
+  "main": "index.html",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "toggle",
+    "switch",
+    "ui-library",
+    "material-design",
+    "google-ui",
+    "css-components"
+  ],
+  "author": "Toggle UI Lab",
+  "license": "MIT"
+}
