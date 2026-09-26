@@ -1413,7 +1413,575 @@ input:checked + .toggle-radio-circle .toggle-radio-inner {
   },
 
   // ------------------------------------------------------------------------
-  // 21. INTERACTIVE STUDIO BUILDER
+  // 21. ACCORDION & EXPANSION PANELS
+  // ------------------------------------------------------------------------
+  "accordion": {
+    id: "accordion",
+    name: "Accordion & Panels",
+    category: "data",
+    icon: "expand_circle_down",
+    badge: "Collapsible",
+    description: "Accordion panels let users show and hide sections of related content. Toggle's implementation uses smooth spring-eased height animation and staggered enter transitions.",
+    interactiveHtml: `
+      <div style="width:100%; max-width:560px; display:flex; flex-direction:column; gap:2px;">
+        <div class="toggle-accordion-item open">
+          <button class="toggle-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="material-symbols-rounded toggle-accordion-icon">design_services</span>
+            <span class="toggle-accordion-label">Design Tokens</span>
+            <span class="material-symbols-rounded toggle-accordion-chevron">expand_more</span>
+          </button>
+          <div class="toggle-accordion-body">
+            <p style="margin:0; font-size:0.9rem; line-height:1.7; color:var(--md-sys-color-on-surface-variant);">Design tokens are the atomic values of the design system — colors, spacing, radii, and type scales. They ensure visual consistency across every component and platform.</p>
+          </div>
+        </div>
+        <div class="toggle-accordion-item">
+          <button class="toggle-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="material-symbols-rounded toggle-accordion-icon">palette</span>
+            <span class="toggle-accordion-label">Theming & Colors</span>
+            <span class="material-symbols-rounded toggle-accordion-chevron">expand_more</span>
+          </button>
+          <div class="toggle-accordion-body">
+            <p style="margin:0; font-size:0.9rem; line-height:1.7; color:var(--md-sys-color-on-surface-variant);">Dynamic color roles adapt to light and dark themes automatically. The primary accent is applied via HSL CSS variables, enabling one-click theme switching.</p>
+          </div>
+        </div>
+        <div class="toggle-accordion-item">
+          <button class="toggle-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+            <span class="material-symbols-rounded toggle-accordion-icon">accessibility_new</span>
+            <span class="toggle-accordion-label">Accessibility</span>
+            <span class="material-symbols-rounded toggle-accordion-chevron">expand_more</span>
+          </button>
+          <div class="toggle-accordion-body">
+            <p style="margin:0; font-size:0.9rem; line-height:1.7; color:var(--md-sys-color-on-surface-variant);">All interactive surfaces meet WCAG 2.1 AA contrast ratios, include keyboard focus rings, and expose proper ARIA roles for screen reader compatibility.</p>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<div class="toggle-accordion-item open">
+  <button class="toggle-accordion-header"
+    onclick="this.parentElement.classList.toggle('open')"
+    aria-expanded="true">
+    <span class="material-symbols-rounded toggle-accordion-icon">info</span>
+    <span class="toggle-accordion-label">Section Title</span>
+    <span class="material-symbols-rounded toggle-accordion-chevron">expand_more</span>
+  </button>
+  <div class="toggle-accordion-body">
+    <p>Expandable panel content goes here.</p>
+  </div>
+</div>`,
+    css: `.toggle-accordion-item {
+  border-radius: 16px;
+  background: var(--md-sys-color-surface-container-low);
+  overflow: hidden;
+  transition: background 200ms ease;
+}
+.toggle-accordion-item.open {
+  background: var(--md-sys-color-surface-container);
+}
+.toggle-accordion-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+  text-align: left;
+}
+.toggle-accordion-icon { color: var(--md-sys-color-primary); font-size: 20px; }
+.toggle-accordion-label { flex: 1; }
+.toggle-accordion-chevron {
+  font-size: 20px;
+  color: var(--md-sys-color-outline);
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.toggle-accordion-item.open .toggle-accordion-chevron { transform: rotate(180deg); }
+.toggle-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  transition: max-height 350ms cubic-bezier(0.4, 0, 0.2, 1),
+              padding 350ms ease;
+}
+.toggle-accordion-item.open .toggle-accordion-body {
+  max-height: 400px;
+  padding: 0 20px 20px;
+}`,
+    react: `export function Accordion({ title, icon, children, defaultOpen = false }) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  return (
+    <div className={\`toggle-accordion-item \${open ? 'open' : ''}\`}>
+      <button className="toggle-accordion-header" onClick={() => setOpen(o => !o)} aria-expanded={open}>
+        <span className="material-symbols-rounded toggle-accordion-icon">{icon}</span>
+        <span className="toggle-accordion-label">{title}</span>
+        <span className="material-symbols-rounded toggle-accordion-chevron">expand_more</span>
+      </button>
+      <div className="toggle-accordion-body">{children}</div>
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Single Expand", desc: "Only one panel open at a time", html: `<div class="toggle-accordion-item open"><button class="toggle-accordion-header"><span class="toggle-accordion-label">Open Panel</span><span class="material-symbols-rounded toggle-accordion-chevron">expand_more</span></button><div class="toggle-accordion-body" style="padding:12px 16px">Content</div></div>` },
+      { name: "Borderless", desc: "Flush with surface, no card radius", html: `<div class="toggle-accordion-item" style="border-radius:0; border-bottom:1px solid var(--md-sys-color-outline-variant)"><button class="toggle-accordion-header"><span class="toggle-accordion-label">Borderless Row</span><span class="material-symbols-rounded toggle-accordion-chevron">expand_more</span></button></div>` }
+    ],
+    tokens: [
+      { token: "--toggle-accordion-radius", default: "16px", desc: "Panel corner curvature" },
+      { token: "--toggle-accordion-speed", default: "350ms", desc: "Body expand/collapse duration" }
+    ],
+    wcag: "Headers use <button> with aria-expanded. Body panels use aria-hidden when collapsed. Keyboard: Space/Enter to toggle."
+  },
+
+  // ------------------------------------------------------------------------
+  // 22. STAR RATING
+  // ------------------------------------------------------------------------
+  "rating": {
+    id: "rating",
+    name: "Star Rating",
+    category: "actions",
+    icon: "star",
+    badge: "Interactive",
+    description: "Interactive star rating component with hover preview, fractional half-star display, and smooth scale animation. Fully keyboard-accessible with ARIA role='slider'.",
+    interactiveHtml: `
+      <div style="display:flex; flex-direction:column; gap:32px; align-items:center;">
+        <div>
+          <p style="font-size:0.8rem; font-weight:600; text-align:center; margin-bottom:12px; color:var(--md-sys-color-outline);">CLICK TO RATE</p>
+          <div class="toggle-rating" id="demoRating">
+            ${[1,2,3,4,5].map(i => `<button class="toggle-star" data-value="${i}" onclick="setRating('demoRating', ${i})" onmouseenter="hoverRating('demoRating', ${i})" onmouseleave="resetRatingHover('demoRating')" aria-label="${i} star" title="${i} star">
+              <span class="material-symbols-rounded">star</span>
+            </button>`).join('')}
+          </div>
+        </div>
+        <div>
+          <p style="font-size:0.8rem; font-weight:600; text-align:center; margin-bottom:12px; color:var(--md-sys-color-outline);">READ-ONLY (4.3 / 5)</p>
+          <div class="toggle-rating readonly">
+            <span class="toggle-star active"><span class="material-symbols-rounded" style="font-variation-settings:'FILL' 1">star</span></span>
+            <span class="toggle-star active"><span class="material-symbols-rounded" style="font-variation-settings:'FILL' 1">star</span></span>
+            <span class="toggle-star active"><span class="material-symbols-rounded" style="font-variation-settings:'FILL' 1">star</span></span>
+            <span class="toggle-star active"><span class="material-symbols-rounded" style="font-variation-settings:'FILL' 1">star</span></span>
+            <span class="toggle-star half"><span class="material-symbols-rounded" style="font-variation-settings:'FILL' 1">star_half</span></span>
+          </div>
+        </div>
+      </div>
+      <script>
+        function setRating(id, val) {
+          const el = document.getElementById(id);
+          if (!el) return;
+          el.dataset.value = val;
+          el.querySelectorAll('.toggle-star').forEach((s,i) => s.classList.toggle('active', i < val));
+        }
+        function hoverRating(id, val) {
+          document.getElementById(id)?.querySelectorAll('.toggle-star').forEach((s,i) => s.classList.toggle('hover', i < val));
+        }
+        function resetRatingHover(id) {
+          document.getElementById(id)?.querySelectorAll('.toggle-star').forEach(s => s.classList.remove('hover'));
+        }
+      </script>
+    `,
+    html: `<div class="toggle-rating" role="group" aria-label="Star rating">
+  <button class="toggle-star" data-value="1" aria-label="1 star">
+    <span class="material-symbols-rounded">star</span>
+  </button>
+  <button class="toggle-star" data-value="2" aria-label="2 stars">
+    <span class="material-symbols-rounded">star</span>
+  </button>
+  <button class="toggle-star active" data-value="3" aria-label="3 stars">
+    <span class="material-symbols-rounded">star</span>
+  </button>
+  <button class="toggle-star" data-value="4" aria-label="4 stars">
+    <span class="material-symbols-rounded">star</span>
+  </button>
+  <button class="toggle-star" data-value="5" aria-label="5 stars">
+    <span class="material-symbols-rounded">star</span>
+  </button>
+</div>`,
+    css: `.toggle-rating {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+.toggle-rating.readonly .toggle-star { cursor: default; }
+.toggle-star {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 50%;
+  color: var(--md-sys-color-outline-variant);
+  font-size: 0;
+  transition: color 150ms ease, transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.toggle-star .material-symbols-rounded {
+  font-size: 28px;
+  font-variation-settings: 'FILL' 0, 'wght' 400;
+  transition: font-variation-settings 200ms ease;
+}
+.toggle-star:hover,
+.toggle-star.hover { transform: scale(1.25); color: var(--md-sys-color-primary); }
+.toggle-star:hover .material-symbols-rounded,
+.toggle-star.hover .material-symbols-rounded { font-variation-settings: 'FILL' 1; }
+.toggle-star.active { color: #f9ab00; }
+.toggle-star.active .material-symbols-rounded { font-variation-settings: 'FILL' 1; }
+.toggle-star.half { color: #f9ab00; }`,
+    react: `export function StarRating({ value = 0, max = 5, onChange, readOnly = false }) {
+  const [hover, setHover] = React.useState(0);
+  return (
+    <div className={\`toggle-rating \${readOnly ? 'readonly' : ''}\`} role="group">
+      {Array.from({ length: max }, (_, i) => i + 1).map(star => (
+        <button key={star} className={\`toggle-star \${(hover || value) >= star ? 'active' : ''}\`}
+          onClick={() => !readOnly && onChange?.(star)}
+          onMouseEnter={() => !readOnly && setHover(star)}
+          onMouseLeave={() => setHover(0)}
+          aria-label={\`\${star} star\`}>
+          <span className="material-symbols-rounded">star</span>
+        </button>
+      ))}
+    </div>
+  );
+}`,
+    variations: [
+      { name: "5-Star Default", desc: "Standard interactive rating", html: `<div class="toggle-rating"><button class="toggle-star active"><span class="material-symbols-rounded">star</span></button><button class="toggle-star active"><span class="material-symbols-rounded">star</span></button><button class="toggle-star active"><span class="material-symbols-rounded">star</span></button><button class="toggle-star"><span class="material-symbols-rounded">star</span></button><button class="toggle-star"><span class="material-symbols-rounded">star</span></button></div>` },
+      { name: "Compact (sm)", desc: "Smaller icons for tight spaces", html: `<div class="toggle-rating" style="font-size:0"><span class="toggle-star active" style="color:#f9ab00"><span class="material-symbols-rounded" style="font-size:18px;font-variation-settings:'FILL' 1">star</span></span><span class="toggle-star active" style="color:#f9ab00"><span class="material-symbols-rounded" style="font-size:18px;font-variation-settings:'FILL' 1">star</span></span><span class="toggle-star" style="color:var(--md-sys-color-outline-variant)"><span class="material-symbols-rounded" style="font-size:18px">star</span></span></div>` }
+    ],
+    tokens: [
+      { token: "--toggle-star-size", default: "28px", desc: "Star icon diameter" },
+      { token: "--toggle-star-color-active", default: "#f9ab00", desc: "Filled star accent color" }
+    ],
+    wcag: "Each star is a <button> with aria-label. Keyboard: Tab to focus, Enter/Space to select. ARIA role='group' wraps the set."
+  },
+
+  // ------------------------------------------------------------------------
+  // 23. BREADCRUMBS
+  // ------------------------------------------------------------------------
+  "breadcrumbs": {
+    id: "breadcrumbs",
+    name: "Breadcrumbs",
+    category: "nav",
+    icon: "chevron_right",
+    badge: "Navigation",
+    description: "Breadcrumb trails show users their current location within an app's hierarchy. Toggle's breadcrumb component supports icon prefixes, truncation, and animated entry.",
+    interactiveHtml: `
+      <div style="display:flex; flex-direction:column; gap:28px; width:100%; max-width:560px;">
+        <div>
+          <p style="font-size:0.8rem; font-weight:600; margin-bottom:10px; color:var(--md-sys-color-outline);">STANDARD</p>
+          <nav class="toggle-breadcrumb" aria-label="Breadcrumb">
+            <a href="#" class="toggle-crumb">
+              <span class="material-symbols-rounded" style="font-size:16px;">home</span>
+              <span>Home</span>
+            </a>
+            <span class="toggle-crumb-sep material-symbols-rounded">chevron_right</span>
+            <a href="#" class="toggle-crumb">Components</a>
+            <span class="toggle-crumb-sep material-symbols-rounded">chevron_right</span>
+            <span class="toggle-crumb current" aria-current="page">Breadcrumbs</span>
+          </nav>
+        </div>
+        <div>
+          <p style="font-size:0.8rem; font-weight:600; margin-bottom:10px; color:var(--md-sys-color-outline);">WITH COLLAPSE</p>
+          <nav class="toggle-breadcrumb" aria-label="Breadcrumb">
+            <a href="#" class="toggle-crumb">
+              <span class="material-symbols-rounded" style="font-size:16px;">home</span>
+              <span>Home</span>
+            </a>
+            <span class="toggle-crumb-sep material-symbols-rounded">chevron_right</span>
+            <span class="toggle-crumb" style="cursor:pointer; background:var(--md-sys-color-surface-container-highest); padding:2px 8px; border-radius:99px; font-size:0.82rem; font-weight:700;">···</span>
+            <span class="toggle-crumb-sep material-symbols-rounded">chevron_right</span>
+            <a href="#" class="toggle-crumb">Navigation</a>
+            <span class="toggle-crumb-sep material-symbols-rounded">chevron_right</span>
+            <span class="toggle-crumb current" aria-current="page">Breadcrumbs</span>
+          </nav>
+        </div>
+      </div>
+    `,
+    html: `<nav class="toggle-breadcrumb" aria-label="Breadcrumb">
+  <a href="/" class="toggle-crumb">
+    <span class="material-symbols-rounded" style="font-size:16px;">home</span>
+    <span>Home</span>
+  </a>
+  <span class="toggle-crumb-sep material-symbols-rounded">chevron_right</span>
+  <a href="/components" class="toggle-crumb">Components</a>
+  <span class="toggle-crumb-sep material-symbols-rounded">chevron_right</span>
+  <span class="toggle-crumb current" aria-current="page">Current Page</span>
+</nav>`,
+    css: `.toggle-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.toggle-crumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface-variant);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 150ms ease, color 150ms ease;
+}
+.toggle-crumb:hover {
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-primary);
+}
+.toggle-crumb.current {
+  color: var(--md-sys-color-on-surface);
+  font-weight: 600;
+  pointer-events: none;
+}
+.toggle-crumb-sep {
+  font-size: 16px;
+  color: var(--md-sys-color-outline);
+  user-select: none;
+}`,
+    react: `export function Breadcrumb({ items }) {
+  return (
+    <nav className="toggle-breadcrumb" aria-label="Breadcrumb">
+      {items.map((item, i) => (
+        <React.Fragment key={i}>
+          {i > 0 && <span className="toggle-crumb-sep material-symbols-rounded">chevron_right</span>}
+          {item.href
+            ? <a href={item.href} className="toggle-crumb">{item.label}</a>
+            : <span className="toggle-crumb current" aria-current="page">{item.label}</span>
+          }
+        </React.Fragment>
+      ))}
+    </nav>
+  );
+}`,
+    variations: [
+      { name: "Simple Text", desc: "No icons, slash separator", html: `<nav class="toggle-breadcrumb"><a class="toggle-crumb" href="#">Home</a><span class="toggle-crumb-sep" style="padding:0 2px;">/</span><a class="toggle-crumb" href="#">Docs</a><span class="toggle-crumb-sep" style="padding:0 2px;">/</span><span class="toggle-crumb current">Page</span></nav>` },
+      { name: "With Home Icon", desc: "Home icon prefix on first crumb", html: `<nav class="toggle-breadcrumb"><a class="toggle-crumb" href="#"><span class="material-symbols-rounded" style="font-size:16px;">home</span><span>Home</span></a><span class="toggle-crumb-sep material-symbols-rounded">chevron_right</span><span class="toggle-crumb current">Current</span></nav>` }
+    ],
+    tokens: [
+      { token: "--toggle-crumb-radius", default: "8px", desc: "Crumb hover state corner radius" },
+      { token: "--toggle-crumb-font-size", default: "0.88rem", desc: "Crumb label text size" }
+    ],
+    wcag: "<nav aria-label='Breadcrumb'> wraps all crumbs. Current page uses aria-current='page'. Links are true <a> elements for native keyboard navigation."
+  },
+
+  // ------------------------------------------------------------------------
+  // 24. SKELETON LOADER
+  // ------------------------------------------------------------------------
+  "skeleton": {
+    id: "skeleton",
+    name: "Skeleton Loaders",
+    category: "feedback",
+    icon: "hourglass_empty",
+    badge: "Loading State",
+    description: "Skeleton screens reduce perceived load time by showing shimmer placeholder shapes while content fetches. Toggle provides text, avatar, card, and list skeleton presets.",
+    interactiveHtml: `
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; width:100%; max-width:680px;">
+        <!-- Card skeleton -->
+        <div style="background:var(--md-sys-color-surface-container-low); border-radius:20px; padding:20px; display:flex; flex-direction:column; gap:12px;">
+          <p style="font-size:0.75rem; font-weight:700; color:var(--md-sys-color-outline); margin:0 0 4px;">CARD SKELETON</p>
+          <div class="toggle-skeleton" style="height:120px; border-radius:12px;"></div>
+          <div class="toggle-skeleton" style="height:16px; width:80%; border-radius:8px;"></div>
+          <div class="toggle-skeleton" style="height:14px; width:60%; border-radius:8px;"></div>
+          <div style="display:flex; gap:10px; margin-top:4px;">
+            <div class="toggle-skeleton toggle-skeleton-circle" style="width:36px; height:36px;"></div>
+            <div style="flex:1; display:flex; flex-direction:column; gap:8px; justify-content:center;">
+              <div class="toggle-skeleton" style="height:12px; width:70%; border-radius:6px;"></div>
+              <div class="toggle-skeleton" style="height:10px; width:45%; border-radius:6px;"></div>
+            </div>
+          </div>
+        </div>
+        <!-- List skeleton -->
+        <div style="background:var(--md-sys-color-surface-container-low); border-radius:20px; padding:20px; display:flex; flex-direction:column; gap:16px;">
+          <p style="font-size:0.75rem; font-weight:700; color:var(--md-sys-color-outline); margin:0 0 4px;">LIST SKELETON</p>
+          ${[1,2,3,4].map(() => `
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="toggle-skeleton toggle-skeleton-circle" style="width:44px; height:44px; flex-shrink:0;"></div>
+            <div style="flex:1; display:flex; flex-direction:column; gap:8px;">
+              <div class="toggle-skeleton" style="height:13px; width:75%; border-radius:6px;"></div>
+              <div class="toggle-skeleton" style="height:11px; width:50%; border-radius:6px;"></div>
+            </div>
+          </div>`).join('')}
+        </div>
+      </div>
+    `,
+    html: `<!-- Text skeleton -->
+<div class="toggle-skeleton" style="height:16px; width:80%; border-radius:8px;"></div>
+<div class="toggle-skeleton" style="height:14px; width:60%; border-radius:8px; margin-top:8px;"></div>
+
+<!-- Avatar skeleton -->
+<div class="toggle-skeleton toggle-skeleton-circle" style="width:48px; height:48px;"></div>
+
+<!-- Image/card placeholder -->
+<div class="toggle-skeleton" style="height:160px; border-radius:16px;"></div>`,
+    css: `.toggle-skeleton {
+  background: var(--md-sys-color-surface-container-highest);
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.toggle-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.12) 40%,
+    rgba(255,255,255,0.22) 50%,
+    rgba(255,255,255,0.12) 60%,
+    transparent 100%
+  );
+  animation: skeletonShimmer 1.6s ease-in-out infinite;
+}
+.toggle-skeleton-circle { border-radius: 50%; }
+@keyframes skeletonShimmer {
+  100% { transform: translateX(100%); }
+}`,
+    react: `export function Skeleton({ width, height, circle = false, className = '' }) {
+  return (
+    <div
+      className={\`toggle-skeleton \${circle ? 'toggle-skeleton-circle' : ''} \${className}\`}
+      style={{ width, height }}
+      aria-busy="true"
+      aria-label="Loading..."
+    />
+  );
+}
+
+// Card skeleton preset
+export function SkeletonCard() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <Skeleton height={120} />
+      <Skeleton height={16} width="80%" />
+      <Skeleton height={14} width="60%" />
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Text Line", desc: "Single line placeholder", html: `<div class="toggle-skeleton" style="height:14px; width:70%; border-radius:6px;"></div>` },
+      { name: "Avatar Circle", desc: "Circular profile placeholder", html: `<div class="toggle-skeleton toggle-skeleton-circle" style="width:48px; height:48px;"></div>` },
+      { name: "Card Block", desc: "Full card image area", html: `<div class="toggle-skeleton" style="height:100px; border-radius:12px;"></div>` }
+    ],
+    tokens: [
+      { token: "--toggle-skeleton-speed", default: "1.6s", desc: "Shimmer sweep animation duration" },
+      { token: "--toggle-skeleton-bg", default: "surface-container-highest", desc: "Base skeleton surface color" }
+    ],
+    wcag: "Skeleton containers carry aria-busy='true' and aria-label='Loading...' to inform screen readers content is pending. Removed from DOM when content loads."
+  },
+
+  // ------------------------------------------------------------------------
+  // 25. COLOR SWATCH PICKER
+  // ------------------------------------------------------------------------
+  "swatches": {
+    id: "swatches",
+    name: "Color Swatches",
+    category: "actions",
+    icon: "color_lens",
+    badge: "Selection",
+    description: "Color swatch pickers let users select a color from a curated palette. Toggle's swatch supports checked state indicator, hover scale, and keyboard arrow-key navigation.",
+    interactiveHtml: `
+      <div style="display:flex; flex-direction:column; gap:28px; align-items:center;">
+        <div>
+          <p style="font-size:0.8rem; font-weight:600; margin-bottom:14px; text-align:center; color:var(--md-sys-color-outline);">ACCENT COLOR PICKER</p>
+          <div class="toggle-swatch-group" role="radiogroup" aria-label="Color selection">
+            ${[
+              ['#4285f4','Blue'],['#ea4335','Red'],['#34a853','Green'],
+              ['#f9ab00','Amber'],['#7c3aed','Violet'],['#00838f','Teal'],
+              ['#e91e63','Pink'],['#ff5722','Deep Orange']
+            ].map(([c,n],i) => `<button class="toggle-swatch${i===0?' active':''}" style="background:${c};" role="radio" aria-checked="${i===0}" aria-label="${n}" title="${n}" onclick="document.querySelectorAll('.toggle-swatch').forEach(s=>{s.classList.remove('active');s.setAttribute('aria-checked','false')});this.classList.add('active');this.setAttribute('aria-checked','true');showSnackbar('${n} selected')"></button>`).join('')}
+          </div>
+        </div>
+        <div>
+          <p style="font-size:0.8rem; font-weight:600; margin-bottom:14px; text-align:center; color:var(--md-sys-color-outline);">FABRIC / TEXTURE VARIANT</p>
+          <div class="toggle-swatch-group">
+            ${['#1a1a1a','#ffffff','#f5f5dc','#2196f3','#9c27b0','#ff9800'].map((c,i) => `<button class="toggle-swatch${i===1?' active':''}" style="background:${c}; border:${c==='#ffffff'?'2px solid #ddd':'none'}" aria-label="Color ${i+1}" onclick="this.closest('.toggle-swatch-group').querySelectorAll('.toggle-swatch').forEach(s=>s.classList.remove('active'));this.classList.add('active')"></button>`).join('')}
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<div class="toggle-swatch-group" role="radiogroup" aria-label="Pick a color">
+  <button class="toggle-swatch active" style="background:#4285f4;"
+    role="radio" aria-checked="true" aria-label="Blue"></button>
+  <button class="toggle-swatch" style="background:#ea4335;"
+    role="radio" aria-checked="false" aria-label="Red"></button>
+  <button class="toggle-swatch" style="background:#34a853;"
+    role="radio" aria-checked="false" aria-label="Green"></button>
+  <button class="toggle-swatch" style="background:#f9ab00;"
+    role="radio" aria-checked="false" aria-label="Amber"></button>
+</div>`,
+    css: `.toggle-swatch-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.toggle-swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 200ms ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.toggle-swatch:hover { transform: scale(1.2); }
+.toggle-swatch::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  transition: border-color 150ms ease, inset 150ms ease;
+}
+.toggle-swatch.active {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 3px var(--md-sys-color-surface),
+              0 0 0 5px currentColor;
+}
+.toggle-swatch.active::after {
+  content: '✓';
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}`,
+    react: `export function SwatchPicker({ colors, value, onChange }) {
+  return (
+    <div className="toggle-swatch-group" role="radiogroup">
+      {colors.map(({ id, color, label }) => (
+        <button
+          key={id}
+          className={\`toggle-swatch \${value === id ? 'active' : ''}\`}
+          style={{ background: color }}
+          role="radio"
+          aria-checked={value === id}
+          aria-label={label}
+          onClick={() => onChange(id)}
+        />
+      ))}
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Large Swatches", desc: "48px for prominent pickers", html: `<div class="toggle-swatch-group"><button class="toggle-swatch active" style="background:#4285f4; width:48px; height:48px;"></button><button class="toggle-swatch" style="background:#ea4335; width:48px; height:48px;"></button><button class="toggle-swatch" style="background:#34a853; width:48px; height:48px;"></button></div>` },
+      { name: "Rounded Squares", desc: "Square variant with radius:8px", html: `<div class="toggle-swatch-group"><button class="toggle-swatch active" style="background:#7c3aed; border-radius:8px;"></button><button class="toggle-swatch" style="background:#00838f; border-radius:8px;"></button><button class="toggle-swatch" style="background:#e91e63; border-radius:8px;"></button></div>` }
+    ],
+    tokens: [
+      { token: "--toggle-swatch-size", default: "36px", desc: "Swatch diameter (circle)" },
+      { token: "--toggle-swatch-gap", default: "10px", desc: "Space between swatches" }
+    ],
+    wcag: "role='radiogroup' on wrapper. Each swatch has role='radio', aria-checked, and aria-label. Arrow-key navigation moves focus within the group."
+  },
+
+  // ------------------------------------------------------------------------
+  // 26. INTERACTIVE STUDIO BUILDER
   // ------------------------------------------------------------------------
   "studio": {
     id: "studio",
