@@ -1,9 +1,49 @@
 {
-  "name": "toggle-ui-library",
+  "name": "@dattebayoolo/toggle-ui-library",
   "version": "1.0.0",
-  "description": "Google Material 3 inspired modern Toggle UI Library with rounded icons, interactive playground, and rich switch collection",
-  "main": "index.html",
+  "description": "Google Material 3 inspired modern Toggle UI Library with 25 accessible switches, tokens, sound FX, and React components",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "style": "dist/toggle.css",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.mjs",
+      "require": "./dist/react.cjs"
+    },
+    "./css": "./dist/toggle.css",
+    "./css/min": "./dist/toggle.min.css",
+    "./css/variables": "./dist/variables.css",
+    "./css/toggles": "./dist/toggles.css",
+    "./css/components": "./dist/components.css",
+    "./catalog": "./dist/catalog.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dattebayoolo/Toggle-Ui-Library.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Dattebayoolo/Toggle-Ui-Library/issues"
+  },
+  "homepage": "https://github.com/Dattebayoolo/Toggle-Ui-Library#readme",
   "scripts": {
+    "build": "node scripts/build.js",
+    "prepack": "node scripts/build.js",
     "dev": "node server.js",
     "start": "node server.js"
   },
@@ -12,9 +52,22 @@
     "switch",
     "ui-library",
     "material-design",
-    "google-ui",
-    "css-components"
+    "material-you",
+    "m3",
+    "react-switch",
+    "css-components",
+    "accessible",
+    "sound-effects"
   ],
   "author": "Toggle UI Lab",
-  "license": "MIT"
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  }
 }
+

@@ -23,6 +23,7 @@ Zero dependencies — pure CSS + vanilla JavaScript.
 
 - [Why Toggle?](#why-toggle)
 - [Feature Highlights](#-feature-highlights)
+- [Installation & Package Usage](#-installation--package-usage)
 - [Quick Start](#-quick-start)
 - [Project Structure](#-project-structure)
 - [The Toggle Collection](#-the-toggle-collection)
@@ -30,6 +31,7 @@ Zero dependencies — pure CSS + vanilla JavaScript.
 - [Design Tokens](#-design-tokens)
 - [Custom Switch Studio](#-custom-switch-studio)
 - [Usage](#-usage)
+- [Publishing to GitHub Packages](#-publishing-to-github-packages)
 - [Keyboard Shortcuts](#-keyboard-shortcuts)
 - [Theming, Accent Palette & Sound](#-theming-accent-palette-sound)
 - [Accessibility](#-accessibility)
@@ -42,6 +44,9 @@ Zero dependencies — pure CSS + vanilla JavaScript.
 ## Why Toggle?
 
 Most switch libraries give you *one* switch. **Toggle** gives you a design system: a Google-style documentation shell (sidebar → canvas → "On this page"), a catalog of 25 production-ready switches from Material 3 to Cyberpunk Plasma, a code inspector with HTML/CSS/React output for every single one, and a live studio that generates brand-new switch CSS from sliders and color pickers.
+
+
+> **Note on `.npmrc`:** Never commit your actual `.npmrc` containing your personal token to version control. The repository has `.npmrc` included in `.gitignore`.
 
 Everything is framework-free. Drop two stylesheets into any page and the switches work — or open `index.html` and explore the whole system as a living style guide.
 
@@ -66,6 +71,77 @@ Everything is framework-free. Drop two stylesheets into any page and the switche
 | 📱 | **Responsive & mobile-ready** | Collapsible sidebar drawer, responsive grids, snackbar toasts |
 | ♿ | **Semantic markup** | Native `input[type="checkbox"]`/`radio` underneath every switch, `aria-label`s, keyboard-operable |
 | 📦 | **Zero dependencies** | No build step, no npm packages, no framework — the dev server uses only the Node.js standard library |
+## 📦 Installation & Package Usage
+
+The library is distributed as `@dattebayoolo/toggle-ui-library` via **GitHub Packages** with bundled CSS stylesheets, React components, catalog metadata, and TypeScript declarations.
+
+### 1. Authenticate with GitHub Packages
+
+Create or update a `.npmrc` file in your project or home directory:
+
+```ini
+@dattebayoolo:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+### 2. Install
+
+```bash
+npm install @dattebayoolo/toggle-ui-library
+# or with yarn:
+# yarn add @dattebayoolo/toggle-ui-library
+# or with pnpm:
+# pnpm add @dattebayoolo/toggle-ui-library
+```
+
+### 3. Usage Options
+
+#### Option A: Pure CSS & Design Tokens
+Import the full styles or only the tokens into your app:
+
+```css
+/* All 25 switches + design tokens */
+@import "@dattebayoolo/toggle-ui-library/css";
+
+/* Or minified production bundle */
+@import "@dattebayoolo/toggle-ui-library/css/min";
+
+/* Or selectively import tokens & switches */
+@import "@dattebayoolo/toggle-ui-library/css/variables";
+@import "@dattebayoolo/toggle-ui-library/css/toggles";
+```
+
+#### Option B: React Switch Components
+```jsx
+import React, { useState } from 'react';
+import { M3Switch, IOSSwitch, DayNightSwitch, PixelSwitch } from '@dattebayoolo/toggle-ui-library/react';
+import '@dattebayoolo/toggle-ui-library/css';
+
+export function SettingsPage() {
+  const [notifications, setNotifications] = useState(true);
+
+  return (
+    <div>
+      <M3Switch checked={notifications} onChange={(e) => setNotifications(e.target.checked)} />
+      <IOSSwitch checked={notifications} onChange={(e) => setNotifications(e.target.checked)} />
+    </div>
+  );
+}
+```
+
+#### Option C: Catalog Data & Audio Engine
+```javascript
+import { TOGGLE_CATALOG, SoundEngine, soundEngine } from '@dattebayoolo/toggle-ui-library';
+
+// Inspect all 25 switch definitions, templates, and specs
+console.log(TOGGLE_CATALOG);
+
+// Play tactile sound effects
+soundEngine?.playToggle(true);
+```
+
+---
+
 
 ---
 
@@ -329,6 +405,35 @@ Append an object to `TOGGLE_CATALOG` in `js/toggle-data.js` and it is instantly 
 Don't forget to add the matching `.toggle-mine` rules to `css/toggles.css`.
 
 ---
+## 🚀 Publishing to GitHub Packages
+
+To publish this library to GitHub's package registry under `@dattebayoolo/toggle-ui-library`:
+
+### 1. Generate a Personal Access Token (Classic)
+- Navigate to GitHub **Settings** → **Developer Settings** → **Personal Access Tokens (classic)**.
+- Generate a new token with:
+  - `write:packages` (upload packages to GitHub Package Registry)
+  - `read:packages` (download packages from GitHub Package Registry)
+
+### 2. Configure Authentication
+Create a `.npmrc` file in your user home directory (or directly in this project directory):
+```ini
+//npm.pkg.github.com/:_authToken=YOUR_GITHUB_PAT
+@dattebayoolo:registry=https://npm.pkg.github.com
+```
+
+### 3. Build & Publish
+Run the build script to compile the latest CSS, React modules, and typings into `dist/`, then publish:
+```bash
+# 1. Run build
+npm run build
+
+# 2. Publish to GitHub Packages
+npm publish
+```
+
+---
+
 
 ## ⌨ Keyboard Shortcuts
 
@@ -366,10 +471,10 @@ Don't forget to add the matching `.toggle-mine` rules to `css/toggles.css`.
 ## 🧭 Roadmap
 
 - [ ] `prefers-reduced-motion` support and an animation-intensity setting
-- [x] `:focus-visible` ring polished across the component set ← *help wanted*
-- [ ] Ship a single-file `toggle.min.css` bundle (the header download button is currently UI-only)
-- [ ] Publish to npm as an installable CSS package
-- [ ] TypeScript definitions / `.d.ts` for the React templates
+- [x] `:focus-visible` ring polished across the component set
+- [x] Ship consolidated `toggle.css` and `toggle.min.css` bundles in `dist/`
+- [x] Package as scoped npm library `@dattebayoolo/toggle-ui-library` for GitHub Packages
+- [x] TypeScript definitions (`.d.ts`) and React export entries
 - [ ] Storybook-style isolated preview page
 - [ ] More components: steppers, bottom sheets, segmented tabs, date pickers
 

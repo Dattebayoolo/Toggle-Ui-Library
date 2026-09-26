@@ -1,0 +1,20 @@
+# Development and Source Files
+css/
+js/
+scripts/
+server.js
+index.html
+
+# Local Environment & Secrets
+.env
+.env.*
+.npmrc
+*.log
+
+# Git & IDE
+.git/
+.github/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,3 @@
+// Set the registry to GitHub Packages for this scoped package
+@dattebayoolo:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
