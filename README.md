@@ -1,8 +1,6 @@
 <div align="center">
 
-<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxyZWN0IHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgcng9IjYiIGZpbGw9IiMwYjU3ZDAiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTcgN0g3Yy0yLjc2IDAtNSA0LjI0LTUgNXM1IDUgNSA1aDEwYzIuNzYgMCA1LTIuMjQgNS01cy0yLjI0LTUtNS01em0wIDhjLTEuNjYgMC0zLTEuMzQtMy0zczEuMzQtMyAzLTMgMyAxLjM0IDMgMy0xLjM0IDMtMyAzeiIvPjwvc3ZnPg==" width="96" alt="Toggle Design System logo" />
-
-# Toggle — Design System
+# 🎚️ Toggle — Design System
 
 **A Google Material 3 inspired toggle & switch UI library.**
 25 handcrafted switches · live component documentation · an interactive switch generator · a full Material You token system.
