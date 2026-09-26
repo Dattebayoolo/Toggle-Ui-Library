@@ -31,7 +31,7 @@ Zero dependencies — pure CSS + vanilla JavaScript.
 - [Custom Switch Studio](#-custom-switch-studio)
 - [Usage](#-usage)
 - [Keyboard Shortcuts](#-keyboard-shortcuts)
-- [Theming, Accent Palette & Sound](#-theming-accent-palette--sound)
+- [Theming, Accent Palette & Sound](#-theming-accent-palette-sound)
 - [Accessibility](#-accessibility)
 - [Roadmap](#-roadmap)
 - [Contributing](#-contributing)
