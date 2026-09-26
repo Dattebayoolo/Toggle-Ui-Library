@@ -37,7 +37,7 @@ class DocsEngine {
 
   attachRippleEffect() {
     document.addEventListener('click', (e) => {
-      const target = e.target.closest('.toggle-btn, .toggle-fab, .toggle-chip, .sidebar-nav-link, .btn');
+      const target = e.target.closest('.toggle-btn, .toggle-fab, .toggle-chip, .sidebar-nav-link, .btn, .toggle-accordion-header, .m3-accordion-header');
       if (!target) return;
 
       const rect = target.getBoundingClientRect();
@@ -275,10 +275,37 @@ class DocsEngine {
           <span class="material-symbols-rounded">accessibility_new</span>
           Accessibility & Standards (WCAG)
         </h2>
-        <div class="m3-card m3-card-outlined">
-          <p style="font-size:0.95rem; line-height:1.6; color:var(--md-sys-color-on-surface-variant);">
-            ${data.wcag || 'Fully compliant with WCAG 2.1 AA standards. Supports keyboard focus, High Contrast mode, and screen readers.'}
-          </p>
+        <div class="wcag-card">
+          <div class="wcag-card-header">
+            <span class="wcag-badge">
+              <span class="material-symbols-rounded">verified</span>
+              WCAG 2.1 AA
+            </span>
+            <p class="wcag-card-title">Accessibility Compliance Report</p>
+          </div>
+          <div class="wcag-card-body">
+            <p class="wcag-text">
+              ${data.wcag || 'Fully compliant with WCAG 2.1 AA standards. Supports keyboard focus, High Contrast mode, and screen readers.'}
+            </p>
+            <div class="wcag-chips">
+              <span class="wcag-chip pass">
+                <span class="material-symbols-rounded">keyboard</span>
+                Keyboard Accessible
+              </span>
+              <span class="wcag-chip pass">
+                <span class="material-symbols-rounded">record_voice_over</span>
+                Screen Reader
+              </span>
+              <span class="wcag-chip pass">
+                <span class="material-symbols-rounded">code</span>
+                ARIA Labels
+              </span>
+              <span class="wcag-chip info">
+                <span class="material-symbols-rounded">contrast</span>
+                4.5:1 Contrast
+              </span>
+            </div>
+          </div>
         </div>
       </section>
     `;

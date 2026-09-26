@@ -1423,9 +1423,9 @@ input:checked + .toggle-radio-circle .toggle-radio-inner {
     badge: "Collapsible",
     description: "Accordion panels let users show and hide sections of related content. Toggle's implementation uses smooth spring-eased height animation and staggered enter transitions.",
     interactiveHtml: `
-      <div style="width:100%; max-width:560px; display:flex; flex-direction:column; gap:2px;">
+      <div class="toggle-accordion" style="width:100%; max-width:580px;">
         <div class="toggle-accordion-item open">
-          <button class="toggle-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="toggle-accordion-header" onclick="this.parentElement.classList.toggle('open'); if(window.soundEngine) soundEngine.playToggle(this.parentElement.classList.contains('open'));">
             <span class="material-symbols-rounded toggle-accordion-icon">design_services</span>
             <span class="toggle-accordion-label">Design Tokens</span>
             <span class="material-symbols-rounded toggle-accordion-chevron">expand_more</span>
@@ -1435,7 +1435,7 @@ input:checked + .toggle-radio-circle .toggle-radio-inner {
           </div>
         </div>
         <div class="toggle-accordion-item">
-          <button class="toggle-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="toggle-accordion-header" onclick="this.parentElement.classList.toggle('open'); if(window.soundEngine) soundEngine.playToggle(this.parentElement.classList.contains('open'));">
             <span class="material-symbols-rounded toggle-accordion-icon">palette</span>
             <span class="toggle-accordion-label">Theming & Colors</span>
             <span class="material-symbols-rounded toggle-accordion-chevron">expand_more</span>
@@ -1445,7 +1445,7 @@ input:checked + .toggle-radio-circle .toggle-radio-inner {
           </div>
         </div>
         <div class="toggle-accordion-item">
-          <button class="toggle-accordion-header" onclick="this.parentElement.classList.toggle('open')">
+          <button class="toggle-accordion-header" onclick="this.parentElement.classList.toggle('open'); if(window.soundEngine) soundEngine.playToggle(this.parentElement.classList.contains('open'));">
             <span class="material-symbols-rounded toggle-accordion-icon">accessibility_new</span>
             <span class="toggle-accordion-label">Accessibility</span>
             <span class="material-symbols-rounded toggle-accordion-chevron">expand_more</span>
@@ -1981,7 +1981,1991 @@ export function SkeletonCard() {
   },
 
   // ------------------------------------------------------------------------
-  // 26. INTERACTIVE STUDIO BUILDER
+  // 26. TABS & SEGMENTED BARS
+  // ------------------------------------------------------------------------
+  "tabs": {
+    id: "tabs",
+    name: "Tabs & Segmented Bars",
+    category: "nav",
+    icon: "tab",
+    badge: "M3 Navigation",
+    description: "Tabs organize and allow navigation between groups of content that are related and at the same level of hierarchy. Includes primary underline indicators and capsule pill segmented groups.",
+    interactiveHtml: `
+      <div style="display:flex; flex-direction:column; gap:28px; width:100%; max-width:600px; margin:0 auto;">
+        <div>
+          <div style="font-size:0.8rem; font-weight:700; text-transform:uppercase; color:var(--md-sys-color-outline); margin-bottom:10px;">Primary Tabs</div>
+          <div class="toggle-tabs-bar" role="tablist">
+            <button class="toggle-tab-btn active" role="tab" aria-selected="true" onclick="this.parentElement.querySelectorAll('.toggle-tab-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="material-symbols-rounded">dashboard</span>
+              <span>Overview</span>
+            </button>
+            <button class="toggle-tab-btn" role="tab" aria-selected="false" onclick="this.parentElement.querySelectorAll('.toggle-tab-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="material-symbols-rounded">analytics</span>
+              <span>Metrics</span>
+            </button>
+            <button class="toggle-tab-btn" role="tab" aria-selected="false" onclick="this.parentElement.querySelectorAll('.toggle-tab-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="material-symbols-rounded">settings</span>
+              <span>Settings</span>
+            </button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.8rem; font-weight:700; text-transform:uppercase; color:var(--md-sys-color-outline); margin-bottom:10px;">Segmented Capsule Controls</div>
+          <div class="toggle-pill-segmented" role="group">
+            <button class="toggle-pill-btn active" onclick="this.parentElement.querySelectorAll('.toggle-pill-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="material-symbols-rounded" style="font-size:16px;">calendar_view_day</span>
+              <span>Day</span>
+            </button>
+            <button class="toggle-pill-btn" onclick="this.parentElement.querySelectorAll('.toggle-pill-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="material-symbols-rounded" style="font-size:16px;">calendar_view_week</span>
+              <span>Week</span>
+            </button>
+            <button class="toggle-pill-btn" onclick="this.parentElement.querySelectorAll('.toggle-pill-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="material-symbols-rounded" style="font-size:16px;">calendar_view_month</span>
+              <span>Month</span>
+            </button>
+            <button class="toggle-pill-btn" onclick="this.parentElement.querySelectorAll('.toggle-pill-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span>Year</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Primary Underlined Tabs -->
+<div class="toggle-tabs-bar" role="tablist">
+  <button class="toggle-tab-btn active" role="tab" aria-selected="true">
+    <span class="material-symbols-rounded">dashboard</span>
+    <span>Overview</span>
+  </button>
+  <button class="toggle-tab-btn" role="tab" aria-selected="false">
+    <span class="material-symbols-rounded">analytics</span>
+    <span>Metrics</span>
+  </button>
+  <button class="toggle-tab-btn" role="tab" aria-selected="false">
+    <span class="material-symbols-rounded">settings</span>
+    <span>Settings</span>
+  </button>
+</div>
+
+<!-- Pill Segmented Tabs -->
+<div class="toggle-pill-segmented" role="group">
+  <button class="toggle-pill-btn active">Day</button>
+  <button class="toggle-pill-btn">Week</button>
+  <button class="toggle-pill-btn">Month</button>
+</div>`,
+    css: `/* Tabs Bar */
+.toggle-tabs-bar {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--md-sys-color-card-border);
+  gap: 8px;
+}
+.toggle-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: transparent;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+}
+.toggle-tab-btn.active {
+  color: var(--md-sys-color-primary);
+  font-weight: 700;
+}
+.toggle-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--md-sys-color-primary);
+  border-radius: 3px 3px 0 0;
+}`,
+    react: `export function Tabs({ tabs, activeTab, onChange }) {
+  return (
+    <div className="toggle-tabs-bar" role="tablist">
+      {tabs.map((tab) => (
+        <button
+          key={tab.id}
+          className={\`toggle-tab-btn \${activeTab === tab.id ? 'active' : ''}\`}
+          role="tab"
+          aria-selected={activeTab === tab.id}
+          onClick={() => onChange(tab.id)}
+        >
+          {tab.icon && <span className="material-symbols-rounded">{tab.icon}</span>}
+          <span>{tab.label}</span>
+        </button>
+      ))}
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Primary Underlined", desc: "Classic Google Material active underline", html: `<div class="toggle-tabs-bar"><button class="toggle-tab-btn active"><span>Home</span></button><button class="toggle-tab-btn"><span>Docs</span></button></div>` },
+      { name: "Pill Segmented", desc: "High-contrast container capsule", html: `<div class="toggle-pill-segmented"><button class="toggle-pill-btn active">Active</button><button class="toggle-pill-btn">History</button></div>` }
+    ],
+    tokens: [
+      { token: "--md-sys-color-primary", default: "#0b57d0", desc: "Indicator underline and active text" },
+      { token: "--radius-full", default: "9999px", desc: "Border radius for pill segmented controls" }
+    ],
+    wcag: "Tabs have role='tablist', each button has role='tab' and aria-selected state. Supports Arrow Left and Arrow Right keyboard navigation."
+  },
+
+  // ------------------------------------------------------------------------
+  // 27. DROPDOWNS & SELECT MENUS
+  // ------------------------------------------------------------------------
+  "dropdowns": {
+    id: "dropdowns",
+    name: "Dropdowns & Select Menus",
+    category: "forms",
+    icon: "arrow_drop_down_circle",
+    badge: "M3 Input",
+    description: "Select menus and dropdowns allow users to choose one or multiple items from an expansive list of options with support for icons, search filtering, and grouped items.",
+    interactiveHtml: `
+      <div style="display:flex; flex-wrap:wrap; gap:24px; justify-content:center; align-items:flex-start; min-height:220px;">
+        <div class="toggle-select-wrapper" id="demoSelectWrap" style="width:260px;">
+          <button class="toggle-select-trigger" onclick="const w = document.getElementById('demoSelectWrap'); w.classList.toggle('open'); if(window.soundEngine) soundEngine.playToggle(true);">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="material-symbols-rounded" style="color:var(--md-sys-color-primary); font-size:20px;">cloud</span>
+              <span id="demoSelectVal">Google Cloud Platform</span>
+            </div>
+            <span class="material-symbols-rounded" style="color:var(--md-sys-color-outline);">arrow_drop_down</span>
+          </button>
+          <div class="toggle-select-menu">
+            <button class="toggle-select-item selected" onclick="document.getElementById('demoSelectVal').textContent='Google Cloud Platform'; document.getElementById('demoSelectWrap').classList.remove('open');">
+              <span class="material-symbols-rounded">cloud</span>
+              <span>Google Cloud Platform</span>
+            </button>
+            <button class="toggle-select-item" onclick="document.getElementById('demoSelectVal').textContent='Google Workspace'; document.getElementById('demoSelectWrap').classList.remove('open');">
+              <span class="material-symbols-rounded">work</span>
+              <span>Google Workspace</span>
+            </button>
+            <button class="toggle-select-item" onclick="document.getElementById('demoSelectVal').textContent='Android Open Source'; document.getElementById('demoSelectWrap').classList.remove('open');">
+              <span class="material-symbols-rounded">android</span>
+              <span>Android Open Source</span>
+            </button>
+            <button class="toggle-select-item" onclick="document.getElementById('demoSelectVal').textContent='Gemini Developer API'; document.getElementById('demoSelectWrap').classList.remove('open');">
+              <span class="material-symbols-rounded">auto_awesome</span>
+              <span>Gemini Developer API</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Select Dropdown -->
+<div class="toggle-select-wrapper">
+  <button class="toggle-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span class="material-symbols-rounded">cloud</span>
+      <span>Google Cloud Platform</span>
+    </div>
+    <span class="material-symbols-rounded">arrow_drop_down</span>
+  </button>
+  <div class="toggle-select-menu" role="listbox">
+    <button class="toggle-select-item selected" role="option">
+      <span class="material-symbols-rounded">cloud</span>
+      <span>Google Cloud Platform</span>
+    </button>
+    <button class="toggle-select-item" role="option">
+      <span class="material-symbols-rounded">work</span>
+      <span>Google Workspace</span>
+    </button>
+  </div>
+</div>`,
+    css: `.toggle-select-wrapper {
+  position: relative;
+  display: inline-block;
+  min-width: 240px;
+}
+.toggle-select-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--radius-md);
+  color: var(--md-sys-color-on-surface);
+  cursor: pointer;
+}
+.toggle-select-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-3);
+  padding: 6px;
+  display: none;
+}
+.toggle-select-wrapper.open .toggle-select-menu {
+  display: flex;
+  flex-direction: column;
+}`,
+    react: `export function Dropdown({ label, options, selected, onSelect }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={\`toggle-select-wrapper \${open ? 'open' : ''}\`}>
+      <button className="toggle-select-trigger" onClick={() => setOpen(!open)}>
+        <span>{selected?.label || label}</span>
+        <span className="material-symbols-rounded">arrow_drop_down</span>
+      </button>
+      {open && (
+        <div className="toggle-select-menu">
+          {options.map((opt) => (
+            <button key={opt.value} className="toggle-select-item" onClick={() => { onSelect(opt); setOpen(false); }}>
+              <span>{opt.label}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}`,
+    variations: [
+      { name: "With Leading Icons", desc: "Visual context icons preceding option text", html: `<div class="toggle-select-wrapper open" style="width:200px;"><button class="toggle-select-trigger"><span>Selected</span></button><div class="toggle-select-menu" style="display:flex; position:static;"><button class="toggle-select-item"><span class="material-symbols-rounded">mail</span><span>Mail</span></button></div></div>` },
+      { name: "Selected State", desc: "High emphasis tonal highlight with check", html: `<div class="toggle-select-item selected"><span class="material-symbols-rounded">check</span><span>Active Selection</span></div>` }
+    ],
+    tokens: [
+      { token: "--radius-md", default: "12px", desc: "Select input and menu border radius" },
+      { token: "--elevation-3", default: "0 4px 12px rgba(0,0,0,0.1)", desc: "Floating dropdown menu elevation" }
+    ],
+    wcag: "Uses aria-haspopup='listbox', aria-expanded, and each item has role='option'. Closes on Escape and clicks outside."
+  },
+
+  // ------------------------------------------------------------------------
+  // 28. BOTTOM SHEETS & DRAWERS
+  // ------------------------------------------------------------------------
+  "bottomsheet": {
+    id: "bottomsheet",
+    name: "Bottom Sheets & Drawers",
+    category: "nav",
+    icon: "vertical_align_top",
+    badge: "M3 Surface",
+    description: "Bottom sheets are surfaces containing supplementary content that anchor to the bottom of the screen with touch drag handles, fluid springs, and modal backdrops.",
+    interactiveHtml: `
+      <div style="display:flex; justify-content:center; width:100%;">
+        <div class="toggle-bottom-sheet-preview">
+          <div class="toggle-sheet-handle-bar">
+            <div class="toggle-sheet-handle"></div>
+          </div>
+          <div class="toggle-sheet-header">
+            <div class="toggle-sheet-title">Share Options</div>
+            <div style="font-size:0.82rem; color:var(--md-sys-color-outline);">Select a destination to export or collaborate</div>
+          </div>
+          <div class="toggle-sheet-body">
+            <button class="toggle-sheet-action-row" onclick="showSnackbar('Sharing via Link copied'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="material-symbols-rounded">link</span>
+              <div style="flex:1;">
+                <div style="font-weight:600;">Copy Link</div>
+                <div style="font-size:0.78rem; color:var(--md-sys-color-outline);">Anyone with the link can view</div>
+              </div>
+            </button>
+            <button class="toggle-sheet-action-row" onclick="showSnackbar('Inviting Collaborator'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="material-symbols-rounded">person_add</span>
+              <div style="flex:1;">
+                <div style="font-weight:600;">Invite Collaborators</div>
+                <div style="font-size:0.78rem; color:var(--md-sys-color-outline);">Add emails from contacts</div>
+              </div>
+            </button>
+            <button class="toggle-sheet-action-row" onclick="showSnackbar('QR Code generated'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="material-symbols-rounded">qr_code_2</span>
+              <div style="flex:1;">
+                <div style="font-weight:600;">Show QR Code</div>
+                <div style="font-size:0.78rem; color:var(--md-sys-color-outline);">Scan to open immediately on mobile</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Bottom Sheet -->
+<div class="toggle-bottom-sheet-preview">
+  <div class="toggle-sheet-handle-bar">
+    <div class="toggle-sheet-handle"></div>
+  </div>
+  <div class="toggle-sheet-header">
+    <div class="toggle-sheet-title">Share Options</div>
+  </div>
+  <div class="toggle-sheet-body">
+    <button class="toggle-sheet-action-row">
+      <span class="material-symbols-rounded">link</span>
+      <span>Copy Link</span>
+    </button>
+    <button class="toggle-sheet-action-row">
+      <span class="material-symbols-rounded">person_add</span>
+      <span>Invite Collaborators</span>
+    </button>
+  </div>
+</div>`,
+    css: `.toggle-bottom-sheet-preview {
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-2xl) var(--radius-2xl) var(--radius-md) var(--radius-md);
+  box-shadow: var(--elevation-4);
+  overflow: hidden;
+}
+.toggle-sheet-handle-bar {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0 6px;
+  cursor: grab;
+}
+.toggle-sheet-handle {
+  width: 40px;
+  height: 4px;
+  border-radius: 999px;
+  background-color: var(--md-sys-color-outline-variant);
+}`,
+    react: `export function BottomSheet({ title, children, onClose }) {
+  return (
+    <div className="toggle-bottom-sheet-preview" role="dialog" aria-modal="true">
+      <div className="toggle-sheet-handle-bar" onClick={onClose}>
+        <div className="toggle-sheet-handle" />
+      </div>
+      {title && <div className="toggle-sheet-header"><div className="toggle-sheet-title">{title}</div></div>}
+      <div className="toggle-sheet-body">{children}</div>
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Touch Drag Handle", desc: "Subtle pill grabber bar at the top edge", html: `<div class="toggle-sheet-handle-bar"><div class="toggle-sheet-handle"></div></div>` },
+      { name: "Action List Item", desc: "Interactive rounded row with icon and subtitle", html: `<div class="toggle-sheet-action-row"><span class="material-symbols-rounded">share</span><span>Quick Share</span></div>` }
+    ],
+    tokens: [
+      { token: "--radius-2xl", default: "32px", desc: "Top rounded surface corners" },
+      { token: "--elevation-4", default: "0 8px 24px rgba(0,0,0,0.12)", desc: "Elevated bottom sheet shadow" }
+    ],
+    wcag: "Has role='dialog', supports keyboard Escape to dismiss, retains focus within the sheet during modal presentation."
+  },
+
+  // ------------------------------------------------------------------------
+  // 29. BADGES & NOTIFICATION COUNTERS
+  // ------------------------------------------------------------------------
+  "badges": {
+    id: "badges",
+    name: "Badges & Status Counters",
+    category: "data",
+    icon: "mark_chat_unread",
+    badge: "M3 Feedback",
+    description: "Badges add numerical values, alert dots, or presence indicators (Online, Busy, Away) to icons, avatars, and navigation items.",
+    interactiveHtml: `
+      <div style="display:flex; flex-direction:column; gap:24px; align-items:center; width:100%;">
+        <div style="display:flex; gap:32px; align-items:center; flex-wrap:wrap; justify-content:center;">
+          <!-- Badge on Button -->
+          <div class="toggle-badge-anchor">
+            <button class="toggle-btn toggle-btn-tonal" onclick="showSnackbar('Notifications clicked'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="material-symbols-rounded">notifications</span>
+              <span>Inbox</span>
+            </button>
+            <span class="toggle-badge-pill">7</span>
+          </div>
+
+          <!-- Badge on Round Icon -->
+          <div class="toggle-badge-anchor">
+            <button class="toggle-fab" style="width:48px; height:48px;" aria-label="Mail" onclick="showSnackbar('Mail clicked'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="material-symbols-rounded">mail</span>
+            </button>
+            <span class="toggle-badge-pill">99+</span>
+          </div>
+
+          <!-- Dot Badge on Avatar -->
+          <div class="toggle-badge-anchor">
+            <div class="toggle-avatar-ring" style="width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg,#0b57d0,#34a853); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700;">
+              JD
+            </div>
+            <span class="toggle-badge-dot toggle-badge-pulse"></span>
+          </div>
+        </div>
+
+        <!-- Status Pills -->
+        <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+          <div class="toggle-status-indicator online">
+            <span class="toggle-status-dot"></span>
+            <span>Online</span>
+          </div>
+          <div class="toggle-status-indicator busy">
+            <span class="toggle-status-dot"></span>
+            <span>Do Not Disturb</span>
+          </div>
+          <div class="toggle-status-indicator away">
+            <span class="toggle-status-dot"></span>
+            <span>Away</span>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Counter Badge on Action -->
+<div class="toggle-badge-anchor">
+  <button class="toggle-btn toggle-btn-tonal">
+    <span class="material-symbols-rounded">notifications</span>
+    <span>Inbox</span>
+  </button>
+  <span class="toggle-badge-pill">7</span>
+</div>
+
+<!-- Dot Badge on Avatar -->
+<div class="toggle-badge-anchor">
+  <div class="toggle-avatar-ring">JD</div>
+  <span class="toggle-badge-dot toggle-badge-pulse"></span>
+</div>
+
+<!-- Presence Indicator -->
+<div class="toggle-status-indicator online">
+  <span class="toggle-status-dot"></span>
+  <span>Online</span>
+</div>`,
+    css: `.toggle-badge-anchor {
+  position: relative;
+  display: inline-flex;
+}
+.toggle-badge-pill {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background-color: #ea4335;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  height: 20px;
+  min-width: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--md-sys-color-surface);
+}
+.toggle-badge-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  background-color: #ea4335;
+  border-radius: 50%;
+  border: 2px solid var(--md-sys-color-surface);
+}`,
+    react: `export function Badge({ count, dot = false, children }) {
+  return (
+    <div className="toggle-badge-anchor">
+      {children}
+      {dot ? (
+        <span className="toggle-badge-dot" />
+      ) : count ? (
+        <span className="toggle-badge-pill">{count > 99 ? '99+' : count}</span>
+      ) : null}
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Pill Counter (99+)", desc: "Displays numeric alerts exceeding two digits", html: `<div class="toggle-badge-anchor"><button class="toggle-btn toggle-btn-outlined">Chat</button><span class="toggle-badge-pill">99+</span></div>` },
+      { name: "Pulsing Presence Dot", desc: "Live radar pulse on user avatar", html: `<div class="toggle-badge-anchor"><div style="width:36px;height:36px;border-radius:50%;background:#0b57d0;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;">AB</div><span class="toggle-badge-dot toggle-badge-pulse"></span></div>` }
+    ],
+    tokens: [
+      { token: "--google-red", default: "#ea4335", desc: "Notification alert badge fill color" },
+      { token: "--md-sys-color-surface", default: "#ffffff", desc: "Cutout border color separating badge from icon" }
+    ],
+    wcag: "Badges include aria-label describing total unread notifications (e.g. '7 unread messages') for screen readers."
+  },
+
+  // ------------------------------------------------------------------------
+  // 30. SPEED DIAL & FLOATING MENUS
+  // ------------------------------------------------------------------------
+  "speeddial": {
+    id: "speeddial",
+    name: "Speed Dial & Floating Menus",
+    category: "actions",
+    icon: "add_circle",
+    badge: "M3 Action",
+    description: "When pressed, a floating action button can expand into a speed dial displaying related quick actions with staggered animations, tooltips, and tactile sound feedback.",
+    interactiveHtml: `
+      <div style="display:flex; justify-content:center; align-items:center; min-height:280px; width:100%;">
+        <div class="toggle-speed-dial" id="demoSpeedDial">
+          <button class="toggle-speed-dial-trigger" aria-label="Quick Actions" onclick="const d = document.getElementById('demoSpeedDial'); d.classList.toggle('open'); if(window.soundEngine) soundEngine.playSpring();">
+            <span class="material-symbols-rounded">add</span>
+          </button>
+          <div class="toggle-speed-dial-items">
+            <div class="toggle-speed-dial-action" onclick="showSnackbar('Creating New Document'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="toggle-dial-label">New Document</span>
+              <div class="toggle-dial-sub-btn">
+                <span class="material-symbols-rounded">description</span>
+              </div>
+            </div>
+            <div class="toggle-speed-dial-action" onclick="showSnackbar('Uploading Photo'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="toggle-dial-label">Upload Photo</span>
+              <div class="toggle-dial-sub-btn">
+                <span class="material-symbols-rounded">photo_camera</span>
+              </div>
+            </div>
+            <div class="toggle-speed-dial-action" onclick="showSnackbar('Voice Memo started'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="toggle-dial-label">Voice Memo</span>
+              <div class="toggle-dial-sub-btn">
+                <span class="material-symbols-rounded">mic</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Speed Dial -->
+<div class="toggle-speed-dial" id="speedDial">
+  <button class="toggle-speed-dial-trigger" aria-expanded="false" aria-label="Create new">
+    <span class="material-symbols-rounded">add</span>
+  </button>
+  <div class="toggle-speed-dial-items">
+    <div class="toggle-speed-dial-action">
+      <span class="toggle-dial-label">New Document</span>
+      <button class="toggle-dial-sub-btn"><span class="material-symbols-rounded">description</span></button>
+    </div>
+    <div class="toggle-speed-dial-action">
+      <span class="toggle-dial-label">Upload Photo</span>
+      <button class="toggle-dial-sub-btn"><span class="material-symbols-rounded">photo_camera</span></button>
+    </div>
+  </div>
+</div>`,
+    css: `.toggle-speed-dial {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 12px;
+}
+.toggle-speed-dial-trigger {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border: none;
+  box-shadow: var(--elevation-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+.toggle-speed-dial.open .toggle-speed-dial-trigger .material-symbols-rounded {
+  transform: rotate(135deg);
+}
+.toggle-speed-dial-items {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  align-items: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px) scale(0.95);
+  transition: all var(--transition-base);
+}
+.toggle-speed-dial.open .toggle-speed-dial-items {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}`,
+    react: `export function SpeedDial({ actions, mainIcon = 'add' }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className={\`toggle-speed-dial \${open ? 'open' : ''}\`}>
+      <button className="toggle-speed-dial-trigger" onClick={() => setOpen(!open)}>
+        <span className="material-symbols-rounded">{mainIcon}</span>
+      </button>
+      <div className="toggle-speed-dial-items">
+        {actions.map((act) => (
+          <div key={act.label} className="toggle-speed-dial-action" onClick={act.onClick}>
+            <span className="toggle-dial-label">{act.label}</span>
+            <button className="toggle-dial-sub-btn">
+              <span className="material-symbols-rounded">{act.icon}</span>
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Expanded Tooltips", desc: "Labels pop out to the left of the action buttons", html: `<div class="toggle-speed-dial-action"><span class="toggle-dial-label">Action</span><button class="toggle-dial-sub-btn"><span class="material-symbols-rounded">star</span></button></div>` },
+      { name: "Spring Rotate Icon", desc: "Add icon rotates 135deg into a close cross", html: `<button class="toggle-speed-dial-trigger" style="transform:scale(0.8);"><span class="material-symbols-rounded" style="transform:rotate(135deg);">add</span></button>` }
+    ],
+    tokens: [
+      { token: "--elevation-3", default: "0 4px 12px rgba(0,0,0,0.1)", desc: "Floating speed dial trigger shadow" },
+      { token: "--transition-spring", default: "400ms cubic-bezier(0.34, 1.56, 0.64, 1)", desc: "Spring rotation duration" }
+    ],
+    wcag: "Uses aria-expanded state on the trigger button, tab focus cycles through speed dial actions when expanded."
+  },
+
+  // ------------------------------------------------------------------------
+  // 31. DATE & TIME PICKERS
+  // ------------------------------------------------------------------------
+  "datepicker": {
+    id: "datepicker",
+    name: "Date & Time Pickers",
+    category: "forms",
+    icon: "calendar_today",
+    badge: "M3 Form",
+    description: "Date pickers let users select a date, date range, or time through an intuitive calendar grid interface matching Google Calendar styling.",
+    interactiveHtml: `
+      <div style="display:flex; justify-content:center; width:100%;">
+        <div class="toggle-datepicker-card">
+          <div class="toggle-calendar-header">
+            <span class="toggle-calendar-month">September 2026</span>
+            <div style="display:flex; gap:4px;">
+              <button class="toggle-calendar-nav-btn" onclick="showSnackbar('Previous month'); if(window.soundEngine) soundEngine.playToggle(true);"><span class="material-symbols-rounded">chevron_left</span></button>
+              <button class="toggle-calendar-nav-btn" onclick="showSnackbar('Next month'); if(window.soundEngine) soundEngine.playToggle(true);"><span class="material-symbols-rounded">chevron_right</span></button>
+            </div>
+          </div>
+          <div class="toggle-calendar-weekdays">
+            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+          </div>
+          <div class="toggle-calendar-days" id="demoCalendarDays">
+            <span class="toggle-calendar-day empty"></span>
+            <span class="toggle-calendar-day empty"></span>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">1</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">2</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">3</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">4</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">5</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">6</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">7</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">8</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">9</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">10</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">11</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">12</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">13</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">14</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">15</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">16</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">17</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">18</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">19</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">20</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">21</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">22</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">23</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">24</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">25</button>
+            <button class="toggle-calendar-day selected today" onclick="selectDemoDate(this)">26</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">27</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">28</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">29</button>
+            <button class="toggle-calendar-day" onclick="selectDemoDate(this)">30</button>
+          </div>
+        </div>
+      </div>
+      <script>
+        function selectDemoDate(el) {
+          document.querySelectorAll('#demoCalendarDays .toggle-calendar-day').forEach(b => b.classList.remove('selected'));
+          el.classList.add('selected');
+          if (window.soundEngine) soundEngine.playToggle(true);
+          showSnackbar('Selected date: September ' + el.textContent + ', 2026');
+        }
+      </script>
+    `,
+    html: `<!-- Material 3 Calendar Date Picker -->
+<div class="toggle-datepicker-card">
+  <div class="toggle-calendar-header">
+    <span class="toggle-calendar-month">September 2026</span>
+    <div style="display:flex; gap:4px;">
+      <button class="toggle-calendar-nav-btn"><span class="material-symbols-rounded">chevron_left</span></button>
+      <button class="toggle-calendar-nav-btn"><span class="material-symbols-rounded">chevron_right</span></button>
+    </div>
+  </div>
+  <div class="toggle-calendar-weekdays">
+    <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+  </div>
+  <div class="toggle-calendar-days">
+    <button class="toggle-calendar-day today selected">26</button>
+  </div>
+</div>`,
+    css: `.toggle-datepicker-card {
+  width: 100%;
+  max-width: 320px;
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--elevation-3);
+  padding: 20px;
+}
+.toggle-calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.toggle-calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.toggle-calendar-day.selected {
+  background-color: var(--md-sys-color-primary);
+  color: #ffffff;
+}`,
+    react: `export function DatePicker({ value, onChange }) {
+  return (
+    <div className="toggle-datepicker-card">
+      <div className="toggle-calendar-header">
+        <span className="toggle-calendar-month">Calendar</span>
+      </div>
+      <div className="toggle-calendar-days">
+        {/* Render interactive days */}
+      </div>
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Today Circle Highlight", desc: "Outlined primary ring on current calendar day", html: `<button class="toggle-calendar-day today" style="width:36px;height:36px;">26</button>` },
+      { name: "Selected Day", desc: "Filled high-emphasis accent circle", html: `<button class="toggle-calendar-day selected" style="width:36px;height:36px;">26</button>` }
+    ],
+    tokens: [
+      { token: "--radius-xl", default: "24px", desc: "Calendar card boundary curvature" },
+      { token: "--md-sys-color-primary", default: "#0b57d0", desc: "Selected date circle color" }
+    ],
+    wcag: "Calendar has role='grid', day buttons have aria-label with full date (e.g. 'September 26, 2026'), and Arrow keys navigate rows and columns."
+  },
+
+  // ------------------------------------------------------------------------
+  // 32. FILE UPLOAD & DROPZONE
+  // ------------------------------------------------------------------------
+  "fileupload": {
+    id: "fileupload",
+    name: "File Upload & Dropzone",
+    category: "forms",
+    icon: "cloud_upload",
+    badge: "M3 Input",
+    description: "File upload dropzones enable users to drag and drop files or browse locally, complete with upload progress indicators, file type badges, and remove actions.",
+    interactiveHtml: `
+      <div style="display:flex; flex-direction:column; gap:16px; width:100%; max-width:540px; margin:0 auto;">
+        <div class="toggle-dropzone-box" onclick="showSnackbar('Browse dialog opened'); if(window.soundEngine) soundEngine.playToggle(true);">
+          <div class="toggle-dropzone-icon-circle">
+            <span class="material-symbols-rounded" style="font-size:28px;">cloud_upload</span>
+          </div>
+          <div>
+            <div class="toggle-dropzone-title">Drop your files here, or <span style="color:var(--md-sys-color-primary); text-decoration:underline;">browse</span></div>
+            <div class="toggle-dropzone-sub">Supports SVG, PNG, JPG, or PDF up to 25MB</div>
+          </div>
+        </div>
+
+        <!-- Sample Uploaded File Item -->
+        <div class="toggle-file-item-card">
+          <div class="toggle-file-info">
+            <div style="width:36px; height:36px; border-radius:8px; background:rgba(66,133,244,0.12); color:#4285f4; display:flex; align-items:center; justify-content:center;">
+              <span class="material-symbols-rounded">image</span>
+            </div>
+            <div>
+              <div style="font-size:0.88rem; font-weight:600; color:var(--md-sys-color-on-surface);">google_material_banner.png</div>
+              <div style="font-size:0.75rem; color:var(--md-sys-color-outline);">2.4 MB • Complete</div>
+              <div class="toggle-file-progress-bar" style="width:160px;">
+                <div class="toggle-file-progress-fill" style="width:100%;"></div>
+              </div>
+            </div>
+          </div>
+          <button class="icon-btn" title="Remove File" onclick="this.closest('.toggle-file-item-card').remove(); showSnackbar('File removed');">
+            <span class="material-symbols-rounded" style="font-size:18px;">close</span>
+          </button>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 File Dropzone -->
+<div class="toggle-dropzone-box">
+  <div class="toggle-dropzone-icon-circle">
+    <span class="material-symbols-rounded">cloud_upload</span>
+  </div>
+  <div class="toggle-dropzone-title">
+    Drop files here, or <span style="color:var(--md-sys-color-primary)">browse</span>
+  </div>
+  <div class="toggle-dropzone-sub">Max size 25MB</div>
+</div>`,
+    css: `.toggle-dropzone-box {
+  width: 100%;
+  border: 2px dashed var(--md-sys-color-outline-variant);
+  border-radius: var(--radius-xl);
+  padding: 32px 24px;
+  background-color: var(--md-sys-color-surface-container-lowest);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.toggle-dropzone-box:hover {
+  border-color: var(--md-sys-color-primary);
+  background-color: var(--md-sys-color-primary-container);
+}`,
+    react: `export function FileUpload({ onUpload }) {
+  return (
+    <div className="toggle-dropzone-box">
+      <div className="toggle-dropzone-icon-circle">
+        <span className="material-symbols-rounded">cloud_upload</span>
+      </div>
+      <div className="toggle-dropzone-title">Drop your files here</div>
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Active Drag Over", desc: "Tonal primary container with highlighted border", html: `<div class="toggle-dropzone-box drag-over" style="padding:16px;"><span class="material-symbols-rounded">file_download</span><span>Drop to upload</span></div>` },
+      { name: "Progress State", desc: "File card with animated progress indicator fill", html: `<div class="toggle-file-progress-bar"><div class="toggle-file-progress-fill" style="width:70%;"></div></div>` }
+    ],
+    tokens: [
+      { token: "--radius-xl", default: "24px", desc: "Dropzone rounded container corners" },
+      { token: "--md-sys-color-outline-variant", default: "#c4c7c5", desc: "Dashed drag and drop border color" }
+    ],
+    wcag: "Dropzone includes an accessible hidden <input type='file'> input keyboard accessible via Enter or Space key."
+  },
+
+  // ------------------------------------------------------------------------
+  // 33. STAT CARDS & METRIC INDICATORS
+  // ------------------------------------------------------------------------
+  "statcards": {
+    id: "statcards",
+    name: "Stat Cards & KPI Metrics",
+    category: "data",
+    icon: "trending_up",
+    badge: "M3 Bento",
+    description: "Stat cards present key performance indicators, numerical metrics, and dashboard summary data with visual trend badges and contextual icons.",
+    interactiveHtml: `
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:20px; width:100%;">
+        <div class="toggle-stat-card">
+          <div class="toggle-stat-top">
+            <span class="toggle-stat-label">Active Users</span>
+            <div class="toggle-stat-icon-wrap">
+              <span class="material-symbols-rounded">group</span>
+            </div>
+          </div>
+          <div class="toggle-stat-value">128,490</div>
+          <div class="toggle-stat-bottom">
+            <span class="toggle-stat-trend positive">
+              <span class="material-symbols-rounded" style="font-size:16px;">trending_up</span>
+              +14.2%
+            </span>
+            <span style="color:var(--md-sys-color-outline);">vs last month</span>
+          </div>
+        </div>
+
+        <div class="toggle-stat-card">
+          <div class="toggle-stat-top">
+            <span class="toggle-stat-label">Avg. Latency</span>
+            <div class="toggle-stat-icon-wrap" style="background:rgba(52,168,83,0.15); color:#1e8e3e;">
+              <span class="material-symbols-rounded">speed</span>
+            </div>
+          </div>
+          <div class="toggle-stat-value">18.4ms</div>
+          <div class="toggle-stat-bottom">
+            <span class="toggle-stat-trend positive">
+              <span class="material-symbols-rounded" style="font-size:16px;">arrow_downward</span>
+              -3.1ms
+            </span>
+            <span style="color:var(--md-sys-color-outline);">faster response</span>
+          </div>
+        </div>
+
+        <div class="toggle-stat-card">
+          <div class="toggle-stat-top">
+            <span class="toggle-stat-label">Error Rate</span>
+            <div class="toggle-stat-icon-wrap" style="background:rgba(234,67,53,0.15); color:#d93025;">
+              <span class="material-symbols-rounded">error</span>
+            </div>
+          </div>
+          <div class="toggle-stat-value">0.02%</div>
+          <div class="toggle-stat-bottom">
+            <span class="toggle-stat-trend negative">
+              <span class="material-symbols-rounded" style="font-size:16px;">trending_down</span>
+              -0.05%
+            </span>
+            <span style="color:var(--md-sys-color-outline);">stability target met</span>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Stat / Metric Card -->
+<div class="toggle-stat-card">
+  <div class="toggle-stat-top">
+    <span class="toggle-stat-label">Active Users</span>
+    <div class="toggle-stat-icon-wrap">
+      <span class="material-symbols-rounded">group</span>
+    </div>
+  </div>
+  <div class="toggle-stat-value">128,490</div>
+  <div class="toggle-stat-bottom">
+    <span class="toggle-stat-trend positive">
+      <span class="material-symbols-rounded">trending_up</span>
+      +14.2%
+    </span>
+    <span>vs last month</span>
+  </div>
+</div>`,
+    css: `.toggle-stat-card {
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  box-shadow: var(--elevation-1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.toggle-stat-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--md-sys-color-on-surface);
+  line-height: 1;
+}
+.toggle-stat-trend.positive {
+  background-color: rgba(52, 168, 83, 0.12);
+  color: #1e8e3e;
+}`,
+    react: `export function StatCard({ label, value, trend, isPositive, icon }) {
+  return (
+    <div className="toggle-stat-card">
+      <div className="toggle-stat-top">
+        <span className="toggle-stat-label">{label}</span>
+        {icon && <div className="toggle-stat-icon-wrap"><span className="material-symbols-rounded">{icon}</span></div>}
+      </div>
+      <div className="toggle-stat-value">{value}</div>
+      <div className="toggle-stat-bottom">
+        <span className={\`toggle-stat-trend \${isPositive ? 'positive' : 'negative'}\`}>
+          {trend}
+        </span>
+      </div>
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Positive Trend Pill", desc: "Green tinted badge with upward indicator", html: `<span class="toggle-stat-trend positive">+18.5%</span>` },
+      { name: "Negative Trend Pill", desc: "Red tinted badge with downward indicator", html: `<span class="toggle-stat-trend negative">-4.2%</span>` }
+    ],
+    tokens: [
+      { token: "--radius-xl", default: "24px", desc: "Stat card outer corner curvature" },
+      { token: "--elevation-1", default: "0 1px 2px rgba(0,0,0,0.08)", desc: "Resting card elevation" }
+    ],
+    wcag: "Uses semantic HTML, headings for labels, and text descriptions so color is never the only visual indicator of trend direction."
+  },
+
+  // ------------------------------------------------------------------------
+  // 34. TIMELINE & ACTIVITY FEEDS
+  // ------------------------------------------------------------------------
+  "timeline": {
+    id: "timeline",
+    name: "Timeline & Activity Feeds",
+    category: "data",
+    icon: "timeline",
+    badge: "M3 Data",
+    description: "Timelines display chronological sequences of events, orders, or activity logs connected with vertical step lines and status dots.",
+    interactiveHtml: `
+      <div style="width:100%; max-width:540px; margin:0 auto;">
+        <div class="toggle-timeline">
+          <div class="toggle-timeline-item">
+            <div class="toggle-timeline-dot completed">
+              <span class="material-symbols-rounded">check</span>
+            </div>
+            <div class="toggle-timeline-header">
+              <span class="toggle-timeline-title">Order Placed & Confirmed</span>
+              <span class="toggle-timeline-time">Today, 10:24 AM</span>
+            </div>
+            <div class="toggle-timeline-content">Order #TG-89024 payment verified via Google Pay.</div>
+          </div>
+
+          <div class="toggle-timeline-item">
+            <div class="toggle-timeline-dot completed">
+              <span class="material-symbols-rounded">check</span>
+            </div>
+            <div class="toggle-timeline-header">
+              <span class="toggle-timeline-title">Packed at Warehouse</span>
+              <span class="toggle-timeline-time">Today, 1:45 PM</span>
+            </div>
+            <div class="toggle-timeline-content">Items secured in eco-friendly packaging and assigned carrier tracking code.</div>
+          </div>
+
+          <div class="toggle-timeline-item">
+            <div class="toggle-timeline-dot" style="background:var(--md-sys-color-primary-container);">
+              <span class="material-symbols-rounded" style="font-size:14px; color:var(--md-sys-color-primary);">local_shipping</span>
+            </div>
+            <div class="toggle-timeline-header">
+              <span class="toggle-timeline-title" style="color:var(--md-sys-color-primary);">Out for Delivery</span>
+              <span class="toggle-timeline-time">Estimated 4:30 PM</span>
+            </div>
+            <div class="toggle-timeline-content">Courier is currently in your neighborhood. Live tracking active.</div>
+          </div>
+
+          <div class="toggle-timeline-item">
+            <div class="toggle-timeline-dot" style="border-color:var(--md-sys-color-outline-variant);"></div>
+            <div class="toggle-timeline-header">
+              <span class="toggle-timeline-title" style="color:var(--md-sys-color-outline);">Delivered</span>
+              <span class="toggle-timeline-time">Pending</span>
+            </div>
+            <div class="toggle-timeline-content">Recipient signature required upon handoff.</div>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Timeline -->
+<div class="toggle-timeline">
+  <div class="toggle-timeline-item">
+    <div class="toggle-timeline-dot completed">
+      <span class="material-symbols-rounded">check</span>
+    </div>
+    <div class="toggle-timeline-header">
+      <span class="toggle-timeline-title">Order Placed</span>
+      <span class="toggle-timeline-time">10:24 AM</span>
+    </div>
+    <div class="toggle-timeline-content">Payment verified.</div>
+  </div>
+</div>`,
+    css: `.toggle-timeline {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 28px;
+}
+.toggle-timeline::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  left: 9px;
+  width: 2px;
+  background-color: var(--md-sys-color-surface-container-highest);
+}
+.toggle-timeline-item {
+  position: relative;
+  padding-bottom: 24px;
+}
+.toggle-timeline-dot {
+  position: absolute;
+  left: -28px;
+  top: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid var(--md-sys-color-primary);
+  background-color: var(--md-sys-color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}`,
+    react: `export function Timeline({ events }) {
+  return (
+    <div className="toggle-timeline">
+      {events.map((ev, i) => (
+        <div key={i} className="toggle-timeline-item">
+          <div className={\`toggle-timeline-dot \${ev.completed ? 'completed' : ''}\`}>
+            {ev.completed && <span className="material-symbols-rounded">check</span>}
+          </div>
+          <div className="toggle-timeline-header">
+            <span className="toggle-timeline-title">{ev.title}</span>
+            <span className="toggle-timeline-time">{ev.time}</span>
+          </div>
+          <div className="toggle-timeline-content">{ev.desc}</div>
+        </div>
+      ))}
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Completed Step Node", desc: "Solid filled dot with checkmark glyph", html: `<div class="toggle-timeline-dot completed" style="position:static;"><span class="material-symbols-rounded">check</span></div>` },
+      { name: "Active Step Node", desc: "Outlined with active contextual icon", html: `<div class="toggle-timeline-dot" style="position:static; border-color:var(--md-sys-color-primary);"><span class="material-symbols-rounded" style="font-size:12px;">flight</span></div>` }
+    ],
+    tokens: [
+      { token: "--md-sys-color-primary", default: "#0b57d0", desc: "Completed step line and marker fill" },
+      { token: "--md-sys-color-surface-container-highest", default: "#dbe0e6", desc: "Connecting vertical line rail" }
+    ],
+    wcag: "Uses list elements with chronological aria-label structure. Clearly distinguishes completed, active, and upcoming steps."
+  },
+
+  // ------------------------------------------------------------------------
+  // 35. TREE VIEW & FILE EXPLORER
+  // ------------------------------------------------------------------------
+  "treeview": {
+    id: "treeview",
+    name: "Tree View & File Explorer",
+    category: "data",
+    icon: "account_tree",
+    badge: "M3 Navigation",
+    description: "Tree views represent hierarchical information such as folder directory structures, navigation trees, and nested categories with expandable branches.",
+    interactiveHtml: `
+      <div style="display:flex; justify-content:center; width:100%;">
+        <div class="toggle-treeview-card">
+          <div class="toggle-tree-node">
+            <div class="toggle-tree-row" onclick="const p = this.nextElementSibling; const t = this.querySelector('.toggle-tree-toggle'); p.style.display = p.style.display === 'none' ? 'flex' : 'none'; t.classList.toggle('open'); if(window.soundEngine) soundEngine.playToggle(true);">
+              <span class="toggle-tree-toggle open material-symbols-rounded" style="font-size:16px;">chevron_right</span>
+              <span class="material-symbols-rounded" style="color:#fbbc05; font-size:20px;">folder</span>
+              <span style="font-weight:600;">src/</span>
+            </div>
+            <div class="toggle-tree-children">
+              <div class="toggle-tree-node">
+                <div class="toggle-tree-row" onclick="const p = this.nextElementSibling; const t = this.querySelector('.toggle-tree-toggle'); p.style.display = p.style.display === 'none' ? 'flex' : 'none'; t.classList.toggle('open'); if(window.soundEngine) soundEngine.playToggle(true);">
+                  <span class="toggle-tree-toggle open material-symbols-rounded" style="font-size:16px;">chevron_right</span>
+                  <span class="material-symbols-rounded" style="color:#fbbc05; font-size:20px;">folder</span>
+                  <span>components/</span>
+                </div>
+                <div class="toggle-tree-children">
+                  <div class="toggle-tree-row selected" onclick="document.querySelectorAll('.toggle-tree-row').forEach(r=>r.classList.remove('selected')); this.classList.add('selected'); if(window.soundEngine) soundEngine.playToggle(true); showSnackbar('Selected: Toggle.jsx');">
+                    <span style="width:20px;"></span>
+                    <span class="material-symbols-rounded" style="color:#4285f4; font-size:18px;">code</span>
+                    <span>Toggle.jsx</span>
+                  </div>
+                  <div class="toggle-tree-row" onclick="document.querySelectorAll('.toggle-tree-row').forEach(r=>r.classList.remove('selected')); this.classList.add('selected'); if(window.soundEngine) soundEngine.playToggle(true); showSnackbar('Selected: Button.jsx');">
+                    <span style="width:20px;"></span>
+                    <span class="material-symbols-rounded" style="color:#4285f4; font-size:18px;">code</span>
+                    <span>Button.jsx</span>
+                  </div>
+                </div>
+              </div>
+              <div class="toggle-tree-row" onclick="document.querySelectorAll('.toggle-tree-row').forEach(r=>r.classList.remove('selected')); this.classList.add('selected'); if(window.soundEngine) soundEngine.playToggle(true); showSnackbar('Selected: index.css');">
+                <span style="width:20px;"></span>
+                <span class="material-symbols-rounded" style="color:#ea4335; font-size:18px;">css</span>
+                <span>index.css</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Tree View -->
+<div class="toggle-treeview-card" role="tree">
+  <div class="toggle-tree-node" role="treeitem" aria-expanded="true">
+    <div class="toggle-tree-row">
+      <span class="toggle-tree-toggle open material-symbols-rounded">chevron_right</span>
+      <span class="material-symbols-rounded">folder</span>
+      <span>components/</span>
+    </div>
+    <div class="toggle-tree-children" role="group">
+      <div class="toggle-tree-row selected" role="treeitem">
+        <span class="material-symbols-rounded">code</span>
+        <span>Toggle.jsx</span>
+      </div>
+    </div>
+  </div>
+</div>`,
+    css: `.toggle-treeview-card {
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+  width: 100%;
+}
+.toggle-tree-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.88rem;
+}
+.toggle-tree-row.selected {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  font-weight: 600;
+}
+.toggle-tree-toggle.open {
+  transform: rotate(90deg);
+}
+.toggle-tree-children {
+  padding-left: 20px;
+}`,
+    react: `export function TreeView({ data, selectedId, onSelect }) {
+  return (
+    <div className="toggle-treeview-card" role="tree">
+      {/* Recursive tree node rendering */}
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Expanded Folder", desc: "Chevron rotated 90deg with nested children visible", html: `<div class="toggle-tree-row"><span class="toggle-tree-toggle open material-symbols-rounded">chevron_right</span><span class="material-symbols-rounded">folder_open</span><span>assets</span></div>` },
+      { name: "Selected File Row", desc: "Tonal pill selection with colored file glyph", html: `<div class="toggle-tree-row selected"><span class="material-symbols-rounded">code</span><span>app.js</span></div>` }
+    ],
+    tokens: [
+      { token: "--radius-sm", default: "8px", desc: "Hover and selection row border radius" },
+      { token: "--md-sys-color-primary-container", default: "hsl(217, 85%, 92%)", desc: "Selected node highlight surface" }
+    ],
+    wcag: "Tree container has role='tree', tree items have role='treeitem' with aria-expanded and aria-selected states. Arrow keys support navigating hierarchy."
+  },
+
+  // ------------------------------------------------------------------------
+  // 37. MATERIAL 3 TYPOGRAPHY & TYPE SCALE
+  // ------------------------------------------------------------------------
+  "typography": {
+    id: "typography",
+    name: "Typography & Type Scale",
+    category: "getting-started",
+    icon: "match_case",
+    badge: "M3 Typography",
+    description: "The Material 3 typography scale establishes clear visual hierarchy with expressive display fonts, headlines, titles, body copy, and code styles crafted with Google's Outfit and JetBrains Mono.",
+    interactiveHtml: `
+      <div style="width:100%; max-width:680px; display:flex; flex-direction:column; gap:20px;">
+        <div style="background:var(--md-sys-color-surface-container-low); border:1px solid var(--md-sys-color-card-border); border-radius:var(--radius-lg); padding:20px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
+            <div style="font-weight:700; font-size:0.92rem; color:var(--md-sys-color-on-surface); display:flex; align-items:center; gap:8px;">
+              <span class="material-symbols-rounded" style="color:var(--md-sys-color-primary); font-size:18px;">edit</span>
+              <span>Interactive Type Preview</span>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="toggle-page-btn active" style="min-width:auto; height:28px; font-size:0.75rem; padding:0 10px;" onclick="document.querySelectorAll('.type-btn-tag').forEach(b=>b.classList.remove('active')); this.classList.add('active'); document.getElementById('typeDemoText').className='toggle-type-display-sm'; if(window.soundEngine) soundEngine.playClick();">Display</button>
+              <button class="toggle-page-btn" style="min-width:auto; height:28px; font-size:0.75rem; padding:0 10px;" onclick="document.querySelectorAll('.type-btn-tag').forEach(b=>b.classList.remove('active')); this.classList.add('active'); document.getElementById('typeDemoText').className='toggle-type-headline-md'; if(window.soundEngine) soundEngine.playClick();">Headline</button>
+              <button class="toggle-page-btn" style="min-width:auto; height:28px; font-size:0.75rem; padding:0 10px;" onclick="document.querySelectorAll('.type-btn-tag').forEach(b=>b.classList.remove('active')); this.classList.add('active'); document.getElementById('typeDemoText').className='toggle-type-title-lg'; if(window.soundEngine) soundEngine.playClick();">Title</button>
+              <button class="toggle-page-btn" style="min-width:auto; height:28px; font-size:0.75rem; padding:0 10px;" onclick="document.querySelectorAll('.type-btn-tag').forEach(b=>b.classList.remove('active')); this.classList.add('active'); document.getElementById('typeDemoText').className='toggle-type-gradient'; if(window.soundEngine) soundEngine.playClick();">Gradient</button>
+            </div>
+          </div>
+          <div id="typeDemoText" class="toggle-type-display-sm" contenteditable="true" spellcheck="false" style="outline:none; min-height:48px; border-bottom:1px dashed var(--md-sys-color-card-border); padding-bottom:8px;">
+            Design with Material You
+          </div>
+          <div style="margin-top:10px; font-size:0.78rem; color:var(--md-sys-color-outline);">
+            Click text to edit directly. Click pills above to toggle styles.
+          </div>
+        </div>
+
+        <div style="background:var(--md-sys-color-surface); border:1px solid var(--md-sys-color-card-border); border-radius:var(--radius-lg); overflow:hidden;">
+          <div style="padding:14px 20px; border-bottom:1px solid var(--md-sys-color-card-border); background:var(--md-sys-color-surface-container-low); font-weight:700; font-size:0.9rem;">
+            Material 3 Role Scale Hierarchy
+          </div>
+          <div style="display:flex; flex-direction:column;">
+            <div style="padding:16px 20px; display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--md-sys-color-card-border);">
+              <div>
+                <div class="toggle-type-display-md">Display Medium</div>
+                <div style="font-size:0.78rem; color:var(--md-sys-color-outline); margin-top:2px;">Large hero titles, splash screens</div>
+              </div>
+              <span class="toggle-type-code">45px / 700</span>
+            </div>
+            <div style="padding:16px 20px; display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--md-sys-color-card-border);">
+              <div>
+                <div class="toggle-type-headline-md">Headline Medium</div>
+                <div style="font-size:0.78rem; color:var(--md-sys-color-outline); margin-top:2px;">Section headers, dialog titles</div>
+              </div>
+              <span class="toggle-type-code">28px / 600</span>
+            </div>
+            <div style="padding:16px 20px; display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--md-sys-color-card-border);">
+              <div>
+                <div class="toggle-type-title-md">Title Medium</div>
+                <div style="font-size:0.78rem; color:var(--md-sys-color-outline); margin-top:2px;">Card titles, list headers</div>
+              </div>
+              <span class="toggle-type-code">18px / 600</span>
+            </div>
+            <div style="padding:16px 20px; display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--md-sys-color-card-border);">
+              <div>
+                <div class="toggle-type-body-md">Body Medium — Adaptive text for standard reading</div>
+                <div style="font-size:0.78rem; color:var(--md-sys-color-outline); margin-top:2px;">Paragraph copy, descriptions</div>
+              </div>
+              <span class="toggle-type-code">15px / 400</span>
+            </div>
+            <div style="padding:16px 20px; display:flex; justify-content:space-between; align-items:baseline;">
+              <div>
+                <div class="toggle-type-label-md">LABEL MEDIUM / OVERLINE</div>
+                <div style="font-size:0.78rem; color:var(--md-sys-color-outline); margin-top:2px;">Caps labels, badge markers</div>
+              </div>
+              <span class="toggle-type-code">12.5px / 600</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Typography Scale -->
+<h1 class="toggle-type-display-lg">Display Large</h1>
+<h2 class="toggle-type-headline-lg">Headline Large</h2>
+<h3 class="toggle-type-title-lg">Title Large</h3>
+<p class="toggle-type-body-lg">Body text designed for effortless readability.</p>
+<span class="toggle-type-label-lg">LABEL CAPTION</span>
+<code class="toggle-type-code">const token = "primary";</code>
+<span class="toggle-type-gradient">Gradient Heading</span>`,
+    css: `.toggle-type-display-lg {
+  font-family: var(--font-family, 'Outfit', sans-serif);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.toggle-type-headline-lg {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.toggle-type-body-lg {
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+.toggle-type-code {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.88em;
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-primary);
+  padding: 0.2em 0.5em;
+  border-radius: 6px;
+}
+.toggle-type-gradient {
+  background: linear-gradient(135deg, #4285f4 0%, #a142f4 50%, #ea4335 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}`,
+    react: `export function Typography({ variant = 'body-md', children, gradient = false, className = '' }) {
+  const Tag = variant.startsWith('display') || variant.startsWith('headline') ? 'h2' :
+              variant.startsWith('title') ? 'h3' : 'p';
+  const cls = \`toggle-type-\${variant} \${gradient ? 'toggle-type-gradient' : ''} \${className}\`;
+  return <Tag className={cls}>{children}</Tag>;
+}`,
+    variations: [
+      { name: "Google 4-Color Gradient", desc: "Vibrant multi-stop gradient heading", html: `<span class="toggle-type-gradient toggle-type-headline-md">Intelligence in every toggle</span>` },
+      { name: "Monospace Inline Code", desc: "JetBrains Mono with surface pill border", html: `<code class="toggle-type-code">npm install @dattebayoolo/toggle-ui-library</code>` }
+    ],
+    tokens: [
+      { token: "--font-family", default: "'Outfit', sans-serif", desc: "Primary geometric sans font" },
+      { token: "--font-mono", default: "'JetBrains Mono', monospace", desc: "Monospace font for tokens and code" }
+    ],
+    wcag: "Follows WCAG 2.1 AA 4.5:1 text contrast ratios against background and surface tiers across all light and dark themes."
+  },
+
+  // ------------------------------------------------------------------------
+  // 38. ALERTS & CALLOUT BANNERS
+  // ------------------------------------------------------------------------
+  "alerts": {
+    id: "alerts",
+    name: "Alerts & Callouts",
+    category: "feedback",
+    icon: "notification_important",
+    badge: "M3 Banners",
+    description: "Alerts display short, important messages in a way that attracts user attention without interrupting their current task.",
+    interactiveHtml: `
+      <div style="display:flex; flex-direction:column; gap:12px; width:100%; max-width:540px;">
+        <div class="toggle-alert toggle-alert-info">
+          <span class="material-symbols-rounded toggle-alert-icon">info</span>
+          <div class="toggle-alert-content">
+            <div class="toggle-alert-title">New Update Available</div>
+            <div class="toggle-alert-message">Version 3.2 includes 10+ new components and faster sound FX engine.</div>
+          </div>
+          <button class="toggle-alert-close" onclick="this.parentElement.style.opacity='0'; setTimeout(()=>this.parentElement.remove(),200); if(window.soundEngine) soundEngine.playClick();"><span class="material-symbols-rounded" style="font-size:18px;">close</span></button>
+        </div>
+        <div class="toggle-alert toggle-alert-success">
+          <span class="material-symbols-rounded toggle-alert-icon">check_circle</span>
+          <div class="toggle-alert-content">
+            <div class="toggle-alert-title">Changes Saved</div>
+            <div class="toggle-alert-message">Theme variables successfully published to your project bundle.</div>
+          </div>
+          <button class="toggle-alert-close" onclick="this.parentElement.style.opacity='0'; setTimeout(()=>this.parentElement.remove(),200); if(window.soundEngine) soundEngine.playClick();"><span class="material-symbols-rounded" style="font-size:18px;">close</span></button>
+        </div>
+        <div class="toggle-alert toggle-alert-warning">
+          <span class="material-symbols-rounded toggle-alert-icon">warning</span>
+          <div class="toggle-alert-content">
+            <div class="toggle-alert-title">Storage Approaching Limit</div>
+            <div class="toggle-alert-message">Your design workspace is at 88% capacity. Consider archiving unused components.</div>
+          </div>
+          <button class="toggle-alert-close" onclick="this.parentElement.style.opacity='0'; setTimeout(()=>this.parentElement.remove(),200); if(window.soundEngine) soundEngine.playClick();"><span class="material-symbols-rounded" style="font-size:18px;">close</span></button>
+        </div>
+        <div class="toggle-alert toggle-alert-error">
+          <span class="material-symbols-rounded toggle-alert-icon">error</span>
+          <div class="toggle-alert-content">
+            <div class="toggle-alert-title">Connection Timeout</div>
+            <div class="toggle-alert-message">Failed to connect to the preview telemetry server. Retrying in 5 seconds...</div>
+          </div>
+          <button class="toggle-alert-close" onclick="this.parentElement.style.opacity='0'; setTimeout(()=>this.parentElement.remove(),200); if(window.soundEngine) soundEngine.playClick();"><span class="material-symbols-rounded" style="font-size:18px;">close</span></button>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Alerts -->
+<div class="toggle-alert toggle-alert-info" role="alert">
+  <span class="material-symbols-rounded toggle-alert-icon">info</span>
+  <div class="toggle-alert-content">
+    <div class="toggle-alert-title">Information Alert</div>
+    <div class="toggle-alert-message">Helpful details about this action.</div>
+  </div>
+  <button class="toggle-alert-close" aria-label="Close">
+    <span class="material-symbols-rounded">close</span>
+  </button>
+</div>`,
+    css: `.toggle-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  width: 100%;
+}
+.toggle-alert-info {
+  background-color: hsl(217, 85%, 94%);
+  color: hsl(217, 80%, 25%);
+  border: 1px solid hsl(217, 85%, 85%);
+}
+.toggle-alert-success {
+  background-color: hsl(142, 60%, 93%);
+  color: hsl(142, 70%, 20%);
+  border: 1px solid hsl(142, 60%, 82%);
+}
+.toggle-alert-warning {
+  background-color: hsl(43, 95%, 92%);
+  color: hsl(43, 90%, 22%);
+  border: 1px solid hsl(43, 95%, 80%);
+}
+.toggle-alert-error {
+  background-color: hsl(4, 85%, 94%);
+  color: hsl(4, 75%, 26%);
+  border: 1px solid hsl(4, 85%, 85%);
+}`,
+    react: `export function Alert({ severity = 'info', title, children, onClose }) {
+  const icons = { info: 'info', success: 'check_circle', warning: 'warning', error: 'error' };
+  return (
+    <div className={\`toggle-alert toggle-alert-\${severity}\`} role="alert">
+      <span className="material-symbols-rounded toggle-alert-icon">{icons[severity]}</span>
+      <div className="toggle-alert-content">
+        {title && <div className="toggle-alert-title">{title}</div>}
+        <div className="toggle-alert-message">{children}</div>
+      </div>
+      {onClose && (
+        <button className="toggle-alert-close" onClick={onClose}>
+          <span className="material-symbols-rounded">close</span>
+        </button>
+      )}
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Filled Banner", desc: "Solid saturated background fill", html: `<div class="toggle-alert filled toggle-alert-info" style="margin-bottom:0;"><span class="material-symbols-rounded toggle-alert-icon">info</span><div class="toggle-alert-content"><div class="toggle-alert-title">Filled Notification</div><div class="toggle-alert-message">High emphasis banner style</div></div></div>` },
+      { name: "Outlined Alert", desc: "Clean transparent surface with border tint", html: `<div class="toggle-alert outlined toggle-alert-success" style="margin-bottom:0;"><span class="material-symbols-rounded toggle-alert-icon">verified</span><div class="toggle-alert-content"><div class="toggle-alert-title">Outlined Success</div><div class="toggle-alert-message">Bordered transparent badge</div></div></div>` }
+    ],
+    tokens: [
+      { token: "--radius-lg", default: "16px", desc: "Alert card curvature" },
+      { token: "--md-sys-color-card-border", default: "rgba(0,0,0,0.08)", desc: "Subtle alert boundary line" }
+    ],
+    wcag: "Uses role='alert' with aria-live='polite'. Close button has accessible aria-label."
+  },
+
+  // ------------------------------------------------------------------------
+  // 39. LISTS & ITEM GROUPS
+  // ------------------------------------------------------------------------
+  "lists": {
+    id: "lists",
+    name: "Lists & Item Groups",
+    category: "data",
+    icon: "format_list_bulleted",
+    badge: "M3 Lists",
+    description: "Lists are continuous, vertical indexes of text and images. Toggle lists feature interactive leading glyphs, secondary descriptive text, and integrated toggle switches.",
+    interactiveHtml: `
+      <div style="display:flex; justify-content:center; width:100%;">
+        <div class="toggle-list">
+          <div class="toggle-list-item" onclick="if(window.soundEngine) soundEngine.playClick();">
+            <span class="material-symbols-rounded toggle-list-icon">wifi</span>
+            <div class="toggle-list-content">
+              <div class="toggle-list-title">Wi-Fi Network</div>
+              <div class="toggle-list-subtitle">Connected to Google-Guest (5 GHz)</div>
+            </div>
+            <div class="toggle-list-action">
+              <label class="toggle-switch toggle-m3" onclick="event.stopPropagation();">
+                <input type="checkbox" checked onchange="if(window.soundEngine) soundEngine.playToggle(this.checked);" />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="toggle-list-item" onclick="if(window.soundEngine) soundEngine.playClick();">
+            <span class="material-symbols-rounded toggle-list-icon">bluetooth</span>
+            <div class="toggle-list-content">
+              <div class="toggle-list-title">Bluetooth Devices</div>
+              <div class="toggle-list-subtitle">Pixel Buds Pro connected</div>
+            </div>
+            <div class="toggle-list-action">
+              <label class="toggle-switch toggle-m3" onclick="event.stopPropagation();">
+                <input type="checkbox" checked onchange="if(window.soundEngine) soundEngine.playToggle(this.checked);" />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="toggle-list-item" onclick="if(window.soundEngine) soundEngine.playClick();">
+            <span class="material-symbols-rounded toggle-list-icon">dark_mode</span>
+            <div class="toggle-list-content">
+              <div class="toggle-list-title">Dark Theme</div>
+              <div class="toggle-list-subtitle">Automatically schedule with sunset</div>
+            </div>
+            <div class="toggle-list-action">
+              <label class="toggle-switch toggle-m3" onclick="event.stopPropagation();">
+                <input type="checkbox" onchange="if(window.soundEngine) soundEngine.playToggle(this.checked);" />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="toggle-list-item" onclick="if(window.soundEngine) soundEngine.playClick();">
+            <span class="material-symbols-rounded toggle-list-icon">notifications</span>
+            <div class="toggle-list-content">
+              <div class="toggle-list-title">Tactile Audio Feedback</div>
+              <div class="toggle-list-subtitle">Synthesize sound on switch toggle</div>
+            </div>
+            <div class="toggle-list-action">
+              <label class="toggle-switch toggle-m3" onclick="event.stopPropagation();">
+                <input type="checkbox" checked onchange="if(window.soundEngine) soundEngine.playToggle(this.checked);" />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Interactive List -->
+<div class="toggle-list" role="list">
+  <div class="toggle-list-item" role="listitem">
+    <span class="material-symbols-rounded toggle-list-icon">wifi</span>
+    <div class="toggle-list-content">
+      <div class="toggle-list-title">Wi-Fi</div>
+      <div class="toggle-list-subtitle">Connected network</div>
+    </div>
+    <div class="toggle-list-action">
+      <label class="toggle-switch toggle-m3">
+        <input type="checkbox" checked />
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+  </div>
+</div>`,
+    css: `.toggle-list {
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-lg);
+  padding: 8px 0;
+  width: 100%;
+}
+.toggle-list-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 18px;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+.toggle-list-item:hover {
+  background-color: var(--md-sys-color-surface-container);
+}`,
+    react: `export function List({ items }) {
+  return (
+    <div className="toggle-list" role="list">
+      {items.map((it, i) => (
+        <div key={i} className="toggle-list-item" role="listitem">
+          {it.icon && <span className="material-symbols-rounded toggle-list-icon">{it.icon}</span>}
+          <div className="toggle-list-content">
+            <div className="toggle-list-title">{it.title}</div>
+            {it.subtitle && <div className="toggle-list-subtitle">{it.subtitle}</div>}
+          </div>
+          {it.action && <div className="toggle-list-action">{it.action}</div>}
+        </div>
+      ))}
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Selected Row Item", desc: "Tonal pill selection indicator", html: `<div class="toggle-list-item selected"><span class="material-symbols-rounded toggle-list-icon">check</span><div class="toggle-list-content"><div class="toggle-list-title">Active Selection</div><div class="toggle-list-subtitle">Highlighted item state</div></div></div>` },
+      { name: "Avatar Leading Row", desc: "Circular user thumbnail item", html: `<div class="toggle-list-item"><div class="m3-avatar m3-avatar-sm" style="background:#0b57d0; color:#fff;">JD</div><div class="toggle-list-content"><div class="toggle-list-title">John Doe</div><div class="toggle-list-subtitle">john@google.com</div></div></div>` }
+    ],
+    tokens: [
+      { token: "--radius-lg", default: "16px", desc: "List container corner curvature" },
+      { token: "--transition-fast", default: "150ms ease", desc: "Item hover duration" }
+    ],
+    wcag: "Uses semantic role='list' and role='listitem'. Nested inputs maintain separate keyboard click targets."
+  },
+
+  // ------------------------------------------------------------------------
+  // 40. PAGINATION CONTROLS
+  // ------------------------------------------------------------------------
+  "pagination": {
+    id: "pagination",
+    name: "Pagination Controls",
+    category: "navigation",
+    icon: "more_horiz",
+    badge: "M3 Navigation",
+    description: "Pagination enables users to divide large data sets into discrete pages, navigating sequentially or directly to a specific target.",
+    interactiveHtml: `
+      <div style="display:flex; flex-direction:column; align-items:center; gap:20px; width:100%;">
+        <div class="toggle-pagination" id="demoPagination">
+          <button class="toggle-page-btn" onclick="showSnackbar('Page changed: Previous'); if(window.soundEngine) soundEngine.playClick();" title="Previous page">
+            <span class="material-symbols-rounded" style="font-size:18px;">chevron_left</span>
+          </button>
+          <button class="toggle-page-btn" onclick="document.querySelectorAll('#demoPagination .toggle-page-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Page 1 selected');">1</button>
+          <button class="toggle-page-btn active" onclick="document.querySelectorAll('#demoPagination .toggle-page-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Page 2 selected');">2</button>
+          <button class="toggle-page-btn" onclick="document.querySelectorAll('#demoPagination .toggle-page-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Page 3 selected');">3</button>
+          <span class="toggle-page-ellipsis">•••</span>
+          <button class="toggle-page-btn" onclick="document.querySelectorAll('#demoPagination .toggle-page-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Page 12 selected');">12</button>
+          <button class="toggle-page-btn" onclick="showSnackbar('Page changed: Next'); if(window.soundEngine) soundEngine.playClick();" title="Next page">
+            <span class="material-symbols-rounded" style="font-size:18px;">chevron_right</span>
+          </button>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Pagination Controls -->
+<nav class="toggle-pagination" aria-label="Pagination">
+  <button class="toggle-page-btn" aria-label="Previous page">
+    <span class="material-symbols-rounded">chevron_left</span>
+  </button>
+  <button class="toggle-page-btn active" aria-current="page">1</button>
+  <button class="toggle-page-btn">2</button>
+  <button class="toggle-page-btn">3</button>
+  <span class="toggle-page-ellipsis">•••</span>
+  <button class="toggle-page-btn">10</button>
+  <button class="toggle-page-btn" aria-label="Next page">
+    <span class="material-symbols-rounded">chevron_right</span>
+  </button>
+</nav>`,
+    css: `.toggle-pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.toggle-page-btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--md-sys-color-card-border);
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+.toggle-page-btn.active {
+  background: var(--md-sys-color-primary);
+  color: #ffffff;
+  border-color: var(--md-sys-color-primary);
+}`,
+    react: `export function Pagination({ totalPages, activePage, onChange }) {
+  return (
+    <nav className="toggle-pagination" aria-label="Pagination">
+      {/* Dynamic page generation */}
+    </nav>
+  );
+}`,
+    variations: [
+      { name: "Compact Jump", desc: "First / Last direct jump buttons", html: `<div class="toggle-pagination"><button class="toggle-page-btn"><span class="material-symbols-rounded" style="font-size:16px;">first_page</span></button><button class="toggle-page-btn active">5</button><button class="toggle-page-btn"><span class="material-symbols-rounded" style="font-size:16px;">last_page</span></button></div>` }
+    ],
+    tokens: [
+      { token: "--radius-full", default: "9999px", desc: "Circular pill button curvature" },
+      { token: "--md-sys-color-primary", default: "#0b57d0", desc: "Active page node background" }
+    ],
+    wcag: "Uses semantic <nav aria-label='Pagination'>. Active button marked with aria-current='page'. Arrow keys support tab index."
+  },
+
+  // ------------------------------------------------------------------------
+  // 41. STEPPER & PROGRESSION WIZARD
+  // ------------------------------------------------------------------------
+  "stepper": {
+    id: "stepper",
+    name: "Stepper & Progression Wizard",
+    category: "navigation",
+    icon: "linear_scale",
+    badge: "M3 Stepper",
+    description: "Steppers convey progress through numbered steps in multi-screen workflows such as checkouts, onboarding, and multi-stage configurations.",
+    interactiveHtml: `
+      <div style="display:flex; flex-direction:column; align-items:center; gap:24px; width:100%; max-width:580px;">
+        <div class="toggle-stepper" id="demoStepper">
+          <div class="toggle-step completed" onclick="(function(btn, targetIdx){ const parent = btn.closest('.toggle-stepper'); const steps = parent.querySelectorAll('.toggle-step'); const conns = parent.querySelectorAll('.toggle-step-connector'); steps.forEach((s, i) => { s.classList.remove('completed', 'active'); if (i < targetIdx) s.classList.add('completed'); else if (i === targetIdx) s.classList.add('active'); }); conns.forEach((c, i) => { if (i < targetIdx) c.classList.add('completed'); else c.classList.remove('completed'); }); })(this, 0); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Step 1: Account selected');">
+            <div class="toggle-step-node"><span class="material-symbols-rounded" style="font-size:18px;">check</span></div>
+            <span class="toggle-step-label">Account</span>
+          </div>
+          <div class="toggle-step-connector completed"></div>
+
+          <div class="toggle-step active" onclick="(function(btn, targetIdx){ const parent = btn.closest('.toggle-stepper'); const steps = parent.querySelectorAll('.toggle-step'); const conns = parent.querySelectorAll('.toggle-step-connector'); steps.forEach((s, i) => { s.classList.remove('completed', 'active'); if (i < targetIdx) s.classList.add('completed'); else if (i === targetIdx) s.classList.add('active'); }); conns.forEach((c, i) => { if (i < targetIdx) c.classList.add('completed'); else c.classList.remove('completed'); }); })(this, 1); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Step 2: Personal selected');">
+            <div class="toggle-step-node">2</div>
+            <span class="toggle-step-label">Personal</span>
+          </div>
+          <div class="toggle-step-connector"></div>
+
+          <div class="toggle-step" onclick="(function(btn, targetIdx){ const parent = btn.closest('.toggle-stepper'); const steps = parent.querySelectorAll('.toggle-step'); const conns = parent.querySelectorAll('.toggle-step-connector'); steps.forEach((s, i) => { s.classList.remove('completed', 'active'); if (i < targetIdx) s.classList.add('completed'); else if (i === targetIdx) s.classList.add('active'); }); conns.forEach((c, i) => { if (i < targetIdx) c.classList.add('completed'); else c.classList.remove('completed'); }); })(this, 2); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Step 3: Billing selected');">
+            <div class="toggle-step-node">3</div>
+            <span class="toggle-step-label">Billing</span>
+          </div>
+          <div class="toggle-step-connector"></div>
+
+          <div class="toggle-step" onclick="(function(btn, targetIdx){ const parent = btn.closest('.toggle-stepper'); const steps = parent.querySelectorAll('.toggle-step'); const conns = parent.querySelectorAll('.toggle-step-connector'); steps.forEach((s, i) => { s.classList.remove('completed', 'active'); if (i < targetIdx) s.classList.add('completed'); else if (i === targetIdx) s.classList.add('active'); }); conns.forEach((c, i) => { if (i < targetIdx) c.classList.add('completed'); else c.classList.remove('completed'); }); })(this, 3); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Step 4: Confirm selected');">
+            <div class="toggle-step-node">4</div>
+            <span class="toggle-step-label">Confirm</span>
+          </div>
+        </div>
+
+        <div style="font-size:0.85rem; color:var(--md-sys-color-outline);">
+          Click any step above to jump to that milestone.
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Stepper -->
+<div class="toggle-stepper" role="navigation" aria-label="Step progress">
+  <div class="toggle-step completed">
+    <div class="toggle-step-node"><span class="material-symbols-rounded">check</span></div>
+    <span class="toggle-step-label">Step 1</span>
+  </div>
+  <div class="toggle-step-connector completed"></div>
+  <div class="toggle-step active">
+    <div class="toggle-step-node">2</div>
+    <span class="toggle-step-label">Step 2</span>
+  </div>
+  <div class="toggle-step-connector"></div>
+  <div class="toggle-step">
+    <div class="toggle-step-node">3</div>
+    <span class="toggle-step-label">Step 3</span>
+  </div>
+</div>`,
+    css: `.toggle-stepper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+.toggle-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.toggle-step-node {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid var(--md-sys-color-card-border);
+  background-color: var(--md-sys-color-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.toggle-step.completed .toggle-step-node {
+  background-color: var(--md-sys-color-primary);
+  border-color: var(--md-sys-color-primary);
+  color: #ffffff;
+}
+.toggle-step.active .toggle-step-node {
+  border-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-primary);
+}
+.toggle-step-connector {
+  flex: 1;
+  height: 2px;
+  background-color: var(--md-sys-color-card-border);
+  margin: 0 8px;
+  position: relative;
+  top: -14px;
+}
+.toggle-step-connector.completed {
+  background-color: var(--md-sys-color-primary);
+}`,
+    react: `export function Stepper({ steps, activeStep, onStepClick }) {
+  return (
+    <div className="toggle-stepper">
+      {/* Multi-step progress rendering */}
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Active Step Node", desc: "Outlined with active primary glow ring", html: `<div class="toggle-step active"><div class="toggle-step-node">2</div><span class="toggle-step-label">Active</span></div>` },
+      { name: "Completed Step Node", desc: "Solid filled dot with checkmark glyph", html: `<div class="toggle-step completed"><div class="toggle-step-node"><span class="material-symbols-rounded">check</span></div><span class="toggle-step-label">Done</span></div>` }
+    ],
+    tokens: [
+      { token: "--md-sys-color-primary", default: "#0b57d0", desc: "Completed step fill & active border" },
+      { token: "--md-sys-color-primary-container", default: "hsl(217, 85%, 92%)", desc: "Active step focus halo" }
+    ],
+    wcag: "Uses role='navigation' with aria-current='step'. Nodes provide high-contrast visual cues for screen readers."
+  },
+
+  // ------------------------------------------------------------------------
+  // 42. DIVIDERS & SEPARATORS
+  // ------------------------------------------------------------------------
+  "dividers": {
+    id: "dividers",
+    name: "Dividers & Separators",
+    category: "data",
+    icon: "splitscreen",
+    badge: "M3 Layout",
+    description: "Dividers group content into clear visual blocks. Toggle provides subtle hairlines, chip-labeled dividers, and vertical column separators.",
+    interactiveHtml: `
+      <div style="width:100%; max-width:540px; display:flex; flex-direction:column; gap:16px;">
+        <div style="padding:16px; background:var(--md-sys-color-surface); border:1px solid var(--md-sys-color-card-border); border-radius:var(--radius-lg);">
+          <div style="font-weight:600; font-size:0.95rem; margin-bottom:4px;">Standard Hairline Divider</div>
+          <div style="font-size:0.85rem; color:var(--md-sys-color-on-surface-variant);">Clean 1px separation between text paragraphs.</div>
+          <hr class="toggle-divider" />
+          <div style="font-size:0.85rem; color:var(--md-sys-color-on-surface-variant);">Second content block after divider rule.</div>
+        </div>
+
+        <div style="padding:16px; background:var(--md-sys-color-surface); border:1px solid var(--md-sys-color-card-border); border-radius:var(--radius-lg);">
+          <div style="font-weight:600; font-size:0.95rem; margin-bottom:8px;">Divider with Pill Chip Label</div>
+          <div class="toggle-divider-labeled">
+            <span class="toggle-divider-chip">OR CONTINUE WITH</span>
+          </div>
+          <div style="display:flex; gap:10px; justify-content:center; margin-top:8px;">
+            <button class="toggle-btn toggle-btn-outlined" style="flex:1; justify-content:center;" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('Google auth selected');">Google</button>
+            <button class="toggle-btn toggle-btn-outlined" style="flex:1; justify-content:center;" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('GitHub auth selected');">GitHub</button>
+          </div>
+        </div>
+
+        <div style="padding:16px; background:var(--md-sys-color-surface); border:1px solid var(--md-sys-color-card-border); border-radius:var(--radius-lg); display:flex; align-items:center; justify-content:center;">
+          <span style="font-size:0.9rem; font-weight:600;">Left Column</span>
+          <span class="toggle-divider-vertical"></span>
+          <span style="font-size:0.9rem; font-weight:600;">Middle Column</span>
+          <span class="toggle-divider-vertical"></span>
+          <span style="font-size:0.9rem; font-weight:600;">Right Column</span>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Dividers -->
+<hr class="toggle-divider" />
+
+<!-- Centered Pill Label Divider -->
+<div class="toggle-divider-labeled">
+  <span class="toggle-divider-chip">OR</span>
+</div>
+
+<!-- Vertical Separator -->
+<span class="toggle-divider-vertical"></span>`,
+    css: `.toggle-divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--md-sys-color-card-border);
+  margin: 16px 0;
+  border: none;
+}
+.toggle-divider-labeled {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+.toggle-divider-labeled::before,
+.toggle-divider-labeled::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--md-sys-color-card-border);
+}
+.toggle-divider-chip {
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background-color: var(--md-sys-color-surface-container);
+  border: 1px solid var(--md-sys-color-card-border);
+}`,
+    react: `export function Divider({ label, vertical = false }) {
+  if (vertical) return <span className="toggle-divider-vertical" role="separator" />;
+  if (label) {
+    return (
+      <div className="toggle-divider-labeled" role="separator">
+        <span className="toggle-divider-chip">{label}</span>
+      </div>
+    );
+  }
+  return <hr className="toggle-divider" role="separator" />;
+}`,
+    variations: [
+      { name: "Pill Chip Divider", desc: "Centered text chip with side rule lines", html: `<div class="toggle-divider-labeled"><span class="toggle-divider-chip">STEP 2</span></div>` }
+    ],
+    tokens: [
+      { token: "--md-sys-color-card-border", default: "rgba(0,0,0,0.08)", desc: "Hairline divider tone" }
+    ],
+    wcag: "Uses semantic <hr> or role='separator' with aria-orientation='horizontal' or 'vertical'."
+  },
+
+  // ------------------------------------------------------------------------
+  // 43. SEGMENTED TOGGLE BUTTON GROUPS
+  // ------------------------------------------------------------------------
+  "togglebutton": {
+    id: "togglebutton",
+    name: "Segmented Toggle Buttons",
+    category: "actions",
+    icon: "view_week",
+    badge: "M3 Toggle Group",
+    description: "Segmented buttons let users select options, switch view modes, or sort elements. Toggle supports single-select pill segments and multi-select toolbar toggles.",
+    interactiveHtml: `
+      <div style="display:flex; flex-direction:column; align-items:center; gap:20px; width:100%; max-width:540px;">
+        <!-- Single Select View Range -->
+        <div class="toggle-btn-group" id="demoRangeGroup">
+          <button class="toggle-segment-btn" onclick="document.querySelectorAll('#demoRangeGroup .toggle-segment-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Timeframe: Day');">Day</button>
+          <button class="toggle-segment-btn active" onclick="document.querySelectorAll('#demoRangeGroup .toggle-segment-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Timeframe: Week');">Week</button>
+          <button class="toggle-segment-btn" onclick="document.querySelectorAll('#demoRangeGroup .toggle-segment-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Timeframe: Month');">Month</button>
+          <button class="toggle-segment-btn" onclick="document.querySelectorAll('#demoRangeGroup .toggle-segment-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Timeframe: Year');">Year</button>
+        </div>
+
+        <!-- Multi-Select Formatting Toolbar -->
+        <div class="toggle-btn-group" id="demoFormatGroup">
+          <button class="toggle-segment-btn active" onclick="this.classList.toggle('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Toggled Bold: ' + this.classList.contains('active'));" title="Bold">
+            <span class="material-symbols-rounded">format_bold</span>
+          </button>
+          <button class="toggle-segment-btn" onclick="this.classList.toggle('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Toggled Italic: ' + this.classList.contains('active'));" title="Italic">
+            <span class="material-symbols-rounded">format_italic</span>
+          </button>
+          <button class="toggle-segment-btn active" onclick="this.classList.toggle('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Toggled Underline: ' + this.classList.contains('active'));" title="Underline">
+            <span class="material-symbols-rounded">format_underlined</span>
+          </button>
+          <button class="toggle-segment-btn" onclick="this.classList.toggle('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Toggled Strikethrough: ' + this.classList.contains('active'));" title="Strikethrough">
+            <span class="material-symbols-rounded">strikethrough_s</span>
+          </button>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Segmented Toggle Button Group -->
+<div class="toggle-btn-group" role="group" aria-label="View options">
+  <button class="toggle-segment-btn active" aria-pressed="true">Day</button>
+  <button class="toggle-segment-btn" aria-pressed="false">Week</button>
+  <button class="toggle-segment-btn" aria-pressed="false">Month</button>
+</div>`,
+    css: `.toggle-btn-group {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-full);
+  padding: 4px;
+  gap: 2px;
+}
+.toggle-segment-btn {
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  color: var(--md-sys-color-on-surface-variant);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.toggle-segment-btn.active {
+  background-color: var(--md-sys-color-primary);
+  color: #ffffff;
+}`,
+    react: `export function ToggleButtonGroup({ options, value, onChange, multiple = false }) {
+  return (
+    <div className="toggle-btn-group" role="group">
+      {options.map(opt => (
+        <button
+          key={opt.value}
+          className={\`toggle-segment-btn \${(multiple ? value.includes(opt.value) : value === opt.value) ? 'active' : ''}\`}
+          onClick={() => onChange(opt.value)}
+        >
+          {opt.icon && <span className="material-symbols-rounded">{opt.icon}</span>}
+          {opt.label}
+        </button>
+      ))}
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Icon Only Segment", desc: "Format toolbar icons with pill active state", html: `<div class="toggle-btn-group"><button class="toggle-segment-btn active"><span class="material-symbols-rounded">format_align_left</span></button><button class="toggle-segment-btn"><span class="material-symbols-rounded">format_align_center</span></button><button class="toggle-segment-btn"><span class="material-symbols-rounded">format_align_right</span></button></div>` }
+    ],
+    tokens: [
+      { token: "--radius-full", default: "9999px", desc: "Continuous segmented capsule curvature" },
+      { token: "--md-sys-color-primary", default: "#0b57d0", desc: "Selected segment indicator fill" }
+    ],
+    wcag: "Uses role='group' and aria-pressed attributes for multi-select, or role='radiogroup' for single-choice."
+  },
+
+  // ------------------------------------------------------------------------
+  // 44. INTERACTIVE STUDIO BUILDER
   // ------------------------------------------------------------------------
   "studio": {
     id: "studio",
