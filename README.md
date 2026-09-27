@@ -265,12 +265,12 @@ Routing is hash-based (`index.html#toggles`, `#tokens`, `#dialogs`, …) and eve
 
 | Group | Pages |
 |---|---|
-| **Getting Started** | `overview` — Design System Overview · `tokens` — Design Tokens & Colors |
-| **Actions & Controls** | `buttons` — Buttons & FABs · `toggles` — Toggles & Switches · `checkboxes` — Checkboxes & Radios · `sliders` — Sliders & Range · `rating` — Star Rating · `swatches` — Color Swatches |
-| **Forms** | `inputs` — Inputs & Text Fields · `pininput` — PIN & OTP Inputs |
-| **Data Display** | `chips` — Chips & Badges · `cards` — Cards & Bento Surfaces · `avatars` — Avatars & Presence · `tables` — Data Tables · `accordion` / `accordions` — Accordion & Expansion Panels |
-| **Navigation** | `navigation` — Navigation & Rails · `breadcrumbs` — Breadcrumbs |
-| **Feedback & Overlays** | `progress` — Progress Indicators · `dialogs` — Dialogs & Modals · `tooltips` — Tooltips & Cues · `feedback` — Dialogs & Snackbars · `skeleton` / `skeletons` — Skeleton Loaders |
+| **Getting Started** | `overview` — Design System Overview · `tokens` — Design Tokens & Colors · `typography` — Typography Scale |
+| **Actions & Controls** | `buttons` — Buttons & FABs · `toggles` — Toggles & Switches (25) · `splitbutton` — Split Button & Actions (NEW) · `togglecard` — Selectable Cards (NEW) · `togglebutton` — Segmented Groups · `checkboxes` — Checkboxes & Radios · `sliders` — Sliders & Range · `rating` — Star Rating · `swatches` — Color Swatches |
+| **Inputs & Forms** | `inputs` — Inputs & Text Fields · `searchbar` — Search Bar & Suggestions (NEW) · `taginput` — Tag & Multi-Chip Input (NEW) · `passwordinput` — Password & Strength (NEW) · `pininput` — PIN & OTP Inputs · `datepicker` — Date & Time Picker · `colorpicker` — Color Picker & Matrix (NEW) · `fileupload` — File Dropzone |
+| **Data Display** | `chips` — Chips & Badges · `cards` — Cards & Bento Surfaces · `statcards` — Metric Stat Cards · `carousel` — Carousel & Card Slider (NEW) · `codeblock` — Code Block & Snippets (NEW) · `emptystate` — Empty State Canvases (NEW) · `gauge` — Radial Gauge Meter (NEW) · `lists` — Lists & Item Groups · `dividers` — Dividers · `avatars` — Avatars & Presence · `tables` — Data Tables · `accordion` — Accordion & Panels · `timeline` — Activity Timeline · `treeview` — Tree Explorer |
+| **Navigation** | `navigation` — Navigation & Rails · `drawer` — Navigation Drawer & Side Sheet (NEW) · `tabs` — Navigation Tabs · `breadcrumbs` — Breadcrumbs · `stepper` — Wizard Stepper · `pagination` — Pagination · `dropdowns` — Menus |
+| **Feedback & Overlays** | `progress` — Progress Indicators · `alerts` — Alerts & Callouts · `dialogs` — Modals · `bottomsheet` — Bottom Sheet · `speeddial` — Speed Dial Actions · `tooltips` — Tooltips & Cues · `feedback` — Snackbars & Toasts · `skeleton` — Skeleton Loaders · `notificationcenter` — Notification Center & Popover (NEW) |
 | **Tools & Studio** | `studio` — Custom Switch Studio |
 
 Each documentation page renders a breadcrumb trail, page title with feature badges, a live interactive demo stage, tabbed code snippets with copy buttons, and a CSS-properties API table.

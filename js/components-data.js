@@ -3965,7 +3965,1602 @@ export function SkeletonCard() {
   },
 
   // ------------------------------------------------------------------------
-  // 44. INTERACTIVE STUDIO BUILDER
+  // 44. SEARCH BAR & SUGGESTIONS
+  // ------------------------------------------------------------------------
+  "searchbar": {
+    id: "searchbar",
+    name: "Search Bar & Suggestions",
+    category: "inputs",
+    icon: "search",
+    badge: "M3 Search View",
+    description: "The Material 3 Search Bar serves as an anchor for search and filtering. On interaction, it reveals an elevated suggestions panel featuring recent queries, query pills, and real-time category results.",
+    interactiveHtml: `
+      <div class="toggle-search-container" style="width:100%; max-width:520px; display:flex; flex-direction:column; gap:16px;">
+        <!-- Search Bar Capsule -->
+        <div class="toggle-searchbar" id="demoSearchBar">
+          <span class="material-symbols-rounded toggle-search-leading">search</span>
+          <input type="text" class="toggle-search-input" id="demoSearchInput" placeholder="Search components, tokens, icons..." oninput="const val=this.value.trim(); document.getElementById('demoSearchView').style.display=val?'block':'none'; const qEl=document.getElementById('demoSearchQuery'); if(qEl) qEl.textContent=val||'components';" />
+          <div class="toggle-search-trailing">
+            <button class="toggle-search-btn" title="Voice Search" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('Voice search listening...');"><span class="material-symbols-rounded">mic</span></button>
+            <button class="toggle-search-btn" title="Clear Search" onclick="document.getElementById('demoSearchInput').value=''; document.getElementById('demoSearchView').style.display='none'; if(window.soundEngine) soundEngine.playClick();"><span class="material-symbols-rounded">close</span></button>
+            <div class="toggle-search-avatar" title="Account profile">K</div>
+          </div>
+        </div>
+
+        <!-- Expandable Suggestion Panel -->
+        <div class="toggle-search-view" id="demoSearchView">
+          <!-- Quick filter chips -->
+          <div class="toggle-search-filter-row">
+            <button class="toggle-search-chip active" onclick="if(window.soundEngine) soundEngine.playClick();">All</button>
+            <button class="toggle-search-chip" onclick="if(window.soundEngine) soundEngine.playClick();">Switches</button>
+            <button class="toggle-search-chip" onclick="if(window.soundEngine) soundEngine.playClick();">Buttons</button>
+            <button class="toggle-search-chip" onclick="if(window.soundEngine) soundEngine.playClick();">Tokens</button>
+          </div>
+
+          <!-- Section: Search Results / History -->
+          <div class="toggle-search-section-title">Matching Results for <span id="demoSearchQuery" style="color:var(--md-sys-color-primary);">components</span></div>
+          <div class="toggle-search-result-list">
+            <div class="toggle-search-item" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('Selected: Material 3 Toggle');">
+              <span class="material-symbols-rounded toggle-search-item-icon">toggle_on</span>
+              <div class="toggle-search-item-text">
+                <div class="toggle-search-item-title">Material 3 Toggle Switch</div>
+                <div class="toggle-search-item-sub">Actions & Controls • 25 accessible variants</div>
+              </div>
+              <span class="material-symbols-rounded toggle-search-item-arrow">chevron_right</span>
+            </div>
+            <div class="toggle-search-item" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('Selected: Design Tokens');">
+              <span class="material-symbols-rounded toggle-search-item-icon">palette</span>
+              <div class="toggle-search-item-text">
+                <div class="toggle-search-item-title">Design Tokens & Palette</div>
+                <div class="toggle-search-item-sub">Foundations • Color, elevation, corner radius</div>
+              </div>
+              <span class="material-symbols-rounded toggle-search-item-arrow">chevron_right</span>
+            </div>
+            <div class="toggle-search-item" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('Selected: Floating Action Button');">
+              <span class="material-symbols-rounded toggle-search-item-icon">smart_button</span>
+              <div class="toggle-search-item-text">
+                <div class="toggle-search-item-title">Floating Action Button (FAB)</div>
+                <div class="toggle-search-item-sub">Buttons • Primary emphasized callout action</div>
+              </div>
+              <span class="material-symbols-rounded toggle-search-item-arrow">chevron_right</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Search Bar -->
+<div class="toggle-searchbar">
+  <span class="material-symbols-rounded toggle-search-leading">search</span>
+  <input type="text" class="toggle-search-input" placeholder="Search..." />
+  <div class="toggle-search-trailing">
+    <button class="toggle-search-btn" aria-label="Voice search">
+      <span class="material-symbols-rounded">mic</span>
+    </button>
+    <div class="toggle-search-avatar">K</div>
+  </div>
+</div>`,
+    css: `.toggle-searchbar {
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 16px;
+  background-color: var(--md-sys-color-surface-container-high);
+  border-radius: var(--radius-full);
+  box-shadow: var(--elevation-1);
+  transition: all var(--transition-fast);
+}
+.toggle-searchbar:focus-within {
+  background-color: var(--md-sys-color-surface-container-highest);
+  box-shadow: var(--elevation-2);
+}
+.toggle-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--md-sys-color-on-surface);
+  padding: 0 12px;
+}`,
+    react: `export function SearchBar({ placeholder = "Search...", onSearch }) {
+  return (
+    <div className="toggle-searchbar">
+      <span className="material-symbols-rounded toggle-search-leading">search</span>
+      <input
+        type="text"
+        className="toggle-search-input"
+        placeholder={placeholder}
+        onChange={(e) => onSearch && onSearch(e.target.value)}
+      />
+      <div className="toggle-search-trailing">
+        <button className="toggle-search-btn" aria-label="Voice search">
+          <span className="material-symbols-rounded">mic</span>
+        </button>
+      </div>
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Compact Search Bar", desc: "40px height for dense toolbars", html: `<div class="toggle-searchbar" style="height:40px; padding:0 12px;"><span class="material-symbols-rounded toggle-search-leading" style="font-size:18px;">search</span><input type="text" class="toggle-search-input" placeholder="Quick find..." style="font-size:0.88rem;" /></div>` }
+    ],
+    tokens: [
+      { token: "--radius-full", default: "9999px", desc: "Capsule curvature radius" },
+      { token: "--md-sys-color-surface-container-high", default: "#e9edf6", desc: "Search pill container fill" }
+    ],
+    wcag: "Features input role='searchbox', clear and voice buttons with descriptive aria-label attributes."
+  },
+
+  // ------------------------------------------------------------------------
+  // 45. CAROUSEL & CARD SLIDER
+  // ------------------------------------------------------------------------
+  "carousel": {
+    id: "carousel",
+    name: "Carousel & Card Slider",
+    category: "display",
+    icon: "view_carousel",
+    badge: "Interactive M3",
+    description: "Material 3 Carousel displays a scrollable collection of cards or media items with snap scroll physics, pill navigation controls, and animated indicator dots.",
+    interactiveHtml: `
+      <div class="toggle-carousel-container" style="width:100%; max-width:640px;">
+        <!-- Carousel Header & Nav Controls -->
+        <div class="toggle-carousel-header">
+          <div class="toggle-carousel-title-group">
+            <h3 style="margin:0; font-size:1.1rem; font-weight:700;">Featured Highlights</h3>
+            <span style="font-size:0.8rem; color:var(--md-sys-color-outline);">Material Design 3 Multi-Browse</span>
+          </div>
+          <div class="toggle-carousel-nav-group">
+            <button class="toggle-carousel-nav-btn" title="Previous" onclick="const t=document.getElementById('demoCarouselTrack'); t.scrollBy({left:-280, behavior:'smooth'}); if(window.soundEngine) soundEngine.playClick();"><span class="material-symbols-rounded">arrow_back</span></button>
+            <button class="toggle-carousel-nav-btn" title="Next" onclick="const t=document.getElementById('demoCarouselTrack'); t.scrollBy({left:280, behavior:'smooth'}); if(window.soundEngine) soundEngine.playClick();"><span class="material-symbols-rounded">arrow_forward</span></button>
+          </div>
+        </div>
+
+        <!-- Carousel Scroll Track -->
+        <div class="toggle-carousel-track" id="demoCarouselTrack">
+          <!-- Card 1 -->
+          <div class="toggle-carousel-card card-gradient-blue" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('Clicked: Expressive Theming');">
+            <div class="toggle-carousel-card-top">
+              <span class="material-symbols-rounded toggle-carousel-card-icon">palette</span>
+              <span class="toggle-carousel-badge">M3 System</span>
+            </div>
+            <div class="toggle-carousel-card-body">
+              <h4 class="toggle-carousel-card-title">Expressive Theming</h4>
+              <p class="toggle-carousel-card-desc">Dynamic tonal palettes generated from algorithmically sound seed colors.</p>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="toggle-carousel-card card-gradient-green" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('Clicked: Tactile Sound FX');">
+            <div class="toggle-carousel-card-top">
+              <span class="material-symbols-rounded toggle-carousel-card-icon">volume_up</span>
+              <span class="toggle-carousel-badge">Zero Assets</span>
+            </div>
+            <div class="toggle-carousel-card-body">
+              <h4 class="toggle-carousel-card-title">Tactile Audio FX</h4>
+              <p class="toggle-carousel-card-desc">Micro-synthesized clicks generated via real-time Web Audio API.</p>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="toggle-carousel-card card-gradient-purple" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('Clicked: 25 Switches');">
+            <div class="toggle-carousel-card-top">
+              <span class="material-symbols-rounded toggle-carousel-card-icon">toggle_on</span>
+              <span class="toggle-carousel-badge">Flagship</span>
+            </div>
+            <div class="toggle-carousel-card-body">
+              <h4 class="toggle-carousel-card-title">25 Switch Styles</h4>
+              <p class="toggle-carousel-card-desc">Material, iOS, Elastic physics, Cyber glow, and Celestial micro-interactions.</p>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div class="toggle-carousel-card card-gradient-amber" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('Clicked: Accessible By Default');">
+            <div class="toggle-carousel-card-top">
+              <span class="material-symbols-rounded toggle-carousel-card-icon">verified</span>
+              <span class="toggle-carousel-badge">WCAG 2.1 AA</span>
+            </div>
+            <div class="toggle-carousel-card-body">
+              <h4 class="toggle-carousel-card-title">Accessible Core</h4>
+              <p class="toggle-carousel-card-desc">Complete keyboard focus traps, High Contrast Mode, and ARIA state labels.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carousel Indicators -->
+        <div class="toggle-carousel-indicators">
+          <span class="toggle-carousel-dot active"></span>
+          <span class="toggle-carousel-dot"></span>
+          <span class="toggle-carousel-dot"></span>
+          <span class="toggle-carousel-dot"></span>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Multi-Browse Carousel -->
+<div class="toggle-carousel">
+  <div class="toggle-carousel-track">
+    <div class="toggle-carousel-card">
+      <span class="material-symbols-rounded toggle-carousel-card-icon">palette</span>
+      <h4>Expressive Theming</h4>
+      <p>Dynamic tonal palettes generated from seed colors.</p>
+    </div>
+  </div>
+</div>`,
+    css: `.toggle-carousel-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 8px 4px 16px;
+  -webkit-overflow-scrolling: touch;
+}
+.toggle-carousel-card {
+  flex: 0 0 260px;
+  scroll-snap-align: start;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  cursor: pointer;
+  transition: transform var(--transition-bounce), box-shadow var(--transition-fast);
+}
+.toggle-carousel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--elevation-3);
+}`,
+    react: `export function Carousel({ items }) {
+  return (
+    <div className="toggle-carousel">
+      <div className="toggle-carousel-track">
+        {items.map((item, idx) => (
+          <div key={idx} className="toggle-carousel-card">
+            <h4>{item.title}</h4>
+            <p>{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Hero Large Carousel", desc: "Wide showcase cards with background art", html: `<div class="toggle-carousel-card card-gradient-blue" style="width:100%; max-width:380px;"><h4>Featured Component</h4><p>Hero banner variant with expanded text layout.</p></div>` }
+    ],
+    tokens: [
+      { token: "--radius-lg", default: "24px", desc: "Corner rounding for carousel card surfaces" },
+      { token: "--elevation-2", default: "0 3px 6px rgba(0,0,0,0.12)", desc: "Resting card elevation" }
+    ],
+    wcag: "Supports horizontal arrow key navigation and scroll snap points with aria-roledescription='carousel'."
+  },
+
+  // ------------------------------------------------------------------------
+  // 46. COLOR PICKER & PALETTE MATRIX
+  // ------------------------------------------------------------------------
+  "colorpicker": {
+    id: "colorpicker",
+    name: "Color Picker & Palette Matrix",
+    category: "inputs",
+    icon: "colorize",
+    badge: "Material You",
+    description: "Material You tonal color selector with continuous hue slider, opacity adjustment, curated Google palette swatches, and instant hex value clipboard copying.",
+    interactiveHtml: `
+      <div class="toggle-colorpicker-card" style="width:100%; max-width:480px;">
+        <!-- Live Preview Header -->
+        <div class="toggle-colorpicker-header">
+          <div class="toggle-color-preview-circle" id="demoColorCircle" style="background:#0b57d0;"></div>
+          <div class="toggle-color-info">
+            <span class="toggle-color-hex" id="demoColorHex">#0B57D0</span>
+            <span class="toggle-color-label" id="demoColorName">Google Blue • Primary Tone 40</span>
+          </div>
+          <button class="toggle-color-copy-btn" id="demoColorCopyBtn" onclick="navigator.clipboard.writeText(document.getElementById('demoColorHex').textContent); this.innerHTML='<span class=\\'material-symbols-rounded\\'>check</span> Copied'; if(window.soundEngine) soundEngine.playClick(); showSnackbar('Copied color token!'); setTimeout(()=>this.innerHTML='<span class=\\'material-symbols-rounded\\'>content_copy</span> Copy', 1500);">
+            <span class="material-symbols-rounded">content_copy</span>
+            <span>Copy</span>
+          </button>
+        </div>
+
+        <!-- Hue Range Slider -->
+        <div class="toggle-color-slider-group">
+          <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:600; color:var(--md-sys-color-on-surface-variant); margin-bottom:6px;">
+            <span>Spectrum Hue</span>
+            <span id="demoHueVal">217°</span>
+          </div>
+          <input type="range" class="toggle-color-hue-slider" id="demoHueSlider" min="0" max="360" value="217" oninput="
+            const h=this.value; document.getElementById('demoHueVal').textContent=h+'°';
+            const c='hsl('+h+', 85%, 45%)';
+            document.getElementById('demoColorCircle').style.background=c;
+            document.getElementById('demoColorHex').textContent='HSL('+h+', 85%, 45%)';
+            document.getElementById('demoColorName').textContent='Dynamic Seed Hue • Tone';
+          " />
+        </div>
+
+        <!-- Material You 8-Color Preset Matrix -->
+        <div style="font-size:0.82rem; font-weight:700; color:var(--md-sys-color-on-surface); margin-bottom:10px;">Material You Tonal Palettes</div>
+        <div class="toggle-color-matrix">
+          <button class="toggle-matrix-swatch active" style="background:#0b57d0;" data-hex="#0B57D0" data-name="Google Blue" onclick="document.querySelectorAll('.toggle-matrix-swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active'); document.getElementById('demoColorCircle').style.background='#0b57d0'; document.getElementById('demoColorHex').textContent='#0B57D0'; document.getElementById('demoColorName').textContent='Google Blue • Tone 40'; if(window.soundEngine) soundEngine.playClick();" title="Google Blue"></button>
+          <button class="toggle-matrix-swatch" style="background:#0d8043;" data-hex="#0D8043" data-name="Google Green" onclick="document.querySelectorAll('.toggle-matrix-swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active'); document.getElementById('demoColorCircle').style.background='#0d8043'; document.getElementById('demoColorHex').textContent='#0D8043'; document.getElementById('demoColorName').textContent='Google Green • Tone 40'; if(window.soundEngine) soundEngine.playClick();" title="Google Green"></button>
+          <button class="toggle-matrix-swatch" style="background:#d93025;" data-hex="#D93025" data-name="Google Red" onclick="document.querySelectorAll('.toggle-matrix-swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active'); document.getElementById('demoColorCircle').style.background='#d93025'; document.getElementById('demoColorHex').textContent='#D93025'; document.getElementById('demoColorName').textContent='Google Red • Tone 40'; if(window.soundEngine) soundEngine.playClick();" title="Google Red"></button>
+          <button class="toggle-matrix-swatch" style="background:#f9ab00;" data-hex="#F9AB00" data-name="Google Yellow" onclick="document.querySelectorAll('.toggle-matrix-swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active'); document.getElementById('demoColorCircle').style.background='#f9ab00'; document.getElementById('demoColorHex').textContent='#F9AB00'; document.getElementById('demoColorName').textContent='Google Yellow • Tone 70'; if(window.soundEngine) soundEngine.playClick();" title="Google Yellow"></button>
+          <button class="toggle-matrix-swatch" style="background:#7c3aed;" data-hex="#7C3AED" data-name="Google Purple" onclick="document.querySelectorAll('.toggle-matrix-swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active'); document.getElementById('demoColorCircle').style.background='#7c3aed'; document.getElementById('demoColorHex').textContent='#7C3AED'; document.getElementById('demoColorName').textContent='Google Purple • Tone 40'; if(window.soundEngine) soundEngine.playClick();" title="Google Purple"></button>
+          <button class="toggle-matrix-swatch" style="background:#00838f;" data-hex="#00838F" data-name="Cyan Teal" onclick="document.querySelectorAll('.toggle-matrix-swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active'); document.getElementById('demoColorCircle').style.background='#00838f'; document.getElementById('demoColorHex').textContent='#00838F'; document.getElementById('demoColorName').textContent='Cyan Teal • Tone 40'; if(window.soundEngine) soundEngine.playClick();" title="Cyan Teal"></button>
+          <button class="toggle-matrix-swatch" style="background:#e91e63;" data-hex="#E91E63" data-name="Pink Flamingo" onclick="document.querySelectorAll('.toggle-matrix-swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active'); document.getElementById('demoColorCircle').style.background='#e91e63'; document.getElementById('demoColorHex').textContent='#E91E63'; document.getElementById('demoColorName').textContent='Pink Flamingo • Tone 40'; if(window.soundEngine) soundEngine.playClick();" title="Pink Flamingo"></button>
+          <button class="toggle-matrix-swatch" style="background:#e65100;" data-hex="#E65100" data-name="Deep Orange" onclick="document.querySelectorAll('.toggle-matrix-swatch').forEach(s=>s.classList.remove('active')); this.classList.add('active'); document.getElementById('demoColorCircle').style.background='#e65100'; document.getElementById('demoColorHex').textContent='#E65100'; document.getElementById('demoColorName').textContent='Deep Orange • Tone 40'; if(window.soundEngine) soundEngine.playClick();" title="Deep Orange"></button>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material You Color Picker Matrix -->
+<div class="toggle-colorpicker-card">
+  <div class="toggle-colorpicker-header">
+    <div class="toggle-color-preview-circle" style="background:#0b57d0;"></div>
+    <div class="toggle-color-info">
+      <span class="toggle-color-hex">#0B57D0</span>
+    </div>
+  </div>
+  <input type="range" class="toggle-color-hue-slider" min="0" max="360" value="217" />
+</div>`,
+    css: `.toggle-colorpicker-card {
+  background-color: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+.toggle-color-preview-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  box-shadow: var(--elevation-2);
+}
+.toggle-color-hue-slider {
+  width: 100%;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+  outline: none;
+  -webkit-appearance: none;
+}`,
+    react: `export function ColorPicker({ value = '#0b57d0', onChange }) {
+  return (
+    <div className="toggle-colorpicker-card">
+      <div className="toggle-color-preview-circle" style={{ background: value }} />
+      <input
+        type="range"
+        className="toggle-color-hue-slider"
+        min="0"
+        max="360"
+        onChange={(e) => onChange && onChange(e.target.value)}
+      />
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Mini Inline Swatch Bar", desc: "Horizontal single-line swatch selector", html: `<div style="display:flex; gap:8px;"><span class="toggle-matrix-swatch active" style="background:#0b57d0;"></span><span class="toggle-matrix-swatch" style="background:#0d8043;"></span><span class="toggle-matrix-swatch" style="background:#d93025;"></span></div>` }
+    ],
+    tokens: [
+      { token: "--radius-lg", default: "24px", desc: "Surface radius for picker modal container" },
+      { token: "--md-sys-color-primary", default: "#0b57d0", desc: "Default selected swatch tone" }
+    ],
+    wcag: "Exposes color values as readable hex strings with aria-label on each color swatch button."
+  },
+
+  // ------------------------------------------------------------------------
+  // 47. CODE BLOCK & SNIPPETS
+  // ------------------------------------------------------------------------
+  "codeblock": {
+    id: "codeblock",
+    name: "Code Block & Snippet",
+    category: "display",
+    icon: "terminal",
+    badge: "Dev Experience",
+    description: "Code blocks present code snippets cleanly with language badges, filename tabs, syntax highlighting cues, line numbers, and a single-click copy button.",
+    interactiveHtml: `
+      <div class="toggle-codeblock-wrap" style="width:100%; max-width:620px;">
+        <!-- Window Header -->
+        <div class="toggle-codeblock-header">
+          <div class="toggle-codeblock-window-dots">
+            <span class="code-dot red"></span>
+            <span class="code-dot yellow"></span>
+            <span class="code-dot green"></span>
+          </div>
+          <div class="toggle-codeblock-tab">
+            <span class="material-symbols-rounded" style="font-size:16px; color:#60a5fa;">javascript</span>
+            <span>ToggleSwitch.jsx</span>
+          </div>
+          <button class="toggle-codeblock-copy" onclick="
+            navigator.clipboard.writeText('import { Switch } from \\'@dattebayoolo/toggle-ui-library\\';\\n\\nexport function Settings() {\\n  return <Switch defaultChecked={true} onChange={console.log} />;\\n}');
+            this.innerHTML='<span class=\\'material-symbols-rounded\\'>check</span> Copied';
+            if(window.soundEngine) soundEngine.playClick();
+            showSnackbar('Code copied to clipboard!');
+            setTimeout(()=>this.innerHTML='<span class=\\'material-symbols-rounded\\'>content_copy</span> Copy', 1600);
+          ">
+            <span class="material-symbols-rounded">content_copy</span>
+            <span>Copy</span>
+          </button>
+        </div>
+
+        <!-- Code Body with Line Numbers -->
+        <div class="toggle-codeblock-body">
+          <div class="toggle-code-line"><span class="toggle-code-num">1</span><span class="token-keyword">import</span> { <span class="token-component">Switch</span>, <span class="token-component">useTheme</span> } <span class="token-keyword">from</span> <span class="token-string">'@dattebayoolo/toggle-ui-library'</span>;</div>
+          <div class="toggle-code-line"><span class="toggle-code-num">2</span></div>
+          <div class="toggle-code-line active-line"><span class="toggle-code-num">3</span><span class="token-comment">// Material 3 accessible haptic switch component</span></div>
+          <div class="toggle-code-line"><span class="toggle-code-num">4</span><span class="token-keyword">export default function</span> <span class="token-fn">PreferencesCard</span>() {</div>
+          <div class="toggle-code-line"><span class="toggle-code-num">5</span>  <span class="token-keyword">const</span> [sound, setSound] = <span class="token-fn">useState</span>(<span class="token-bool">true</span>);</div>
+          <div class="toggle-code-line"><span class="toggle-code-num">6</span>  <span class="token-keyword">return</span> (</div>
+          <div class="toggle-code-line"><span class="toggle-code-num">7</span>    &lt;<span class="token-tag">div</span> <span class="token-attr">className</span>=<span class="token-string">"toggle-card"</span>&gt;</div>
+          <div class="toggle-code-line"><span class="toggle-code-num">8</span>      &lt;<span class="token-component">Switch</span> <span class="token-attr">checked</span>={sound} <span class="token-attr">onChange</span>={setSound} <span class="token-attr">sound</span>=<span class="token-string">"tactile"</span> /&gt;</div>
+          <div class="toggle-code-line"><span class="toggle-code-num">9</span>    &lt;/<span class="token-tag">div</span>&gt;</div>
+          <div class="toggle-code-line"><span class="toggle-code-num">10</span>  );</div>
+          <div class="toggle-code-line"><span class="toggle-code-num">11</span>}</div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Code Block with Header and Copy Button -->
+<div class="toggle-codeblock-wrap">
+  <div class="toggle-codeblock-header">
+    <div class="toggle-codeblock-tab">
+      <span>App.jsx</span>
+    </div>
+    <button class="toggle-codeblock-copy">
+      <span class="material-symbols-rounded">content_copy</span>
+      <span>Copy</span>
+    </button>
+  </div>
+  <pre class="toggle-codeblock-body"><code>const active = true;</code></pre>
+</div>`,
+    css: `.toggle-codeblock-wrap {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+  box-shadow: var(--elevation-2);
+}
+.toggle-codeblock-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.toggle-codeblock-body {
+  padding: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}`,
+    react: `export function CodeBlock({ filename, code }) {
+  return (
+    <div className="toggle-codeblock-wrap">
+      <div className="toggle-codeblock-header">
+        <span>{filename}</span>
+        <button onClick={() => navigator.clipboard.writeText(code)}>Copy</button>
+      </div>
+      <pre className="toggle-codeblock-body"><code>{code}</code></pre>
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Terminal Prompt Style", desc: "Dark bash terminal with shell prompt marker", html: `<div class="toggle-codeblock-wrap" style="background:#0f172a; padding:12px 16px; font-family:'JetBrains Mono', monospace;"><span style="color:#22c55e;">$</span> npm install @dattebayoolo/toggle-ui-library</div>` }
+    ],
+    tokens: [
+      { token: "--radius-md", default: "16px", desc: "Container corner radius" },
+      { token: "--elevation-2", default: "0 3px 6px rgba(0,0,0,0.12)", desc: "Code box elevation shadow" }
+    ],
+    wcag: "Uses semantic <pre><code> tags and includes accessible labels for copy button states."
+  },
+
+  // ------------------------------------------------------------------------
+  // 48. EMPTY STATE CANVASES
+  // ------------------------------------------------------------------------
+  "emptystate": {
+    id: "emptystate",
+    name: "Empty State Canvases",
+    category: "display",
+    icon: "inbox",
+    badge: "UX Pattern",
+    description: "Empty states communicate that a space has no content to show yet and guide users to take action. They feature illustrative iconography, helpful explanations, and clear primary calls to action.",
+    interactiveHtml: `
+      <div class="toggle-empty-container" style="width:100%; max-width:540px; display:flex; flex-direction:column; gap:20px;">
+        <!-- State Selector Buttons -->
+        <div class="toggle-btn-group" style="align-self:center;">
+          <button class="toggle-segment-btn active" id="btnEmptyProjects" onclick="
+            document.querySelectorAll('.toggle-empty-container .toggle-segment-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active');
+            document.getElementById('demoEmptyIcon').textContent = 'folder_open';
+            document.getElementById('demoEmptyTitle').textContent = 'No projects created yet';
+            document.getElementById('demoEmptyDesc').textContent = 'Your workspace is clear and ready. Kickstart your component library by creating your first UI project.';
+            document.getElementById('demoEmptyBtn').textContent = 'Create New Project';
+            if(window.soundEngine) soundEngine.playClick();
+          ">No Projects</button>
+          <button class="toggle-segment-btn" id="btnEmptySearch" onclick="
+            document.querySelectorAll('.toggle-empty-container .toggle-segment-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active');
+            document.getElementById('demoEmptyIcon').textContent = 'search_off';
+            document.getElementById('demoEmptyTitle').textContent = 'No matching results found';
+            document.getElementById('demoEmptyDesc').textContent = 'We couldn\\'t find any components matching your search query. Try checking your spelling or adjusting filters.';
+            document.getElementById('demoEmptyBtn').textContent = 'Clear All Filters';
+            if(window.soundEngine) soundEngine.playClick();
+          ">Search Empty</button>
+          <button class="toggle-segment-btn" id="btnEmptyInbox" onclick="
+            document.querySelectorAll('.toggle-empty-container .toggle-segment-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active');
+            document.getElementById('demoEmptyIcon').textContent = 'mark_email_read';
+            document.getElementById('demoEmptyTitle').textContent = 'You are all caught up!';
+            document.getElementById('demoEmptyDesc').textContent = 'Zero unread notifications or review requests in your queue. Enjoy the peaceful inbox zero.';
+            document.getElementById('demoEmptyBtn').textContent = 'Refresh Activity';
+            if(window.soundEngine) soundEngine.playClick();
+          ">Inbox Zero</button>
+        </div>
+
+        <!-- Empty State Surface -->
+        <div class="toggle-empty-state">
+          <div class="toggle-empty-icon-wrap">
+            <span class="material-symbols-rounded toggle-empty-icon" id="demoEmptyIcon">folder_open</span>
+          </div>
+          <h3 class="toggle-empty-title" id="demoEmptyTitle">No projects created yet</h3>
+          <p class="toggle-empty-desc" id="demoEmptyDesc">Your workspace is clear and ready. Kickstart your component library by creating your first UI project.</p>
+          <div class="toggle-empty-actions">
+            <button class="toggle-btn toggle-btn-filled" id="demoEmptyBtn" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('Primary action triggered!');">
+              Create New Project
+            </button>
+            <button class="toggle-btn toggle-btn-text" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('Opening documentation guide...');">
+              Explore Documentation
+            </button>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Illustrated Empty State -->
+<div class="toggle-empty-state">
+  <div class="toggle-empty-icon-wrap">
+    <span class="material-symbols-rounded toggle-empty-icon">folder_open</span>
+  </div>
+  <h3 class="toggle-empty-title">No projects created yet</h3>
+  <p class="toggle-empty-desc">Your workspace is ready. Create your first project to get started.</p>
+  <div class="toggle-empty-actions">
+    <button class="toggle-btn toggle-btn-filled">Create New Project</button>
+  </div>
+</div>`,
+    css: `.toggle-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 48px 24px;
+  background-color: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-xl);
+}
+.toggle-empty-icon-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.toggle-empty-icon {
+  font-size: 36px;
+}
+.toggle-empty-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--md-sys-color-on-surface);
+}
+.toggle-empty-desc {
+  font-size: 0.95rem;
+  color: var(--md-sys-color-on-surface-variant);
+  max-width: 400px;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}`,
+    react: `export function EmptyState({ icon = "folder_open", title, description, actionText, onAction }) {
+  return (
+    <div className="toggle-empty-state">
+      <div className="toggle-empty-icon-wrap">
+        <span className="material-symbols-rounded toggle-empty-icon">{icon}</span>
+      </div>
+      <h3 className="toggle-empty-title">{title}</h3>
+      <p className="toggle-empty-desc">{description}</p>
+      {actionText && (
+        <button className="toggle-btn toggle-btn-filled" onClick={onAction}>
+          {actionText}
+        </button>
+      )}
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Compact Empty State", desc: "Smaller padding for cards and dialog interiors", html: `<div class="toggle-empty-state" style="padding:24px;"><span class="material-symbols-rounded" style="font-size:28px; color:var(--md-sys-color-outline);">inbox</span><h5 style="margin:8px 0 4px;">Nothing here</h5><p style="font-size:0.8rem; margin:0;">Check back later</p></div>` }
+    ],
+    tokens: [
+      { token: "--radius-xl", default: "28px", desc: "Outermost container radius" },
+      { token: "--md-sys-color-primary-container", default: "#d3e3fd", desc: "Glow background circle fill" }
+    ],
+    wcag: "Ensures meaningful alternative text and clear heading hierarchy (h3) for screen readers."
+  },
+
+  // ------------------------------------------------------------------------
+  // 49. NAVIGATION DRAWER & SIDE SHEET
+  // ------------------------------------------------------------------------
+  "drawer": {
+    id: "drawer",
+    name: "Navigation Drawer & Side Sheet",
+    category: "navigation",
+    icon: "dock_to_right",
+    badge: "M3 Navigation",
+    description: "Navigation Drawers provide access to top-level destinations in an application. Features user account card, active pill highlights, trailing badge counters, and organized section dividers.",
+    interactiveHtml: `
+      <div class="toggle-drawer-demo-frame" style="width:100%; max-width:440px; border-radius:24px; overflow:hidden; border:1px solid var(--md-sys-color-card-border); background:var(--md-sys-color-surface-container-low); box-shadow:var(--elevation-3);">
+        <!-- Drawer Header / Account info -->
+        <div class="toggle-drawer-header">
+          <div class="toggle-drawer-user-row">
+            <div class="toggle-drawer-avatar">KM</div>
+            <div class="toggle-drawer-user-info">
+              <div style="font-weight:700; font-size:0.95rem; color:var(--md-sys-color-on-surface);">Kazam Mahmood</div>
+              <div style="font-size:0.78rem; color:var(--md-sys-color-outline);">kazam.lead@toggle.design</div>
+            </div>
+            <span class="material-symbols-rounded" style="color:var(--md-sys-color-outline); font-size:20px; cursor:pointer;" onclick="showSnackbar('Switching account profile'); if(window.soundEngine) soundEngine.playClick();">arrow_drop_down</span>
+          </div>
+        </div>
+
+        <!-- Primary Nav Items -->
+        <nav class="toggle-drawer-nav" id="demoDrawerNav">
+          <div class="toggle-drawer-item active" onclick="document.querySelectorAll('#demoDrawerNav .toggle-drawer-item').forEach(i=>i.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Navigated to Inbox');">
+            <span class="material-symbols-rounded toggle-drawer-item-icon">inbox</span>
+            <span class="toggle-drawer-item-label">Inbox</span>
+            <span class="toggle-drawer-badge">14</span>
+          </div>
+          <div class="toggle-drawer-item" onclick="document.querySelectorAll('#demoDrawerNav .toggle-drawer-item').forEach(i=>i.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Navigated to Starred');">
+            <span class="material-symbols-rounded toggle-drawer-item-icon">star</span>
+            <span class="toggle-drawer-item-label">Starred</span>
+          </div>
+          <div class="toggle-drawer-item" onclick="document.querySelectorAll('#demoDrawerNav .toggle-drawer-item').forEach(i=>i.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Navigated to Sent');">
+            <span class="material-symbols-rounded toggle-drawer-item-icon">send</span>
+            <span class="toggle-drawer-item-label">Sent</span>
+          </div>
+          <div class="toggle-drawer-item" onclick="document.querySelectorAll('#demoDrawerNav .toggle-drawer-item').forEach(i=>i.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Navigated to Drafts');">
+            <span class="material-symbols-rounded toggle-drawer-item-icon">drafts</span>
+            <span class="toggle-drawer-item-label">Drafts</span>
+            <span class="toggle-drawer-badge">3</span>
+          </div>
+
+          <div class="toggle-drawer-divider"></div>
+          <div class="toggle-drawer-section-title">Labels & Spaces</div>
+
+          <div class="toggle-drawer-item" onclick="document.querySelectorAll('#demoDrawerNav .toggle-drawer-item').forEach(i=>i.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Label: Design System');">
+            <span class="material-symbols-rounded toggle-drawer-item-icon" style="color:#0b57d0;">label</span>
+            <span class="toggle-drawer-item-label">Design System</span>
+          </div>
+          <div class="toggle-drawer-item" onclick="document.querySelectorAll('#demoDrawerNav .toggle-drawer-item').forEach(i=>i.classList.remove('active')); this.classList.add('active'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Label: Engineering Core');">
+            <span class="material-symbols-rounded toggle-drawer-item-icon" style="color:#0d8043;">label</span>
+            <span class="toggle-drawer-item-label">Engineering Core</span>
+          </div>
+
+          <div class="toggle-drawer-divider"></div>
+
+          <div class="toggle-drawer-item" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('Opening System Settings');">
+            <span class="material-symbols-rounded toggle-drawer-item-icon">settings</span>
+            <span class="toggle-drawer-item-label">Settings</span>
+          </div>
+        </nav>
+      </div>
+    `,
+    html: `<!-- Material 3 Standard Navigation Drawer -->
+<nav class="toggle-drawer">
+  <div class="toggle-drawer-item active">
+    <span class="material-symbols-rounded">inbox</span>
+    <span>Inbox</span>
+    <span class="toggle-drawer-badge">12</span>
+  </div>
+  <div class="toggle-drawer-item">
+    <span class="material-symbols-rounded">star</span>
+    <span>Starred</span>
+  </div>
+</nav>`,
+    css: `.toggle-drawer {
+  width: 320px;
+  background-color: var(--md-sys-color-surface-container-low);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+}
+.toggle-drawer-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 48px;
+  padding: 0 16px;
+  border-radius: var(--radius-full);
+  color: var(--md-sys-color-on-surface-variant);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.toggle-drawer-item:hover {
+  background-color: var(--md-sys-color-surface-container-highest);
+  color: var(--md-sys-color-on-surface);
+}
+.toggle-drawer-item.active {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  font-weight: 700;
+}`,
+    react: `export function NavigationDrawer({ items, activeId, onSelect }) {
+  return (
+    <nav className="toggle-drawer">
+      {items.map(item => (
+        <div
+          key={item.id}
+          className={\`toggle-drawer-item \${activeId === item.id ? 'active' : ''}\`}
+          onClick={() => onSelect(item.id)}
+        >
+          <span className="material-symbols-rounded">{item.icon}</span>
+          <span>{item.label}</span>
+          {item.badge && <span className="toggle-drawer-badge">{item.badge}</span>}
+        </div>
+      ))}
+    </nav>
+  );
+}`,
+    variations: [
+      { name: "Modal Side Sheet", desc: "Overlay drawer for secondary mobile contextual actions", html: `<div class="toggle-drawer-item active"><span class="material-symbols-rounded">tune</span><span>Adjust Parameters</span></div>` }
+    ],
+    tokens: [
+      { token: "--radius-full", default: "9999px", desc: "Pill indicator active background radius" },
+      { token: "--md-sys-color-secondary-container", default: "#c2e7ff", desc: "Active item container background" }
+    ],
+    wcag: "Uses semantic <nav> landmark with role='navigation' and aria-current='page' on active links."
+  },
+
+  // ------------------------------------------------------------------------
+  // 50. SPLIT BUTTON & ACTIONS
+  // ------------------------------------------------------------------------
+  "splitbutton": {
+    id: "splitbutton",
+    name: "Split Button & Actions",
+    category: "actions",
+    icon: "call_split",
+    badge: "M3 Actions",
+    description: "Split buttons combine a primary action with a secondary dropdown menu trigger in a unified pill container. Ideal for contextual actions like Save & Publish or Create New Project.",
+    interactiveHtml: `
+      <div style="display:flex; flex-direction:column; align-items:center; gap:24px; position:relative; min-height:220px;">
+        <!-- Split Button Container -->
+        <div class="toggle-split-btn" id="demoSplitBtn">
+          <button class="toggle-split-primary" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('Primary action: Saved changes successfully!');">
+            <span class="material-symbols-rounded">save</span>
+            <span>Save Changes</span>
+          </button>
+          <div class="toggle-split-sep"></div>
+          <button class="toggle-split-caret" title="More options" onclick="
+            const m = document.getElementById('demoSplitMenu');
+            m.classList.toggle('open');
+            if(window.soundEngine) soundEngine.playClick();
+          ">
+            <span class="material-symbols-rounded">arrow_drop_down</span>
+          </button>
+        </div>
+
+        <!-- Floating Action Menu -->
+        <div class="toggle-split-menu" id="demoSplitMenu">
+          <div class="toggle-split-menu-item" onclick="document.getElementById('demoSplitMenu').classList.remove('open'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Saved as draft');">
+            <span class="material-symbols-rounded">draft</span>
+            <span>Save as Draft</span>
+          </div>
+          <div class="toggle-split-menu-item" onclick="document.getElementById('demoSplitMenu').classList.remove('open'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Exporting project JSON...');">
+            <span class="material-symbols-rounded">file_download</span>
+            <span>Export as JSON</span>
+          </div>
+          <div class="toggle-split-menu-divider"></div>
+          <div class="toggle-split-menu-item" style="color:var(--google-green);" onclick="document.getElementById('demoSplitMenu').classList.remove('open'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Publishing live to production!');">
+            <span class="material-symbols-rounded" style="color:var(--google-green);">rocket_launch</span>
+            <span>Publish Live</span>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Material 3 Split Button -->
+<div class="toggle-split-btn">
+  <button class="toggle-split-primary">
+    <span class="material-symbols-rounded">save</span>
+    <span>Save Changes</span>
+  </button>
+  <div class="toggle-split-sep"></div>
+  <button class="toggle-split-caret" aria-label="More options">
+    <span class="material-symbols-rounded">arrow_drop_down</span>
+  </button>
+</div>`,
+    css: `.toggle-split-btn {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-full);
+  background-color: var(--md-sys-color-primary);
+  color: #ffffff;
+  box-shadow: var(--elevation-1);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+.toggle-split-btn:hover {
+  box-shadow: var(--elevation-2);
+  filter: brightness(0.95);
+}
+.toggle-split-primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.toggle-split-sep {
+  width: 1px;
+  height: 24px;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+.toggle-split-caret {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}`,
+    react: `export function SplitButton({ onPrimary, options = [] }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="toggle-split-btn">
+      <button className="toggle-split-primary" onClick={onPrimary}>
+        Save Changes
+      </button>
+      <div className="toggle-split-sep" />
+      <button className="toggle-split-caret" onClick={() => setOpen(!open)}>
+        <span className="material-symbols-rounded">arrow_drop_down</span>
+      </button>
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Tonal Split Button", desc: "Lower emphasis split pill for secondary toolbars", html: `<div class="toggle-split-btn" style="background:var(--md-sys-color-surface-container-high); color:var(--md-sys-color-on-surface);"><button class="toggle-split-primary"><span>Export</span></button><div class="toggle-split-sep" style="background:var(--md-sys-color-card-border);"></div><button class="toggle-split-caret"><span class="material-symbols-rounded">arrow_drop_down</span></button></div>` }
+    ],
+    tokens: [
+      { token: "--radius-full", default: "9999px", desc: "Pill curvature for joined split container" },
+      { token: "--md-sys-color-primary", default: "#0b57d0", desc: "Primary fill tone" }
+    ],
+    wcag: "Caret button includes aria-haspopup='menu' and aria-expanded state."
+  },
+
+  // ------------------------------------------------------------------------
+  // 51. SELECTABLE TOGGLE CARDS
+  // ------------------------------------------------------------------------
+  "togglecard": {
+    id: "togglecard",
+    name: "Selectable Toggle Cards",
+    category: "actions",
+    icon: "fact_check",
+    badge: "Interactive M3",
+    description: "Selectable cards blend card surfaces with toggle selection states. Often used for subscription pricing plans, device selection, or permission settings.",
+    interactiveHtml: `
+      <div class="toggle-selectable-grid" id="demoCardGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:16px; width:100%; max-width:620px;">
+        <!-- Card 1 -->
+        <div class="toggle-selectable-card" onclick="document.querySelectorAll('.toggle-selectable-card').forEach(c=>c.classList.remove('selected')); this.classList.add('selected'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Selected Starter Plan');">
+          <div class="toggle-card-radio-wrap">
+            <span class="material-symbols-rounded toggle-card-check">radio_button_unchecked</span>
+          </div>
+          <h4 class="toggle-card-tier-title">Starter</h4>
+          <div class="toggle-card-price">$0<span style="font-size:0.75rem; color:var(--md-sys-color-outline);">/mo</span></div>
+          <ul class="toggle-card-feature-list">
+            <li><span class="material-symbols-rounded">check</span> 5 Toggle Styles</li>
+            <li><span class="material-symbols-rounded">check</span> Pure CSS bundle</li>
+          </ul>
+        </div>
+
+        <!-- Card 2 (Active/Popular) -->
+        <div class="toggle-selectable-card selected" onclick="document.querySelectorAll('.toggle-selectable-card').forEach(c=>c.classList.remove('selected')); this.classList.add('selected'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Selected Pro Plan');">
+          <div class="toggle-card-popular-badge">POPULAR</div>
+          <div class="toggle-card-radio-wrap">
+            <span class="material-symbols-rounded toggle-card-check">check_circle</span>
+          </div>
+          <h4 class="toggle-card-tier-title">Professional</h4>
+          <div class="toggle-card-price">$19<span style="font-size:0.75rem; color:var(--md-sys-color-outline);">/mo</span></div>
+          <ul class="toggle-card-feature-list">
+            <li><span class="material-symbols-rounded">check</span> All 25+ Switches</li>
+            <li><span class="material-symbols-rounded">check</span> Tactile Audio Engine</li>
+            <li><span class="material-symbols-rounded">check</span> Studio Customizer</li>
+          </ul>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="toggle-selectable-card" onclick="document.querySelectorAll('.toggle-selectable-card').forEach(c=>c.classList.remove('selected')); this.classList.add('selected'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Selected Team Enterprise Plan');">
+          <div class="toggle-card-radio-wrap">
+            <span class="material-symbols-rounded toggle-card-check">radio_button_unchecked</span>
+          </div>
+          <h4 class="toggle-card-tier-title">Enterprise</h4>
+          <div class="toggle-card-price">$49<span style="font-size:0.75rem; color:var(--md-sys-color-outline);">/mo</span></div>
+          <ul class="toggle-card-feature-list">
+            <li><span class="material-symbols-rounded">check</span> Unlimited Seats</li>
+            <li><span class="material-symbols-rounded">check</span> Figma Token Sync</li>
+          </ul>
+        </div>
+      </div>
+    `,
+    html: `<!-- Selectable Toggle Card -->
+<div class="toggle-selectable-card selected" role="radio" aria-checked="true">
+  <span class="material-symbols-rounded toggle-card-check">check_circle</span>
+  <h4>Professional</h4>
+  <div class="toggle-card-price">$19/mo</div>
+</div>`,
+    css: `.toggle-selectable-card {
+  position: relative;
+  background-color: var(--md-sys-color-surface-container-low);
+  border: 2px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.toggle-selectable-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--md-sys-color-outline);
+}
+.toggle-selectable-card.selected {
+  border-color: var(--md-sys-color-primary);
+  background-color: var(--md-sys-color-surface-container);
+  box-shadow: 0 0 0 1px var(--md-sys-color-primary), var(--elevation-2);
+}
+.toggle-selectable-card.selected .toggle-card-check {
+  color: var(--md-sys-color-primary);
+}`,
+    react: `export function SelectableCard({ title, price, selected, onSelect }) {
+  return (
+    <div
+      className={\`toggle-selectable-card \${selected ? 'selected' : ''}\`}
+      role="radio"
+      aria-checked={selected}
+      onClick={onSelect}
+    >
+      <span className="material-symbols-rounded toggle-card-check">
+        {selected ? 'check_circle' : 'radio_button_unchecked'}
+      </span>
+      <h4>{title}</h4>
+      <div className="toggle-card-price">{price}</div>
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Compact Row Selector", desc: "Horizontal selectable item for settings lists", html: `<div class="toggle-selectable-card selected" style="padding:12px 16px; display:flex; align-items:center; justify-content:space-between;"><h5 style="margin:0;">Automatic Updates</h5><span class="material-symbols-rounded" style="color:var(--md-sys-color-primary);">check_circle</span></div>` }
+    ],
+    tokens: [
+      { token: "--radius-lg", default: "24px", desc: "Surface radius for selectable cards" },
+      { token: "--md-sys-color-primary", default: "#0b57d0", desc: "Active selection highlight outline" }
+    ],
+    wcag: "Uses role='radio' or role='checkbox' with aria-checked bindings and full keyboard tab stop."
+  },
+
+  // ------------------------------------------------------------------------
+  // 52. TAG & MULTI-CHIP INPUT
+  // ------------------------------------------------------------------------
+  "taginput": {
+    id: "taginput",
+    name: "Tag & Multi-Chip Input",
+    category: "inputs",
+    icon: "sell",
+    badge: "Forms & Filter",
+    description: "Tokenized multi-select input allowing users to enter multiple tags or choose from suggestions. Features removable chip pills, keyboard Enter tag creation, and suggestion chips.",
+    interactiveHtml: `
+      <div style="width:100%; max-width:540px; display:flex; flex-direction:column; gap:16px;">
+        <!-- Tag Box Container -->
+        <div class="toggle-tag-box" id="demoTagBox" onclick="document.getElementById('demoTagField').focus();">
+          <div class="toggle-tag-chip">
+            <span>Material 3</span>
+            <button class="toggle-tag-remove" onclick="event.stopPropagation(); this.closest('.toggle-tag-chip').remove(); if(window.soundEngine) soundEngine.playClick();"><span class="material-symbols-rounded">close</span></button>
+          </div>
+          <div class="toggle-tag-chip">
+            <span>Design System</span>
+            <button class="toggle-tag-remove" onclick="event.stopPropagation(); this.closest('.toggle-tag-chip').remove(); if(window.soundEngine) soundEngine.playClick();"><span class="material-symbols-rounded">close</span></button>
+          </div>
+          <div class="toggle-tag-chip">
+            <span>Zero Runtime</span>
+            <button class="toggle-tag-remove" onclick="event.stopPropagation(); this.closest('.toggle-tag-chip').remove(); if(window.soundEngine) soundEngine.playClick();"><span class="material-symbols-rounded">close</span></button>
+          </div>
+          <input
+            type="text"
+            id="demoTagField"
+            class="toggle-tag-input"
+            placeholder="Type and press Enter..."
+            onkeydown="if(event.key === 'Enter' && this.value.trim()){
+              event.preventDefault();
+              const chip = document.createElement('div');
+              chip.className = 'toggle-tag-chip';
+              chip.innerHTML = '<span>' + this.value.trim() + '</span><button class=\\'toggle-tag-remove\\' onclick=\\'event.stopPropagation(); this.closest(\\\".toggle-tag-chip\\\").remove(); if(window.soundEngine) soundEngine.playClick();\\'><span class=\\'material-symbols-rounded\\'>close</span></button>';
+              document.getElementById('demoTagBox').insertBefore(chip, this);
+              this.value = '';
+              if(window.soundEngine) soundEngine.playClick();
+              showSnackbar('Added new tag');
+            }"
+          />
+        </div>
+
+        <!-- Quick Suggestions -->
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+          <span style="font-size:0.78rem; font-weight:700; color:var(--md-sys-color-outline);">Suggestions:</span>
+          <button class="toggle-tag-sugg-btn" onclick="
+            const chip = document.createElement('div');
+            chip.className = 'toggle-tag-chip';
+            chip.innerHTML = '<span>' + this.textContent + '</span><button class=\\'toggle-tag-remove\\' onclick=\\'event.stopPropagation(); this.closest(\\\".toggle-tag-chip\\\").remove(); if(window.soundEngine) soundEngine.playClick();\\'><span class=\\'material-symbols-rounded\\'>close</span></button>';
+            document.getElementById('demoTagBox').insertBefore(chip, document.getElementById('demoTagField'));
+            if(window.soundEngine) soundEngine.playClick();
+            showSnackbar('Added tag: ' + this.textContent);
+          ">+ Accessible</button>
+          <button class="toggle-tag-sugg-btn" onclick="
+            const chip = document.createElement('div');
+            chip.className = 'toggle-tag-chip';
+            chip.innerHTML = '<span>' + this.textContent + '</span><button class=\\'toggle-tag-remove\\' onclick=\\'event.stopPropagation(); this.closest(\\\".toggle-tag-chip\\\").remove(); if(window.soundEngine) soundEngine.playClick();\\'><span class=\\'material-symbols-rounded\\'>close</span></button>';
+            document.getElementById('demoTagBox').insertBefore(chip, document.getElementById('demoTagField'));
+            if(window.soundEngine) soundEngine.playClick();
+            showSnackbar('Added tag: ' + this.textContent);
+          ">+ React 19</button>
+          <button class="toggle-tag-sugg-btn" onclick="
+            const chip = document.createElement('div');
+            chip.className = 'toggle-tag-chip';
+            chip.innerHTML = '<span>' + this.textContent + '</span><button class=\\'toggle-tag-remove\\' onclick=\\'event.stopPropagation(); this.closest(\\\".toggle-tag-chip\\\").remove(); if(window.soundEngine) soundEngine.playClick();\\'><span class=\\'material-symbols-rounded\\'>close</span></button>';
+            document.getElementById('demoTagBox').insertBefore(chip, document.getElementById('demoTagField'));
+            if(window.soundEngine) soundEngine.playClick();
+            showSnackbar('Added tag: ' + this.textContent);
+          ">+ TypeScript</button>
+        </div>
+      </div>
+    `,
+    html: `<!-- Tag & Chip Input -->
+<div class="toggle-tag-box">
+  <div class="toggle-tag-chip">
+    <span>Material 3</span>
+    <button class="toggle-tag-remove">
+      <span class="material-symbols-rounded">close</span>
+    </button>
+  </div>
+  <input type="text" class="toggle-tag-input" placeholder="Add tag..." />
+</div>`,
+    css: `.toggle-tag-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background-color: var(--md-sys-color-surface-container-high);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-md);
+  min-height: 52px;
+  cursor: text;
+  transition: all var(--transition-fast);
+}
+.toggle-tag-box:focus-within {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 1px var(--md-sys-color-primary);
+}
+.toggle-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.toggle-tag-remove {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  color: inherit;
+  font-size: 14px;
+}`,
+    react: `export function TagInput({ tags = [], onAdd, onRemove }) {
+  return (
+    <div className="toggle-tag-box">
+      {tags.map((tag, idx) => (
+        <div key={idx} className="toggle-tag-chip">
+          <span>{tag}</span>
+          <button onClick={() => onRemove(tag)}>×</button>
+        </div>
+      ))}
+      <input
+        className="toggle-tag-input"
+        placeholder="Add tag..."
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') onAdd(e.target.value);
+        }}
+      />
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Outlined Tag Box", desc: "White surface with outlined pill tags", html: `<div class="toggle-tag-box" style="background:#fff;"><span class="toggle-tag-chip" style="background:transparent; border:1px solid #ccc; color:#333;">Frontend</span></div>` }
+    ],
+    tokens: [
+      { token: "--radius-md", default: "16px", desc: "Outermost box rounding" },
+      { token: "--md-sys-color-primary-container", default: "#d3e3fd", desc: "Tag chip fill tone" }
+    ],
+    wcag: "Includes accessible remove buttons with aria-label='Remove tag' and keyboard backspace support."
+  },
+
+  // ------------------------------------------------------------------------
+  // 53. PASSWORD & STRENGTH METER
+  // ------------------------------------------------------------------------
+  "passwordinput": {
+    id: "passwordinput",
+    name: "Password & Strength Meter",
+    category: "inputs",
+    icon: "password",
+    badge: "Security UI",
+    description: "Secure password input field with visibility toggle eye, 4-tier colored strength progress bar (Weak/Fair/Good/Strong), and real-time validation criteria.",
+    interactiveHtml: `
+      <div style="width:100%; max-width:440px; display:flex; flex-direction:column; gap:16px;">
+        <!-- Password Field Container -->
+        <div class="toggle-pass-wrap">
+          <input
+            type="password"
+            id="demoPassInput"
+            class="toggle-pass-input"
+            placeholder="Enter secure password..."
+            oninput="
+              const val = this.value;
+              const hasLength = val.length >= 8;
+              const hasUpper = /[A-Z]/.test(val);
+              const hasNumber = /[0-9]/.test(val);
+              const hasSpecial = /[^A-Za-z0-9]/.test(val);
+              
+              const score = (hasLength?1:0) + (hasUpper?1:0) + (hasNumber?1:0) + (hasSpecial?1:0);
+              
+              const bars = document.querySelectorAll('.toggle-pass-strength-bar');
+              bars.forEach((b, idx) => {
+                b.className = 'toggle-pass-strength-bar';
+                if(idx < score) {
+                  b.classList.add(score <= 1 ? 'weak' : score <= 2 ? 'fair' : score <= 3 ? 'good' : 'strong');
+                }
+              });
+
+              const label = document.getElementById('demoPassScoreLabel');
+              label.textContent = score === 0 ? 'Empty' : score === 1 ? 'Weak' : score === 2 ? 'Fair' : score === 3 ? 'Good' : 'Strong & Resilient';
+              label.style.color = score <= 1 ? '#d93025' : score <= 2 ? '#f9ab00' : score <= 3 ? '#1a73e8' : '#1e8e3e';
+
+              document.getElementById('critLength').classList.toggle('valid', hasLength);
+              document.getElementById('critUpper').classList.toggle('valid', hasUpper);
+              document.getElementById('critNumber').classList.toggle('valid', hasNumber);
+              document.getElementById('critSpecial').classList.toggle('valid', hasSpecial);
+            "
+          />
+          <button class="toggle-pass-toggle-btn" title="Toggle visibility" onclick="
+            const inp = document.getElementById('demoPassInput');
+            const isPass = inp.type === 'password';
+            inp.type = isPass ? 'text' : 'password';
+            this.querySelector('.material-symbols-rounded').textContent = isPass ? 'visibility_off' : 'visibility';
+            if(window.soundEngine) soundEngine.playClick();
+          ">
+            <span class="material-symbols-rounded">visibility</span>
+          </button>
+        </div>
+
+        <!-- 4-Segment Strength Indicator -->
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <div style="display:flex; justify-content:space-between; font-size:0.78rem; font-weight:700;">
+            <span style="color:var(--md-sys-color-outline);">Password Strength</span>
+            <span id="demoPassScoreLabel" style="color:#d93025;">Empty</span>
+          </div>
+          <div class="toggle-pass-strength-track">
+            <div class="toggle-pass-strength-bar"></div>
+            <div class="toggle-pass-strength-bar"></div>
+            <div class="toggle-pass-strength-bar"></div>
+            <div class="toggle-pass-strength-bar"></div>
+          </div>
+        </div>
+
+        <!-- Live Validation Checklist -->
+        <div class="toggle-pass-criteria-grid">
+          <div class="toggle-pass-crit" id="critLength"><span class="material-symbols-rounded">check</span> 8+ characters</div>
+          <div class="toggle-pass-crit" id="critUpper"><span class="material-symbols-rounded">check</span> Uppercase letter</div>
+          <div class="toggle-pass-crit" id="critNumber"><span class="material-symbols-rounded">check</span> At least 1 number</div>
+          <div class="toggle-pass-crit" id="critSpecial"><span class="material-symbols-rounded">check</span> Special character</div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Password Input with Strength Meter -->
+<div class="toggle-pass-wrap">
+  <input type="password" class="toggle-pass-input" placeholder="Password" />
+  <button class="toggle-pass-toggle-btn" aria-label="Show password">
+    <span class="material-symbols-rounded">visibility</span>
+  </button>
+</div>
+<div class="toggle-pass-strength-track">
+  <div class="toggle-pass-strength-bar strong"></div>
+</div>`,
+    css: `.toggle-pass-wrap {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: var(--md-sys-color-surface-container-high);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-full);
+  padding: 0 16px;
+  height: 52px;
+}
+.toggle-pass-wrap:focus-within {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 1px var(--md-sys-color-primary);
+}
+.toggle-pass-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--md-sys-color-on-surface);
+}
+.toggle-pass-toggle-btn {
+  background: transparent;
+  border: none;
+  color: var(--md-sys-color-on-surface-variant);
+  cursor: pointer;
+  display: flex;
+}
+.toggle-pass-strength-track {
+  display: flex;
+  gap: 6px;
+  height: 6px;
+}
+.toggle-pass-strength-bar {
+  flex: 1;
+  height: 100%;
+  border-radius: var(--radius-full);
+  background-color: var(--md-sys-color-card-border);
+  transition: background-color var(--transition-fast);
+}
+.toggle-pass-strength-bar.weak { background-color: #d93025; }
+.toggle-pass-strength-bar.fair { background-color: #f9ab00; }
+.toggle-pass-strength-bar.good { background-color: #1a73e8; }
+.toggle-pass-strength-bar.strong { background-color: #1e8e3e; }`,
+    react: `export function PasswordInput({ value, onChange }) {
+  const [show, setShow] = useState(false);
+  return (
+    <div className="toggle-pass-wrap">
+      <input
+        type={show ? "text" : "password"}
+        className="toggle-pass-input"
+        value={value}
+        onChange={onChange}
+      />
+      <button className="toggle-pass-toggle-btn" onClick={() => setShow(!show)}>
+        <span className="material-symbols-rounded">{show ? "visibility_off" : "visibility"}</span>
+      </button>
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Minimal Underline", desc: "Subtle underline password input with inline eye", html: `<div style="border-bottom:2px solid var(--md-sys-color-primary); padding:8px 0; display:flex; justify-content:space-between;"><span>••••••••</span><span class="material-symbols-rounded">visibility</span></div>` }
+    ],
+    tokens: [
+      { token: "--radius-full", default: "9999px", desc: "Pill password capsule curvature" },
+      { token: "--md-sys-color-surface-container-high", default: "#e9edf6", desc: "Input background fill" }
+    ],
+    wcag: "Includes accessible toggle button state with aria-pressed and dynamic aria-live feedback for strength criteria."
+  },
+
+  // ------------------------------------------------------------------------
+  // 54. RADIAL GAUGE & METRIC METER
+  // ------------------------------------------------------------------------
+  "gauge": {
+    id: "gauge",
+    name: "Radial Gauge & Metric Meter",
+    category: "display",
+    icon: "speed",
+    badge: "Data Viz",
+    description: "Radial Gauge visualizes scalar metric values on a circular arc scale. Features customizable threshold zones (Normal, Warning, Critical), animated needle/arc, and center value readouts.",
+    interactiveHtml: `
+      <div style="width:100%; max-width:440px; display:flex; flex-direction:column; align-items:center; gap:24px;">
+        <!-- Gauge SVG Card -->
+        <div class="toggle-gauge-card">
+          <svg class="toggle-gauge-svg" viewBox="0 0 200 130">
+            <!-- Background Arc -->
+            <path d="M 25 115 A 75 75 0 0 1 175 115" fill="none" stroke="var(--md-sys-color-card-border)" stroke-width="16" stroke-linecap="round" />
+            <!-- Active Score Arc -->
+            <path id="demoGaugePath" d="M 25 115 A 75 75 0 0 1 175 115" fill="none" stroke="url(#gaugeGrad)" stroke-width="16" stroke-linecap="round" stroke-dasharray="235" stroke-dashoffset="38" style="transition: stroke-dashoffset 400ms cubic-bezier(0.34, 1.56, 0.64, 1);" />
+            <!-- SVG Gradients -->
+            <defs>
+              <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#0b57d0" />
+                <stop offset="60%" stop-color="#34a853" />
+                <stop offset="100%" stop-color="#fbbc05" />
+              </linearGradient>
+            </defs>
+          </svg>
+
+          <!-- Center Readout -->
+          <div class="toggle-gauge-readout">
+            <span class="toggle-gauge-val" id="demoGaugeScore">84%</span>
+            <span class="toggle-gauge-label" id="demoGaugeStatus">OPTIMAL HEALTH</span>
+          </div>
+        </div>
+
+        <!-- Interactive Score Slider Control -->
+        <div style="width:100%; display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:700;">
+            <span style="color:var(--md-sys-color-on-surface);">Adjust Gauge Value</span>
+            <span id="demoSliderValText" style="color:var(--md-sys-color-primary);">84%</span>
+          </div>
+          <input
+            type="range"
+            id="demoGaugeSlider"
+            class="control-slider"
+            min="0"
+            max="100"
+            value="84"
+            oninput="
+              const val = parseInt(this.value, 10);
+              const maxDash = 235;
+              const offset = maxDash - (val / 100) * maxDash;
+              document.getElementById('demoGaugePath').style.strokeDashoffset = offset;
+              document.getElementById('demoGaugeScore').textContent = val + '%';
+              document.getElementById('demoSliderValText').textContent = val + '%';
+              
+              const statusEl = document.getElementById('demoGaugeStatus');
+              if(val >= 80) {
+                statusEl.textContent = 'OPTIMAL HEALTH';
+                statusEl.style.color = '#1e8e3e';
+              } else if(val >= 50) {
+                statusEl.textContent = 'MODERATE LOAD';
+                statusEl.style.color = '#f9ab00';
+              } else {
+                statusEl.textContent = 'CRITICAL ATTENTION';
+                statusEl.style.color = '#d93025';
+              }
+            "
+          />
+        </div>
+
+        <!-- Presets -->
+        <div style="display:flex; gap:8px;">
+          <button class="toggle-tag-sugg-btn" onclick="document.getElementById('demoGaugeSlider').value=35; document.getElementById('demoGaugeSlider').dispatchEvent(new Event('input')); if(window.soundEngine) soundEngine.playClick();">Eco (35%)</button>
+          <button class="toggle-tag-sugg-btn" onclick="document.getElementById('demoGaugeSlider').value=68; document.getElementById('demoGaugeSlider').dispatchEvent(new Event('input')); if(window.soundEngine) soundEngine.playClick();">Balanced (68%)</button>
+          <button class="toggle-tag-sugg-btn" onclick="document.getElementById('demoGaugeSlider').value=94; document.getElementById('demoGaugeSlider').dispatchEvent(new Event('input')); if(window.soundEngine) soundEngine.playClick();">Turbo (94%)</button>
+        </div>
+      </div>
+    `,
+    html: `<!-- Radial Gauge Meter Component -->
+<div class="toggle-gauge-card">
+  <svg class="toggle-gauge-svg" viewBox="0 0 200 130">
+    <path class="toggle-gauge-bg" d="M 25 115 A 75 75 0 0 1 175 115" />
+    <path class="toggle-gauge-active" d="M 25 115 A 75 75 0 0 1 175 115" />
+  </svg>
+  <div class="toggle-gauge-readout">
+    <span class="toggle-gauge-val">84%</span>
+    <span class="toggle-gauge-label">OPTIMAL</span>
+  </div>
+</div>`,
+    css: `.toggle-gauge-card {
+  position: relative;
+  background-color: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-xl);
+  padding: 32px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--elevation-1);
+}
+.toggle-gauge-svg {
+  width: 220px;
+  overflow: visible;
+}
+.toggle-gauge-readout {
+  position: absolute;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.toggle-gauge-val {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--md-sys-color-on-surface);
+}
+.toggle-gauge-label {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #1e8e3e;
+}`,
+    react: `export function RadialGauge({ value = 80, label = "OPTIMAL" }) {
+  const maxDash = 235;
+  const offset = maxDash - (value / 100) * maxDash;
+  return (
+    <div className="toggle-gauge-card">
+      <svg className="toggle-gauge-svg" viewBox="0 0 200 130">
+        <path d="M 25 115 A 75 75 0 0 1 175 115" fill="none" stroke="#ddd" strokeWidth="16" />
+        <path
+          d="M 25 115 A 75 75 0 0 1 175 115"
+          fill="none"
+          stroke="#0b57d0"
+          strokeWidth="16"
+          strokeDasharray="235"
+          strokeDashoffset={offset}
+        />
+      </svg>
+      <div className="toggle-gauge-readout">
+        <span className="toggle-gauge-val">{value}%</span>
+        <span className="toggle-gauge-label">{label}</span>
+      </div>
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Compact Speedometer", desc: "140px mini gauge for dense analytics grids", html: `<div class="toggle-gauge-card" style="padding:16px;"><span style="font-size:1.4rem; font-weight:800;">72%</span><span style="font-size:0.7rem; color:var(--md-sys-color-outline);">CPU Usage</span></div>` }
+    ],
+    tokens: [
+      { token: "--radius-xl", default: "28px", desc: "Outermost container radius" },
+      { token: "--md-sys-color-primary", default: "#0b57d0", desc: "Active meter stroke tone" }
+    ],
+    wcag: "Uses role='meter' with aria-valuenow, aria-valuemin='0', and aria-valuemax='100'."
+  },
+
+  // ------------------------------------------------------------------------
+  // 55. NOTIFICATION CENTER & POPOVER
+  // ------------------------------------------------------------------------
+  "notificationcenter": {
+    id: "notificationcenter",
+    name: "Notification Center & Popover",
+    category: "feedback",
+    icon: "notifications_active",
+    badge: "M3 Overlay",
+    description: "Elevated notification popover featuring unread counters, category tabs (All, Mentions), timestamps, avatar indicators, interactive dismiss, and bulk 'Mark all as read'.",
+    interactiveHtml: `
+      <div style="width:100%; max-width:440px; display:flex; flex-direction:column; gap:16px;">
+        <!-- Notification Popover Card -->
+        <div class="toggle-notif-card">
+          <!-- Header -->
+          <div class="toggle-notif-header">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="material-symbols-rounded" style="color:var(--md-sys-color-primary);">notifications</span>
+              <span style="font-weight:700; font-size:1rem; color:var(--md-sys-color-on-surface);">Notifications</span>
+              <span class="toggle-notif-counter-pill" id="demoNotifCount">3</span>
+            </div>
+            <button class="toggle-notif-mark-btn" onclick="
+              document.querySelectorAll('.toggle-notif-item').forEach(i=>i.classList.remove('unread'));
+              document.getElementById('demoNotifCount').textContent='0';
+              document.getElementById('demoNotifCount').style.display='none';
+              if(window.soundEngine) soundEngine.playClick();
+              showSnackbar('All notifications marked as read');
+            ">Mark all read</button>
+          </div>
+
+          <!-- Notification Items List -->
+          <div class="toggle-notif-list">
+            <!-- Item 1 -->
+            <div class="toggle-notif-item unread" onclick="this.classList.remove('unread'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Opened PR #42');">
+              <div class="toggle-notif-avatar" style="background:#4285f4;">SC</div>
+              <div class="toggle-notif-body">
+                <div class="toggle-notif-text"><strong>Sarah Chen</strong> approved PR #42 for Toggle Library v1.2</div>
+                <div class="toggle-notif-time">5 minutes ago</div>
+              </div>
+              <div class="toggle-notif-dot"></div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="toggle-notif-item unread" onclick="this.classList.remove('unread'); if(window.soundEngine) soundEngine.playClick(); showSnackbar('Viewed mention');">
+              <div class="toggle-notif-avatar" style="background:#ea4335;">AR</div>
+              <div class="toggle-notif-body">
+                <div class="toggle-notif-text"><strong>Alex Rivera</strong> mentioned you in <em>Design Tokens</em></div>
+                <div class="toggle-notif-time">1 hour ago</div>
+              </div>
+              <div class="toggle-notif-dot"></div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="toggle-notif-item" onclick="if(window.soundEngine) soundEngine.playClick(); showSnackbar('System update details');">
+              <div class="toggle-notif-avatar" style="background:#34a853;"><span class="material-symbols-rounded" style="font-size:18px;">cloud_done</span></div>
+              <div class="toggle-notif-body">
+                <div class="toggle-notif-text">Design tokens synced with production CDN bundle</div>
+                <div class="toggle-notif-time">Yesterday at 4:32 PM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `,
+    html: `<!-- Notification Popover Card -->
+<div class="toggle-notif-card">
+  <div class="toggle-notif-header">
+    <span>Notifications</span>
+    <span class="toggle-notif-counter-pill">3</span>
+  </div>
+  <div class="toggle-notif-list">
+    <div class="toggle-notif-item unread">
+      <div class="toggle-notif-avatar">SC</div>
+      <div class="toggle-notif-body">
+        <p><strong>Sarah</strong> approved your request</p>
+        <span>5m ago</span>
+      </div>
+      <div class="toggle-notif-dot"></div>
+    </div>
+  </div>
+</div>`,
+    css: `.toggle-notif-card {
+  background-color: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-card-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--elevation-3);
+  overflow: hidden;
+}
+.toggle-notif-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--md-sys-color-card-border);
+}
+.toggle-notif-counter-pill {
+  background-color: var(--md-sys-color-primary);
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+.toggle-notif-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--md-sys-color-card-border);
+  transition: background-color var(--transition-fast);
+}
+.toggle-notif-item:hover {
+  background-color: var(--md-sys-color-surface-container-high);
+}
+.toggle-notif-item.unread {
+  background-color: rgba(11, 87, 208, 0.05);
+}
+.toggle-notif-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--md-sys-color-primary);
+  margin-top: 6px;
+}`,
+    react: `export function NotificationCenter({ notifications = [], onRead }) {
+  return (
+    <div className="toggle-notif-card">
+      <div className="toggle-notif-header">
+        <h4>Notifications</h4>
+      </div>
+      <div className="toggle-notif-list">
+        {notifications.map(n => (
+          <div key={n.id} className={\`toggle-notif-item \${n.unread ? 'unread' : ''}\`} onClick={() => onRead(n.id)}>
+            <div className="toggle-notif-body">
+              <p>{n.text}</p>
+              <span>{n.time}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}`,
+    variations: [
+      { name: "Compact Floating Bell", desc: "Header toolbar trigger button with pulse indicator", html: `<button class="icon-btn" style="position:relative;"><span class="material-symbols-rounded">notifications</span><span style="position:absolute; top:6px; right:6px; width:8px; height:8px; border-radius:50%; background:#d93025;"></span></button>` }
+    ],
+    tokens: [
+      { token: "--radius-xl", default: "28px", desc: "Container corner radius" },
+      { token: "--md-sys-color-primary", default: "#0b57d0", desc: "Unread indicator dot tone" }
+    ],
+    wcag: "Uses aria-expanded on notification bell, role='feed' on list, and aria-label for unread status."
+  },
+
+  // ------------------------------------------------------------------------
+  // 56. INTERACTIVE STUDIO BUILDER
   // ------------------------------------------------------------------------
   "studio": {
     id: "studio",
